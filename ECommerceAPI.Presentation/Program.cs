@@ -1,4 +1,6 @@
 
+using ECommerceAPI.Presentation.Extensions.Swagger;
+
 namespace ECommerceAPI.Presentation
 {
     public class Program
@@ -12,9 +14,12 @@ namespace ECommerceAPI.Presentation
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            #region Configure Swagger/OpenAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwagger(builder.Configuration);
+            #endregion
 
             #region Build Web Application
             WebApplication? app = builder.Build();
@@ -23,7 +28,7 @@ namespace ECommerceAPI.Presentation
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                #region Config Swagger/OpenAPI Pipeline
+                #region Configure Swagger/OpenAPI Pipeline
                 app.UseSwagger();
                 app.UseSwaggerUI();
                 #endregion
