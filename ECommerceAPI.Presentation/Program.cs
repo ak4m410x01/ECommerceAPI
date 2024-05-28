@@ -5,7 +5,9 @@ namespace ECommerceAPI.Presentation
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            #region Create Web Application
+            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+            #endregion
 
             // Add services to the container.
 
@@ -14,21 +16,28 @@ namespace ECommerceAPI.Presentation
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+            #region Build Web Application
+            WebApplication? app = builder.Build();
+            #endregion
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                #region Config Swagger/OpenAPI Pipeline
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                #endregion
             }
 
+            #region Config Authentication & Authorization Pipelines
             app.UseAuthorization();
-
+            #endregion
 
             app.MapControllers();
 
+            #region Run Web Application
             app.Run();
+            #endregion
         }
     }
 }
