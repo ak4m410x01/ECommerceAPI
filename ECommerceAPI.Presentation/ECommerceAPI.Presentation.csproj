@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -15,7 +15,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\ECommerceAPI.Application\ECommerceAPI.Application.csproj" />
+		<ProjectReference Include="..\ECommerceAPI.Domain\ECommerceAPI.Domain.csproj" />
+		<ProjectReference Include="..\ECommerceAPI.Infrastructure\ECommerceAPI.Infrastructure.csproj" />
 		<ProjectReference Include="..\ECommerceAPI.Persistence\ECommerceAPI.Persistence.csproj" />
+		<ProjectReference Include="..\ECommerceAPI.Shared\ECommerceAPI.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

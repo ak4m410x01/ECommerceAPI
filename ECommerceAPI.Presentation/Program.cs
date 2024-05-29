@@ -1,4 +1,7 @@
-
+using ECommerceAPI.Application.Interfaces.DataSeeding.Security.Roles;
+using ECommerceAPI.Infrastructure.DataSeeding.Security.Roles;
+using ECommerceAPI.Persistence.DataSeeding;
+using ECommerceAPI.Persistence.DbContexts;
 using ECommerceAPI.Persistence.Extensions;
 using ECommerceAPI.Presentation.Extensions.Swagger;
 
@@ -6,7 +9,7 @@ namespace ECommerceAPI.Presentation
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             #region Create Web Application
             WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
@@ -44,6 +47,19 @@ namespace ECommerceAPI.Presentation
             #endregion
 
             app.MapControllers();
+
+            #region Data Seeding
+            IServiceProvider serviceProvider = app.Services.CreateScope().ServiceProvider;
+            using (ApplicationDbContext? context = serviceProvider.GetService<ApplicationDbContext>())
+            {
+                if (context is not null)
+                {
+                    IRoleSeeder roleSeeder = new RoleSeeder(context);
+                    await DataSeeding.Initialize(serviceProvider, roleSeeder);
+                }
+            }
+
+            #endregion
 
             #region Run Web Application
             app.Run();
