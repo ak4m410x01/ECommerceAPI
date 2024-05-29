@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Domain.IdentityEntities;
+﻿using ECommerceAPI.Domain.Entities.Users;
+using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,9 @@ namespace ECommerceAPI.Persistence.DbContexts
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         #endregion
 
+        #region Configure Db Sets
+        public DbSet<UserAddress> UserAddresses { get; set; }
+        #endregion
 
         #region On Model Creating Configuration
         protected override void OnModelCreating(ModelBuilder builder)
