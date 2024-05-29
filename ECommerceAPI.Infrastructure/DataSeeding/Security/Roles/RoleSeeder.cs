@@ -13,7 +13,7 @@ namespace ECommerceAPI.Infrastructure.DataSeeding.Security.Roles
             _context = context;
         }
 
-        public async Task SeedRolesAsync(IEnumerable<IdentityRole> roles)
+        public async Task<int> SeedRolesAsync(IEnumerable<IdentityRole> roles)
         {
             List<string?> existingRoles = _context.Roles.Select(r => r.Name).ToList();
 
@@ -25,7 +25,7 @@ namespace ECommerceAPI.Infrastructure.DataSeeding.Security.Roles
                 }
             }
 
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
     }
 }
