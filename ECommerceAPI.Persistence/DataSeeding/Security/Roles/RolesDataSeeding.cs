@@ -1,15 +1,17 @@
-﻿using ECommerceAPI.Application.Interfaces.DataSeeding.Security.Roles;
-using ECommerceAPI.Persistence.DbContexts;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Persistence.DataSeeding.Security.Roles
 {
     public static class RolesDataSeeding
     {
-        public static async Task InitializeRolesDataSeedingAsync(this ApplicationDbContext context, IRoleSeeder roleSeeder)
+        public static async Task InitializeRolesDataSeedingAsync(this RoleManager<IdentityRole> roleManager)
         {
-            IdentityRole[] roles = [new IdentityRole("Admin"), new IdentityRole("Customer")];
-            await roleSeeder.SeedRolesAsync(roles);
+            string[] roles = ["Admin", "Customer"];
+
+            foreach (string role in roles)
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
         }
     }
 }
