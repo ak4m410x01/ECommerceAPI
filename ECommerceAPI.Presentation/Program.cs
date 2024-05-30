@@ -1,10 +1,9 @@
+using ECommerceAPI.Application.Extensions;
 using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
-using ECommerceAPI.Presentation.Extensions.Middlewares.Authentication;
 using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
-using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
-using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections;
 
 namespace ECommerceAPI.Presentation
 {
@@ -16,22 +15,11 @@ namespace ECommerceAPI.Presentation
             WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
             #endregion
 
-            // Add services to the container.
-
             #region Clean Architecture Layers Configuration
-            builder.Services.AddInfrastructure()
-                            .AddPersistence(builder.Configuration);
-            #endregion
-
-            #region Configure Authentication
-            builder.Services.AddAuthenticationConfigurations(builder.Configuration);
-            #endregion
-
-            builder.Services.AddControllers();
-
-            #region Configure Swagger/OpenAPI
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddSwaggerConfiguration(builder.Configuration);
+            builder.Services.AddApplicationLayer()
+                            .AddInfrastructureLayer()
+                            .AddPresentationLayer(builder.Configuration)
+                            .AddPersistenceLayer(builder.Configuration);
             #endregion
 
             #region Build Web Application
@@ -45,10 +33,6 @@ namespace ECommerceAPI.Presentation
                 app.UseSwaggerMiddlewares();
                 #endregion
             }
-
-            #region Config Authentication & Authorization Pipelines
-            app.UseAuthenticationMiddlewares();
-            #endregion
 
             app.MapControllers();
 
