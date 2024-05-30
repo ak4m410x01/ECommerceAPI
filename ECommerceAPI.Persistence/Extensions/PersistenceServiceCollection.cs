@@ -7,7 +7,7 @@ namespace ECommerceAPI.Persistence.Extensions
 {
     public static class PersistenceServiceCollection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContexts(configuration)
                     .AddIdentity();

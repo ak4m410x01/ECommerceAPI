@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Domain.Entities.Users;
+﻿using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,9 +15,17 @@ namespace ECommerceAPI.Persistence.DbContexts
         #endregion
 
         #region Configure Db Sets
+
+        #region User Related Db Sets
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserActivityLog> UserActivityLogs { get; set; }
+        #endregion
+
+        #region Product Related Db Sets
+        public DbSet<Category> Categories { get; set; }
+        #endregion
+
         #endregion
 
         #region On Model Creating Configuration
