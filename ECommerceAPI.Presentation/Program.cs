@@ -1,6 +1,8 @@
 using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Authentication;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
 
@@ -41,13 +43,12 @@ namespace ECommerceAPI.Presentation
             if (app.Environment.IsDevelopment())
             {
                 #region Configure Swagger/OpenAPI Pipeline
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerMiddlewares();
                 #endregion
             }
 
             #region Config Authentication & Authorization Pipelines
-            app.UseAuthorization();
+            app.UseAuthenticationMiddlewares();
             #endregion
 
             app.MapControllers();
