@@ -1,7 +1,8 @@
 using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
-using ECommerceAPI.Presentation.Extensions.Swagger;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
 
 namespace ECommerceAPI.Presentation
 {
@@ -18,6 +19,10 @@ namespace ECommerceAPI.Presentation
             #region Clean Architecture Layers Configuration
             builder.Services.AddInfrastructure()
                             .AddPersistence(builder.Configuration);
+            #endregion
+
+            #region Configure Authentication
+            builder.Services.AddAuthenticationConfigurations(builder.Configuration);
             #endregion
 
             builder.Services.AddControllers();

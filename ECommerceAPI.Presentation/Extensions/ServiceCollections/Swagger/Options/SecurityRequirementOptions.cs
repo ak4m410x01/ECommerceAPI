@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace ECommerceAPI.Presentation.Extensions.Swagger.Options
+namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger.Options
 {
     public static class SecurityRequirementOptions
     {

@@ -1,6 +1,6 @@
-﻿using ECommerceAPI.Presentation.Extensions.Swagger.Options;
+﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger.Options;
 
-namespace ECommerceAPI.Presentation.Extensions.Swagger.ServiceCollections
+namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger.ServiceCollections
 {
     public static class SwaggerGenServiceCollection
     {
