@@ -18,6 +18,8 @@ namespace ECommerceAPI.Domain.IdentityEntities
 
         #region Relationships
         public ICollection<UserAddress> Addresses { get; set; } = new List<UserAddress>();
+        public ICollection<UserActivityLog> UserActivityLogs { get; set; } = new List<UserActivityLog>();
+        public UserProfile? UserProfile { get; set; }
         #endregion
     }
 }

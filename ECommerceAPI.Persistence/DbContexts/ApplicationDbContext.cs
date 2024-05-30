@@ -15,6 +15,8 @@ namespace ECommerceAPI.Persistence.DbContexts
 
         #region Configure Db Sets
         public DbSet<UserAddress> UserAddresses { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserActivityLog> UserActivityLogs { get; set; }
         #endregion
 
         #region On Model Creating Configuration
