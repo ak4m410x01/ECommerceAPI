@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Domain.IdentityEntities;
+﻿using ECommerceAPI.Domain.Enumerations.Users;
+using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Persistence.DataSeeding.Users
@@ -15,7 +16,7 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
             string password = "P@ssw0rd";
 
             await userManager.CreateAsync(user, password);
-            await userManager.AddToRoleAsync(user, "Admin");
+            await userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
         }
 
         public static async Task InitializeUsersDataSeedingAsync(this UserManager<ApplicationUser> userManager)

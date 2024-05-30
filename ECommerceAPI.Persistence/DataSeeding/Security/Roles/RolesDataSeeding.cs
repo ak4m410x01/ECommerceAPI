@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ECommerceAPI.Domain.Enumerations.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Persistence.DataSeeding.Security.Roles
 {
@@ -6,9 +7,7 @@ namespace ECommerceAPI.Persistence.DataSeeding.Security.Roles
     {
         public static async Task InitializeRolesDataSeedingAsync(this RoleManager<IdentityRole> roleManager)
         {
-            string[] roles = ["Admin", "Customer"];
-
-            foreach (string role in roles)
+            foreach (string role in Enum.GetNames(typeof(UserRole)))
             {
                 await roleManager.CreateAsync(new IdentityRole(role));
             }
