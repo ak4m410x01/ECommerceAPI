@@ -1,3 +1,4 @@
+using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
 using ECommerceAPI.Presentation.Extensions.Swagger;
@@ -15,7 +16,8 @@ namespace ECommerceAPI.Presentation
             // Add services to the container.
 
             #region Clean Architecture Layers Configuration
-            builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddInfrastructure()
+                            .AddPersistence(builder.Configuration);
             #endregion
 
             builder.Services.AddControllers();
