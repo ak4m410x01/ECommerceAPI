@@ -31,7 +31,9 @@ namespace ECommerceAPI.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 906, DateTimeKind.Utc).AddTicks(5696));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -40,20 +42,329 @@ namespace ECommerceAPI.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 906, DateTimeKind.Utc).AddTicks(6215));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ParentCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("NameIndex");
+
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(1267));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MaxUses")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(1580));
+
+                    b.Property<decimal>("Percent")
+                        .HasColumnType("DECIMAL(15, 3)");
+
+                    b.Property<DateTime>("StartAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UsedTimes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("CodeIndex");
+
+                    b.ToTable("Discounts", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Inventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(4468));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(4842));
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Inventories", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(7300));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(7758));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("DECIMAL(15, 3)");
+
+                    b.Property<string>("SKU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("DiscountId");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("SKU")
+                        .IsUnique()
+                        .HasDatabaseName("SKUIndex");
+
+                    b.ToTable("Products", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 908, DateTimeKind.Utc).AddTicks(4870));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 908, DateTimeKind.Utc).AddTicks(5395));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductRecommendation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecommendedProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecommendedProductId");
+
+                    b.HasIndex("ProductId", "RecommendedProductId")
+                        .IsUnique()
+                        .HasDatabaseName("ProductIdAndRecommendedProductIdIndex");
+
+                    b.ToTable("ProductRecommendations", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductTag", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProductTags", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductVariant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 912, DateTimeKind.Utc).AddTicks(1340));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 912, DateTimeKind.Utc).AddTicks(1803));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ProductVariant");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariants", "Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(2034));
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(3140));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("NameIndex");
+
+                    b.ToTable("Tags", "Product");
                 });
 
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Users.UserActivityLog", b =>
@@ -117,7 +428,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 16, 3, 32, 876, DateTimeKind.Utc).AddTicks(6953));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 914, DateTimeKind.Utc).AddTicks(6269));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -125,7 +436,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 16, 3, 32, 876, DateTimeKind.Utc).AddTicks(7385));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 914, DateTimeKind.Utc).AddTicks(6741));
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -199,7 +510,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 16, 3, 32, 876, DateTimeKind.Utc).AddTicks(1002));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(8963));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -228,7 +539,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 16, 3, 32, 876, DateTimeKind.Utc).AddTicks(1422));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(9430));
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -418,6 +729,93 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Navigation("ParentCategory");
                 });
 
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Product", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Discount", "Discount")
+                        .WithMany("Products")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Inventory", "Inventory")
+                        .WithMany("Products")
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Discount");
+
+                    b.Navigation("Inventory");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductImage", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductRecommendation", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "Product")
+                        .WithMany("ProductRecommendations")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "RecommendedProduct")
+                        .WithMany()
+                        .HasForeignKey("RecommendedProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("RecommendedProduct");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductTag", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "Product")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Tag", "Tag")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductVariant", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "Product")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Users.UserActivityLog", b =>
                 {
                     b.HasOne("ECommerceAPI.Domain.IdentityEntities.ApplicationUser", "User")
@@ -505,6 +903,34 @@ namespace ECommerceAPI.Persistence.Migrations
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Category", b =>
                 {
                     b.Navigation("ChildCategories");
+
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Discount", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Inventory", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Product", b =>
+                {
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductRecommendations");
+
+                    b.Navigation("ProductTags");
+
+                    b.Navigation("ProductVariants");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Tag", b =>
+                {
+                    b.Navigation("ProductTags");
                 });
 
             modelBuilder.Entity("ECommerceAPI.Domain.IdentityEntities.ApplicationUser", b =>

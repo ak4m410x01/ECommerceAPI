@@ -18,6 +18,17 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(category => category.Description)
                    .IsRequired(false);
+
+            builder.Property(category => category.CreatedAt)
+                   .HasDefaultValue(DateTime.UtcNow)
+                   .IsRequired();
+
+            builder.Property(category => category.ModifiedAt)
+                   .HasDefaultValue(DateTime.UtcNow)
+                   .IsRequired();
+
+            builder.Property(category => category.DeletedAt)
+                   .IsRequired(false);
             #endregion
 
             #region Config Relationship
@@ -25,6 +36,12 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
                    .WithMany(parent => parent.ChildCategories)
                    .HasForeignKey(child => child.ParentCategoryId)
                    .IsRequired(false);
+            #endregion
+
+            #region Config Unique Constrains
+            builder.HasIndex(category => category.Name)
+                   .HasDatabaseName("NameIndex")
+                   .IsUnique();
             #endregion
         }
     }

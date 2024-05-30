@@ -24,6 +24,14 @@ namespace ECommerceAPI.Persistence.DbContexts
 
         #region Product Related Db Sets
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<ProductVariant> ProductVariants { get; set; }
+        public DbSet<ProductRecommendation> ProductRecommendations { get; set; }
         #endregion
 
         #endregion
