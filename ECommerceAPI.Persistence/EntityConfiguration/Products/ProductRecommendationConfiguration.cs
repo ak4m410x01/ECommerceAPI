@@ -22,7 +22,6 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             #region Config Unique Constrains
             builder.HasIndex(productRecommendation => new { productRecommendation.ProductId, productRecommendation.RecommendedProductId })
-                   .HasDatabaseName("ProductIdAndRecommendedProductIdIndex")
                    .IsUnique();
             #endregion
         }

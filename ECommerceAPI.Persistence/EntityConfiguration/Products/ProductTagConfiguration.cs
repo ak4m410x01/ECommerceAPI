@@ -27,6 +27,11 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
                    .HasForeignKey(productTag => productTag.TagId)
                    .IsRequired();
             #endregion
+
+            #region Config Unique Constrains
+            builder.HasIndex(productTag => new { productTag.ProductId, productTag.TagId })
+                   .IsUnique();
+            #endregion
         }
     }
 }

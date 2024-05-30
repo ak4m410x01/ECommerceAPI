@@ -50,7 +50,6 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             #region Config Unique Constrains
             builder.HasIndex(discount => discount.Code)
-                   .HasDatabaseName("CodeIndex")
                    .IsUnique();
             #endregion
         }

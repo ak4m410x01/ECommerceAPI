@@ -33,7 +33,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 906, DateTimeKind.Utc).AddTicks(5696));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 583, DateTimeKind.Utc).AddTicks(7655));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -44,7 +44,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 906, DateTimeKind.Utc).AddTicks(6215));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 583, DateTimeKind.Utc).AddTicks(8121));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -56,8 +56,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("NameIndex");
+                        .IsUnique();
 
                     b.HasIndex("ParentCategoryId");
 
@@ -79,7 +78,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(1267));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(3136));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -96,7 +95,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(1580));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(3531));
 
                     b.Property<decimal>("Percent")
                         .HasColumnType("DECIMAL(15, 3)");
@@ -112,8 +111,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Code")
-                        .IsUnique()
-                        .HasDatabaseName("CodeIndex");
+                        .IsUnique();
 
                     b.ToTable("Discounts", "Product");
                 });
@@ -129,7 +127,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(4468));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(5958));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -137,7 +135,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(4842));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(6346));
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -161,7 +159,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(7300));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(8840));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -178,7 +176,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 907, DateTimeKind.Utc).AddTicks(7758));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 584, DateTimeKind.Utc).AddTicks(9305));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -217,7 +215,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 908, DateTimeKind.Utc).AddTicks(4870));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 585, DateTimeKind.Utc).AddTicks(5866));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -225,7 +223,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 908, DateTimeKind.Utc).AddTicks(5395));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 585, DateTimeKind.Utc).AddTicks(6391));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -269,8 +267,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasIndex("RecommendedProductId");
 
                     b.HasIndex("ProductId", "RecommendedProductId")
-                        .IsUnique()
-                        .HasDatabaseName("ProductIdAndRecommendedProductIdIndex");
+                        .IsUnique();
 
                     b.ToTable("ProductRecommendations", "Product");
                 });
@@ -287,6 +284,9 @@ namespace ECommerceAPI.Persistence.Migrations
 
                     b.HasIndex("TagId");
 
+                    b.HasIndex("ProductId", "TagId")
+                        .IsUnique();
+
                     b.ToTable("ProductTags", "Product");
                 });
 
@@ -301,7 +301,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 912, DateTimeKind.Utc).AddTicks(1340));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 589, DateTimeKind.Utc).AddTicks(1239));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -309,7 +309,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 912, DateTimeKind.Utc).AddTicks(1803));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 589, DateTimeKind.Utc).AddTicks(1677));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -325,8 +325,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ProductVariant");
+                        .IsUnique();
 
                     b.HasIndex("ProductId");
 
@@ -344,7 +343,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(2034));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 589, DateTimeKind.Utc).AddTicks(5655));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -352,7 +351,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(3140));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 589, DateTimeKind.Utc).AddTicks(6126));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -361,8 +360,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("NameIndex");
+                        .IsUnique();
 
                     b.ToTable("Tags", "Product");
                 });
@@ -428,7 +426,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 914, DateTimeKind.Utc).AddTicks(6269));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 590, DateTimeKind.Utc).AddTicks(7476));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -436,7 +434,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 914, DateTimeKind.Utc).AddTicks(6741));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 590, DateTimeKind.Utc).AddTicks(8528));
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -510,7 +508,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(8963));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 590, DateTimeKind.Utc).AddTicks(726));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -539,7 +537,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 19, 46, 13, 913, DateTimeKind.Utc).AddTicks(9430));
+                        .HasDefaultValue(new DateTime(2024, 5, 30, 20, 53, 14, 590, DateTimeKind.Utc).AddTicks(1040));
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)

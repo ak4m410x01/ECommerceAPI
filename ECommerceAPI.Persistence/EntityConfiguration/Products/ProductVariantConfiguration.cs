@@ -40,7 +40,6 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             #region Config Unique Constrains
             builder.HasIndex(productVariant => productVariant.Name)
-                   .HasDatabaseName("ProductVariant")
                    .IsUnique();
             #endregion
         }
