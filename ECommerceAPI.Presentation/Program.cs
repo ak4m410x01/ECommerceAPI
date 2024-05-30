@@ -31,8 +31,7 @@ namespace ECommerceAPI.Presentation
 
             #region Configure Swagger/OpenAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwagger(builder.Configuration);
+            builder.Services.AddSwaggerConfiguration(builder.Configuration);
             #endregion
 
             #region Build Web Application

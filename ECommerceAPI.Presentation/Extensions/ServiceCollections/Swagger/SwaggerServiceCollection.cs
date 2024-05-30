@@ -4,9 +4,10 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger
 {
     public static class SwaggerServiceCollection
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSwaggerGenOptions(configuration);
+            services.AddEndpointsApiExplorer()
+                    .AddSwaggerGenOptions(configuration);
             return services;
         }
     }
