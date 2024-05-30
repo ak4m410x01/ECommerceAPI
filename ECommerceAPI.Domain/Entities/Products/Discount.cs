@@ -2,18 +2,19 @@
 
 namespace ECommerceAPI.Domain.Entities.Products
 {
-    public class Category : BaseEntity
+    public class Discount : BaseEntity
     {
         #region Properties
-        public string? Name { get; set; }
+        public string? Code { get; set; }
         public string? Description { get; set; }
+        public decimal Percent { get; set; }
+        public int UsedTimes { get; set; }
+        public int MaxUses { get; set; }
+        public DateTime StartAt { get; set; }
+        public DateTime EndAt { get; set; }
         #endregion
 
         #region Relationships
-        public int ParentCategoryId { get; set; }
-        public Category? ParentCategory { get; set; }
-        public ICollection<Category> ChildCategories { get; set; } = new List<Category>();
-
         public ICollection<Product> Products { get; set; } = new List<Product>();
         #endregion
     }
