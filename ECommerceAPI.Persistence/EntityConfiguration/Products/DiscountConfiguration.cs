@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<Discount> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Discounts", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(discount => discount.Code)
                    .IsRequired();
 
@@ -46,12 +49,15 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(discount => discount.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Unique Constrains
+
             builder.HasIndex(discount => discount.Code)
                    .IsUnique();
-            #endregion
+
+            #endregion Config Unique Constrains
         }
     }
 }

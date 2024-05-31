@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ECommerceAPI.Persistence.Migrations
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public partial class AddProductSchemaEntities : Migration
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -391,7 +390,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 unique: true);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

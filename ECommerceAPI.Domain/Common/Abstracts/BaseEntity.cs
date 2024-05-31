@@ -3,14 +3,17 @@
     public abstract class BaseEntity
     {
         #region Properties
+
         public int Id { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        #endregion
+
+        #endregion Properties
 
         #region Equals Override
+
         public override bool Equals(object? obj)
         {
             // Check for reference equality and nullity
@@ -27,30 +30,36 @@
             // If either other's ID is the default value, they are not equal
             return Id != default && Id == other.Id;
         }
-        #endregion
+
+        #endregion Equals Override
 
         #region GetHashCode Override
+
         public override int GetHashCode()
         {
             return Id == default ? base.GetHashCode() : Id.GetHashCode();
         }
-        #endregion
 
+        #endregion GetHashCode Override
 
         #region Operator == Override
+
         public static bool operator ==(BaseEntity obj1, BaseEntity obj2)
         {
             if (obj1 is null)
                 return obj2 is null;
             return obj1.Equals(obj2);
         }
-        #endregion
+
+        #endregion Operator == Override
 
         #region Operator != Override
+
         public static bool operator !=(BaseEntity obj1, BaseEntity obj2)
         {
             return !(obj1 == obj2);
         }
-        #endregion
+
+        #endregion Operator != Override
     }
 }

@@ -9,22 +9,28 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
         public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Profiles", "User");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(profile => profile.Bio)
                    .IsRequired();
 
             builder.Property(profile => profile.ImageUrl)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Relationships
+
             builder.HasOne(profile => profile.User)
                    .WithOne(user => user.UserProfile)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationships
         }
     }
 }

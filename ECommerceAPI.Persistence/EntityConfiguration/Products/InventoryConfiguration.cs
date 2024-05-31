@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<Inventory> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Inventories", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(inventory => inventory.Quantity)
                    .IsRequired();
 
@@ -26,7 +29,8 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(inventory => inventory.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
         }
     }
 }

@@ -5,6 +5,7 @@ namespace ECommerceAPI.Domain.Entities.Products
     public class Discount : BaseEntity
     {
         #region Properties
+
         public string? Code { get; set; }
         public string? Description { get; set; }
         public decimal Percent { get; set; }
@@ -12,10 +13,13 @@ namespace ECommerceAPI.Domain.Entities.Products
         public int MaxUses { get; set; }
         public DateTime StartAt { get; set; }
         public DateTime EndAt { get; set; }
-        #endregion
+
+        #endregion Properties
 
         #region Relationships
+
         public ICollection<Product> Products { get; set; } = new List<Product>();
-        #endregion
+
+        #endregion Relationships
     }
 }

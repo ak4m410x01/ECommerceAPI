@@ -5,11 +5,15 @@ namespace ECommerceAPI.Domain.Entities.Products
     public class Tag : BaseEntity
     {
         #region Properties
+
         public string? Name { get; set; }
-        #endregion
+
+        #endregion Properties
 
         #region Relationships
+
         public ICollection<ProductTag>? ProductTags { get; set; } = new List<ProductTag>();
-        #endregion
+
+        #endregion Relationships
     }
 }

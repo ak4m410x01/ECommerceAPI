@@ -1,14 +1,16 @@
-﻿using ECommerceAPI.Presentation.Extensions.Middlewares.Authentication;
+﻿using ECommerceAPI.Presentation.Extensions.MiddleWares.Authentication;
 
-namespace ECommerceAPI.Presentation.Extensions.Middlewares
+namespace ECommerceAPI.Presentation.Extensions.MiddleWares
 {
     public static class PresentationApplicationBuilder
     {
-        public static IApplicationBuilder PresentationMiddlewares(this IApplicationBuilder app)
+        public static IApplicationBuilder PresentationMiddleWares(this IApplicationBuilder app)
         {
             #region Config Authentication & Authorization Pipelines
-            app.UseAuthenticationMiddlewares();
-            #endregion
+
+            app.UseAuthenticationMiddleWares();
+
+            #endregion Config Authentication & Authorization Pipelines
 
             return app;
         }

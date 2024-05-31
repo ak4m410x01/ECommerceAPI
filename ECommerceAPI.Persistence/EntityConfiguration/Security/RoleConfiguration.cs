@@ -9,8 +9,10 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Security
         public void Configure(EntityTypeBuilder<IdentityRole> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Roles", "Security");
-            #endregion
+
+            #endregion Config Table Name
         }
     }
 }

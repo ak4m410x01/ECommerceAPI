@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
         public void Configure(EntityTypeBuilder<UserAddress> builder)
         {
             #region Config Table Name
+
             builder.ToTable("UserAddresses", "User");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(address => address.PostalCode)
                    .HasMaxLength(256)
                    .IsRequired();
@@ -43,14 +46,17 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
 
             builder.Property(user => user.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Relationships
+
             builder.HasOne(address => address.User)
                    .WithMany(user => user.Addresses)
                    .HasForeignKey(address => address.UserId)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationships
         }
     }
 }

@@ -9,23 +9,29 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
         public void Configure(EntityTypeBuilder<UserActivityLog> builder)
         {
             #region Config Table Name
+
             builder.ToTable("UserActivityLogs", "User");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(log => log.Action)
                    .IsRequired();
 
             builder.Property(log => log.Description)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Relationships
+
             builder.HasOne(log => log.User)
                    .WithMany(user => user.UserActivityLogs)
                    .HasForeignKey(log => log.UserId)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationships
         }
     }
 }

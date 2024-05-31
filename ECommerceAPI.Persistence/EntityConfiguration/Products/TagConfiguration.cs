@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Tags", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Properties
+
             builder.Property(tag => tag.Name)
                    .IsRequired();
 
@@ -26,12 +29,15 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(tag => tag.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Properties
 
             #region Config Unique Constrains
+
             builder.HasIndex(tag => tag.Name)
                    .IsUnique();
-            #endregion
+
+            #endregion Config Unique Constrains
         }
     }
 }

@@ -11,18 +11,25 @@ namespace ECommerceAPI.Persistence.DbContexts
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         #region Constructors
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        #endregion
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
+
+        #endregion Constructors
 
         #region Configure Db Sets
 
         #region User Related Db Sets
+
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserActivityLog> UserActivityLogs { get; set; }
-        #endregion
+
+        #endregion User Related Db Sets
 
         #region Product Related Db Sets
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Discount> Discounts { get; set; }
@@ -32,11 +39,13 @@ namespace ECommerceAPI.Persistence.DbContexts
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<ProductRecommendation> ProductRecommendations { get; set; }
-        #endregion
 
-        #endregion
+        #endregion Product Related Db Sets
+
+        #endregion Configure Db Sets
 
         #region On Model Creating Configuration
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -50,15 +59,16 @@ namespace ECommerceAPI.Persistence.DbContexts
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", "Security");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "Security");
 
-            #endregion
+            #endregion Identity Configuration
 
             #region Assemblies Configuration
 
             // Apply Entities Configurations
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            #endregion
+            #endregion Assemblies Configuration
         }
-        #endregion
+
+        #endregion On Model Creating Configuration
     }
 }

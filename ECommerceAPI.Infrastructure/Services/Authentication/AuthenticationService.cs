@@ -8,10 +8,12 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
     public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+
         public AuthenticationService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
+
         public Task<AuthanticationResponseDTO> SignInAsync(SignInDTO dto)
         {
             throw new NotImplementedException();

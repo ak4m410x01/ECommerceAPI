@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             #region Config Table Name
+
             builder.ToTable("Categories", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(category => category.Name)
                    .IsRequired();
 
@@ -29,19 +32,24 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(category => category.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Relationship
+
             builder.HasOne(child => child.ParentCategory)
                    .WithMany(parent => parent.ChildCategories)
                    .HasForeignKey(child => child.ParentCategoryId)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Relationship
 
             #region Config Unique Constrains
+
             builder.HasIndex(category => category.Name)
                    .IsUnique();
-            #endregion
+
+            #endregion Config Unique Constrains
         }
     }
 }

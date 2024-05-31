@@ -5,13 +5,17 @@ namespace ECommerceAPI.Domain.Entities.Products
     public class ProductVariant : BaseEntity
     {
         #region Properties
+
         public string? Name { get; set; }
         public string? Value { get; set; }
-        #endregion
+
+        #endregion Properties
 
         #region Relationships
+
         public int ProductId { get; set; }
         public Product? Product { get; set; }
-        #endregion
+
+        #endregion Relationships
     }
 }

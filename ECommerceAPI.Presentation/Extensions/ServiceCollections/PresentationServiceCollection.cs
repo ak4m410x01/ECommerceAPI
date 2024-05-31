@@ -8,17 +8,23 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
         public static IServiceCollection AddPresentationLayer(this IServiceCollection services, IConfiguration configuration)
         {
             #region Configure Authentication
+
             services.AddAuthenticationConfigurations(configuration);
-            #endregion
+
+            #endregion Configure Authentication
 
             #region Configure Swagger/OpenAPI
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddSwaggerConfiguration(configuration);
-            #endregion
+
+            #endregion Configure Swagger/OpenAPI
 
             #region Configure Controllers
+
             services.AddControllers();
-            #endregion
+
+            #endregion Configure Controllers
 
             return services;
         }

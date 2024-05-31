@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<ProductVariant> builder)
         {
             #region Config Table Name
+
             builder.ToTable("ProductVariants", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Properties
+
             builder.Property(productVariant => productVariant.Name)
                    .IsRequired();
 
@@ -29,19 +32,24 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(productVariant => productVariant.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Properties
 
             #region Config Relationship
+
             builder.HasOne(productVariant => productVariant.Product)
                    .WithMany(product => product.ProductVariants)
                    .HasForeignKey(productVariant => productVariant.ProductId)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationship
 
             #region Config Unique Constrains
+
             builder.HasIndex(productVariant => productVariant.Name)
                    .IsUnique();
-            #endregion
+
+            #endregion Config Unique Constrains
         }
     }
 }

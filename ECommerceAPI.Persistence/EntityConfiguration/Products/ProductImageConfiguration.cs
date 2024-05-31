@@ -9,10 +9,13 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<ProductImage> builder)
         {
             #region Config Table Name
+
             builder.ToTable("ProductImages", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Properties
+
             builder.Property(productImage => productImage.Url)
                    .IsRequired();
 
@@ -26,14 +29,17 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
 
             builder.Property(productImage => productImage.DeletedAt)
                    .IsRequired(false);
-            #endregion
+
+            #endregion Config Properties
 
             #region Config Relationship
+
             builder.HasOne(productImage => productImage.Product)
                    .WithMany(product => product.ProductImages)
                    .HasForeignKey(productImage => productImage.ProductId)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationship
         }
     }
 }

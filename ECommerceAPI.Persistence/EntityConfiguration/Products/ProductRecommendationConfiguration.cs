@@ -9,21 +9,27 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
         public void Configure(EntityTypeBuilder<ProductRecommendation> builder)
         {
             #region Config Table Name
+
             builder.ToTable("ProductRecommendations", "Product");
-            #endregion
+
+            #endregion Config Table Name
 
             #region Config Relationship
+
             builder.HasOne(productRecommendation => productRecommendation.Product)
                    .WithMany(product => product.ProductRecommendations)
                    .HasForeignKey(productRecommendation => productRecommendation.ProductId)
                    .OnDelete(DeleteBehavior.NoAction)
                    .IsRequired();
-            #endregion
+
+            #endregion Config Relationship
 
             #region Config Unique Constrains
+
             builder.HasIndex(productRecommendation => new { productRecommendation.ProductId, productRecommendation.RecommendedProductId })
                    .IsUnique();
-            #endregion
+
+            #endregion Config Unique Constrains
         }
     }
 }
