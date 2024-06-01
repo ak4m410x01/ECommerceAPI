@@ -17,19 +17,45 @@ namespace ECommerceAPI.Persistence.DataSeeding
             if (context is null)
                 return;
 
-            if (context.Database.GetPendingMigrationsAsync().Result.Any())
+            bool isPendingMigrations = (await context.Database.GetPendingMigrationsAsync()).Any();
+
+            if (isPendingMigrations)
             {
-                context.Database.MigrateAsync().Wait();
+                await MigrateDatabaseAsync(context);
 
-                UserManager<ApplicationUser>? userManager = services.GetService<UserManager<ApplicationUser>>();
-                RoleManager<IdentityRole>? roleManager = services.GetService<RoleManager<IdentityRole>>();
+                #region Initialize Data
 
-                if (userManager is null || roleManager is null)
-                    return;
+                await InitializeRolesDataAsync(services);
 
-                await roleManager.InitializeRolesDataSeedingAsync();
-                await userManager.InitializeUsersDataSeedingAsync();
+                await InitializeUserDataAsync(services);
+
+                #endregion Initialize Data
             }
+        }
+
+        private static async Task MigrateDatabaseAsync(ApplicationDbContext context)
+        {
+            await context.Database.MigrateAsync();
+        }
+
+        private static async Task InitializeUserDataAsync(IServiceProvider services)
+        {
+            UserManager<ApplicationUser>? userManager = services.GetService<UserManager<ApplicationUser>>();
+
+            if (userManager is null)
+                return;
+
+            await userManager.InitializeUsersDataSeedingAsync();
+        }
+
+        private static async Task InitializeRolesDataAsync(IServiceProvider services)
+        {
+            RoleManager<IdentityRole>? roleManager = services.GetService<RoleManager<IdentityRole>>();
+
+            if (roleManager is null)
+                return;
+
+            await roleManager.InitializeRolesDataSeedingAsync();
         }
     }
 }
