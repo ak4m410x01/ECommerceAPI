@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ECommerceAPI.Infrastructure.Extensions.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerceAPI.Infrastructure.Extensions
 {
@@ -6,6 +7,8 @@ namespace ECommerceAPI.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
         {
+            services.AddTokenService();
+
             return services;
         }
     }

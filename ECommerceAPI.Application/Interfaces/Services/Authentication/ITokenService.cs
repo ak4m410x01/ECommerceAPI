@@ -1,9 +1,10 @@
 ﻿using ECommerceAPI.Domain.IdentityEntities;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Application.Interfaces.Services.Authentication
 {
-    public interface IJwtBearerGenerator
+    public interface ITokenService
     {
-        string GenerateToken(ApplicationUser user);
+        Task<string> CreateTokenAsync(ApplicationUser user);
     }
 }
