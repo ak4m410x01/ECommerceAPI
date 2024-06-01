@@ -8,7 +8,7 @@ namespace ECommerceAPI.Infrastructure.Extensions.Authentication
     {
         public static IServiceCollection AddTokenService(this IServiceCollection services)
         {
-            services.AddTransient(typeof(ITokenService), typeof(TokenService));
+            services.AddScoped(typeof(ITokenService), typeof(TokenService));
 
             return services;
         }
