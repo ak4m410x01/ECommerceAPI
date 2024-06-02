@@ -20,9 +20,18 @@ namespace ECommerceAPI.Persistence.Specifications.Base
 
         #region Properties
 
-        public Expression<Func<T, bool>> Criteria { get; }
-        public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
+        public Expression<Func<T, bool>> Criteria { get; } = default!;
+        public List<Expression<Func<T, object>>> Includes { get; } = new();
 
         #endregion Properties
+
+        #region Methods
+
+        protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
+        {
+            Includes.Add(includeExpression);
+        }
+
+        #endregion Methods
     }
 }
