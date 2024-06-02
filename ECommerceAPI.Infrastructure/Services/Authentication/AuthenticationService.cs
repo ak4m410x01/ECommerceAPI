@@ -14,12 +14,12 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             _userManager = userManager;
         }
 
-        public Task<AuthanticationResponseDTO> SignInAsync(SignInDTO dto)
+        public Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AuthanticationResponseDTO> SignUpAsync(SignUpDTO dto)
+        public Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,6 @@
 ﻿namespace ECommerceAPI.Application.DTOs.Authentication
 {
-    public class AuthanticationResponseDTO
+    public class AuthenticationResponseDTO
     {
         public string Message { get; set; } = string.Empty;
         public bool IsAuthenticated { get; set; }

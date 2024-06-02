@@ -4,8 +4,8 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<AuthanticationResponseDTO> SignUpAsync(SignUpDTO dto);
+        Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto);
 
-        Task<AuthanticationResponseDTO> SignInAsync(SignInDTO dto);
+        Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto);
     }
 }
