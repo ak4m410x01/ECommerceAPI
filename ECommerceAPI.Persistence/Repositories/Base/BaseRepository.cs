@@ -1,5 +1,7 @@
 ﻿using ECommerceAPI.Application.Interfaces.Repositories.Base;
+using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Persistence.DbContexts;
+using ECommerceAPI.Persistence.Specifications.Evaluations;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceAPI.Persistence.Repositories.Base
@@ -23,14 +25,19 @@ namespace ECommerceAPI.Persistence.Repositories.Base
 
         #region Method
 
-        public async Task<IQueryable<T>> GetAllAsync()
+        private IQueryable<T> GetQuery(IBaseSpecification<T> specification)
         {
-            return await Task.FromResult(_context.Set<T>().AsNoTracking());
+            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
         }
 
-        public async Task<T?> GetById<TId>(TId id)
+        public Task<IQueryable<T>> GetAllAsync(IBaseSpecification<T> specification)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return Task.FromResult(GetQuery(specification).AsNoTracking());
+        }
+
+        public Task<T?> FindAsync(IBaseSpecification<T> specification)
+        {
+            return GetQuery(specification).FirstOrDefaultAsync();
         }
 
         #endregion Method
