@@ -5,7 +5,24 @@ namespace ECommerceAPI.Persistence.Specifications.Base
 {
     public class BaseSpecification<T> : IBaseSpecification<T> where T : class
     {
-        public Expression<Func<T, bool>> Criteria { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<Expression<Func<T, object>>> Includes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        #region Constructors
+
+        public BaseSpecification()
+        {
+        }
+
+        public BaseSpecification(Expression<Func<T, bool>> criteria)
+        {
+            Criteria = criteria;
+        }
+
+        #endregion Constructors
+
+        #region Properties
+
+        public Expression<Func<T, bool>> Criteria { get; }
+        public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
+
+        #endregion Properties
     }
 }
