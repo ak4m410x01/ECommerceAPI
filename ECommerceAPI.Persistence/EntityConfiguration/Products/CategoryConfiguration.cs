@@ -22,6 +22,9 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Products
             builder.Property(category => category.Description)
                    .IsRequired(false);
 
+            builder.Property(category => category.ParentCategoryId)
+                   .IsRequired(false);
+
             builder.Property(category => category.CreatedAt)
                    .HasDefaultValue(DateTime.UtcNow)
                    .IsRequired();
