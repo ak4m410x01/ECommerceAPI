@@ -13,7 +13,7 @@ namespace ECommerceAPI.Domain.Entities.Products
         #region Relationships
 
         public int ProductId { get; set; }
-        public Product? Product { get; set; }
+        public virtual Product? Product { get; set; }
 
         #endregion Relationships
     }

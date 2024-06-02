@@ -18,7 +18,7 @@ namespace ECommerceAPI.Domain.Entities.Products
 
         #region Relationships
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
         #endregion Relationships
     }

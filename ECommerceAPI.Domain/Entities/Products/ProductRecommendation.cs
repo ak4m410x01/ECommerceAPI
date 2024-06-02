@@ -7,9 +7,9 @@ namespace ECommerceAPI.Domain.Entities.Products
         #region Relationships
 
         public int ProductId { get; set; }
-        public Product? Product { get; set; }
+        public virtual Product? Product { get; set; }
         public int RecommendedProductId { get; set; }
-        public Product? RecommendedProduct { get; set; }
+        public virtual Product? RecommendedProduct { get; set; }
 
         #endregion Relationships
     }

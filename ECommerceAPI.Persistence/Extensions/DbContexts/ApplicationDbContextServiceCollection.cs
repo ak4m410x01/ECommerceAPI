@@ -14,7 +14,7 @@ namespace ECommerceAPI.Persistence.Extensions.DbContexts
 
             // Add Application Db Context
             services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(connectionString, builder =>
+                        options.UseLazyLoadingProxies().UseSqlServer(connectionString, builder =>
                                 builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             return services;
         }

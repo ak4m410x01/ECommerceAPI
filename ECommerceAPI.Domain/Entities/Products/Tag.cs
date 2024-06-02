@@ -12,7 +12,7 @@ namespace ECommerceAPI.Domain.Entities.Products
 
         #region Relationships
 
-        public ICollection<ProductTag>? ProductTags { get; set; } = new List<ProductTag>();
+        public virtual ICollection<ProductTag>? ProductTags { get; set; } = new List<ProductTag>();
 
         #endregion Relationships
     }

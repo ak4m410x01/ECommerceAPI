@@ -11,6 +11,8 @@ namespace ECommerceAPI.Persistence.Extensions.Identity
         {
             // Identity Configuration
             services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddUserManager<UserManager<ApplicationUser>>()
+                    .AddRoleManager<RoleManager<IdentityRole>>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
             return services;

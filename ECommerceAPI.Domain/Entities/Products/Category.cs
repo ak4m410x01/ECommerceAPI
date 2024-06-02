@@ -14,10 +14,10 @@ namespace ECommerceAPI.Domain.Entities.Products
         #region Relationships
 
         public int ParentCategoryId { get; set; }
-        public Category? ParentCategory { get; set; }
-        public ICollection<Category> ChildCategories { get; set; } = new List<Category>();
+        public virtual Category? ParentCategory { get; set; }
+        public virtual ICollection<Category> ChildCategories { get; set; } = new List<Category>();
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
         #endregion Relationships
     }
