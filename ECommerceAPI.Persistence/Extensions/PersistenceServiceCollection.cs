@@ -21,7 +21,7 @@ namespace ECommerceAPI.Persistence.Extensions
 
             services.AddSpecification();
 
-            //services.AddMediatR();
+            services.AddMediatR();
 
             return services;
         }
