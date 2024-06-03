@@ -1,5 +1,5 @@
-﻿using ECommerceAPI.Application.Mapping;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace ECommerceAPI.Application.Extensions.AutoMapper
 {
@@ -7,7 +7,7 @@ namespace ECommerceAPI.Application.Extensions.AutoMapper
     {
         public static IServiceCollection AddAutoMapperConfigurations(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ProfileMapper));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
     }
