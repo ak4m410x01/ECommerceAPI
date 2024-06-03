@@ -1,12 +1,11 @@
 ﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
-using ECommerceAPI.Presentation.Controllers.Base;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.User.Authentication
 {
-    public class AuthenticationController : APIBaseController
+    public class AuthenticationController : UserAPIBaseController
     {
         #region Properties
 
