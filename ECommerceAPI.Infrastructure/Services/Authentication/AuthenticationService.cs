@@ -30,9 +30,33 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Methods
 
-        public Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto)
+        public async Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(dto.Email);
+
+            if (user is null || !await _userManager.CheckPasswordAsync(user, dto.Password))
+            {
+                return await Task.FromResult(new AuthenticationResponseDTO()
+                {
+                    IsAuthenticated = false,
+                    Message = "Invalid SignIn."
+                });
+            }
+
+            // Generate Token
+            var token = await _tokenService.CreateTokenAsync(user);
+
+            // Get User Roles
+            var roles = await _userManager.GetRolesAsync(user);
+
+            // Build Response
+            var response = _mapper.Map<AuthenticationResponseDTO>(user);
+            response.Roles = roles;
+            response.IsAuthenticated = true;
+            response.AccessToken = token.value;
+            response.AccessTokenValidTo = token.validTo;
+
+            return response;
         }
 
         public async Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto)

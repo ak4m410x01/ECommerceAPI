@@ -15,7 +15,7 @@ namespace ECommerceAPI.Application.Mapping.User.Authentication.Commands.SignUp
                  .ForMember(destination => destination.UserId, options =>
                                    options.MapFrom(source => source.Id));
 
-            CreateMap<SignUpDTO, SignUpCommandRequest>().ReverseMap();
+            CreateMap<SignUpCommandRequest, SignUpDTO>();
             CreateMap<AuthenticationResponseDTO, SignUpCommandDTO>();
         }
     }
