@@ -20,7 +20,7 @@ namespace ECommerceAPI.Persistence.Specifications.Base
 
         #region Properties
 
-        public Expression<Func<T, bool>> Criteria { get; } = default!;
+        public Expression<Func<T, bool>> Criteria { get; set; } = default!;
         public List<Expression<Func<T, object>>> Includes { get; } = new();
 
         #endregion Properties
