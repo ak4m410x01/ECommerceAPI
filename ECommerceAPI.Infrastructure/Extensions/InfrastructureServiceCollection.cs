@@ -8,7 +8,7 @@ namespace ECommerceAPI.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
         {
             services.AddTokenService();
-
+            services.AddAuthenticationService();
             return services;
         }
     }

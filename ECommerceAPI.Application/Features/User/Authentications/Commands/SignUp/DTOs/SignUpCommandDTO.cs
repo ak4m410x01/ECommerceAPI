@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Application.DTOs.Authentication
+﻿namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs
 {
-    public class AuthenticationResponseDTO
+    public class SignUpCommandDTO
     {
         public string Message { get; set; } = string.Empty;
         public bool IsAuthenticated { get; set; }

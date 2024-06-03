@@ -32,7 +32,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Create Token
 
-        public async Task<string> CreateTokenAsync(ApplicationUser user)
+        public async Task<(string value, DateTime validTo)> CreateTokenAsync(ApplicationUser user)
         {
             JwtSecurityToken token = new
             (
@@ -43,7 +43,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
                signingCredentials: GetSigningCredentials()
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
         }
 
         private SigningCredentials GetSigningCredentials()
