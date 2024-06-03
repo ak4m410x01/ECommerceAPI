@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ECommerceAPI.Application.DTOs.Authentication
+﻿namespace ECommerceAPI.Application.DTOs.Authentication
 {
     public class SignInDTO
     {

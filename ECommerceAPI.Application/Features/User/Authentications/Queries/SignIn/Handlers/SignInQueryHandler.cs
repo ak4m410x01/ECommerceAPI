@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.DTOs.Authentication;
-using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;

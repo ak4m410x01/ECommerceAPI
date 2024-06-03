@@ -1,4 +1,3 @@
-using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Persistence.DataSeeding.Security.Roles;
 using ECommerceAPI.Persistence.DataSeeding.Users;

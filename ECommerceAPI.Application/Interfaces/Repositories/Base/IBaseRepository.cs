@@ -1,6 +1,5 @@
 ﻿using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceAPI.Application.Interfaces.Repositories.Base
 {

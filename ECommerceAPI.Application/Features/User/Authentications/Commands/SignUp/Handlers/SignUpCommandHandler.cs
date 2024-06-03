@@ -10,14 +10,24 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
 {
     public class SignUpCommandHandler : ResponseHandler, IRequestHandler<SignUpCommandRequest, Response<SignUpCommandDTO>>
     {
+        #region Properties
+
         private readonly IAuthenticationService _authenticationService;
         private readonly IMapper _mapper;
+
+        #endregion Properties
+
+        #region Constructors
 
         public SignUpCommandHandler(IAuthenticationService authenticationService, IMapper mapper)
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public async Task<Response<SignUpCommandDTO>> Handle(SignUpCommandRequest request, CancellationToken cancellationToken)
         {
@@ -29,5 +39,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
 
             return response.IsAuthenticated ? Success(response) : BadRequest<SignUpCommandDTO>(response.Message);
         }
+
+        #endregion Methods
     }
 }

@@ -6,8 +6,12 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.
 {
     public class SignInQueryRequest : IRequest<Response<SignInQueryDTO>>
     {
+        #region Properties
+
         public string Email { get; set; } = default!;
 
         public string Password { get; set; } = default!;
+
+        #endregion Properties
     }
 }
