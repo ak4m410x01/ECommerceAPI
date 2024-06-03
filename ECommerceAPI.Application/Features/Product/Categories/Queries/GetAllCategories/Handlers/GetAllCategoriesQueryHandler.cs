@@ -4,11 +4,12 @@ using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategor
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Shared.Responses;
 using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Handlers
 {
-    public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQueryRequest, IQueryable<GetAllCategoriesQueryDTO>>
+    public class GetAllCategoriesQueryHandler : ResponseHandler, IRequestHandler<GetAllCategoriesQueryRequest, Response<IQueryable<GetAllCategoriesQueryDTO>>>
     {
         #region Properties
 
@@ -31,10 +32,11 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCat
 
         #region Methods
 
-        public async Task<IQueryable<GetAllCategoriesQueryDTO>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Response<IQueryable<GetAllCategoriesQueryDTO>>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
         {
             var categories = await _unitOfWork.Repository<Category>().GetAllAsync(_categorySpecification);
-            return _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
+            var data = _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
+            return Success(data);
         }
 
         #endregion Methods
