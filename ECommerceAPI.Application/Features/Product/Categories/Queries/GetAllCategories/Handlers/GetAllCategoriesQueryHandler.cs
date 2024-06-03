@@ -34,7 +34,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCat
 
         public async Task<Response<IQueryable<GetAllCategoriesQueryDTO>>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
         {
-            var categories = await _unitOfWork.Repository<Category>().GetAllAsync(_categorySpecification);
+            var categories = await _unitOfWork.Repository<Category>().GetAllAsNoTrackingAsync(_categorySpecification);
             var data = _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
             return Success(data);
         }
