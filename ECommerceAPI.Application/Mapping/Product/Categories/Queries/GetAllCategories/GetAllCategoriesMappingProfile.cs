@@ -2,16 +2,11 @@
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.DTOs;
 using ECommerceAPI.Domain.Entities.Products;
 
-namespace ECommerceAPI.Application.Mapping.Product.Categories
+namespace ECommerceAPI.Application.Mapping.Product.Categories.Queries.GetAllCategories
 {
-    public class CategoriesMappingProfile : Profile
+    public class GetAllCategoriesMappingProfile : Profile
     {
-        public CategoriesMappingProfile()
-        {
-            GetAllCategoriesMapping();
-        }
-
-        private void GetAllCategoriesMapping()
+        public GetAllCategoriesMappingProfile()
         {
             CreateMap<Category, GetAllCategoriesQueryDTO>()
                  .ForMember(destination => destination.ParentCategory, options =>
