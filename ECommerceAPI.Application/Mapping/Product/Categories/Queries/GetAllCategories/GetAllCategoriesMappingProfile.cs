@@ -10,7 +10,7 @@ namespace ECommerceAPI.Application.Mapping.Product.Categories.Queries.GetAllCate
         {
             CreateMap<Category, GetAllCategoriesQueryDTO>()
                  .ForMember(destination => destination.ParentCategory, options =>
-                                  options.MapFrom(source => source.ParentCategory.Name));
+                                  options.MapFrom(source => source.ParentCategory!.Name));
         }
     }
 }
