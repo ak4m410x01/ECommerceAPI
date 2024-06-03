@@ -33,8 +33,8 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCat
 
         public async Task<IQueryable<GetAllCategoriesQueryDTO>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
         {
-            IQueryable<Category> categories = await _unitOfWork.Repository<Category>().GetAllAsync(_categorySpecification);
-            return _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
+            var categories = await _unitOfWork.Repository<Category>().GetAllAsync(_categorySpecification);
+            return _mapper.Map<IQueryable<Category>, IQueryable<GetAllCategoriesQueryDTO>>(categories);
         }
 
         #endregion Methods
