@@ -1,11 +1,11 @@
 ﻿using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
-using ECommerceAPI.Presentation.Controllers.Base;
+using ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ECommerceAPI.Presentation.Controllers.Products
+namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 {
-    public class CategoriesController : APIBaseController
+    public class CategoriesController : ProductAPIBaseController
     {
         #region Properties
 
@@ -26,6 +26,13 @@ namespace ECommerceAPI.Presentation.Controllers.Products
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] GetAllCategoriesQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdQueryRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
