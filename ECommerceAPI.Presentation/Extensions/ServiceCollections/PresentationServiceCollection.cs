@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
 
 namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
@@ -25,6 +26,12 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
             services.AddControllers();
 
             #endregion Configure Controllers
+
+            #region Configure Exceptions
+
+            services.AddValidationErrorExceptionConfiguration();
+
+            #endregion Configure Exceptions
 
             return services;
         }
