@@ -37,7 +37,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
 
             var response = _mapper.Map<SignUpCommandDTO>(authenticationResponse);
 
-            return response.IsAuthenticated ? Success(response) : BadRequest<SignUpCommandDTO>(response.Message);
+            return response.IsAuthenticated ? Created(response) : BadRequest<SignUpCommandDTO>(response.Message);
         }
 
         #endregion Methods
