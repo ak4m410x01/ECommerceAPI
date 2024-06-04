@@ -7,17 +7,10 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 {
     public class CategoriesController : ProductAPIBaseController
     {
-        #region Properties
-
-        private readonly IMediator _mediator;
-
-        #endregion Properties
-
         #region Constructors
 
-        public CategoriesController(IMediator mediator)
+        public CategoriesController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         #endregion Constructors
@@ -27,15 +20,15 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] GetAllCategoriesQueryRequest request)
         {
-            var response = await _mediator.Send(request);
-            return Ok(response);
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
         }
 
         [HttpGet("GetById")]
         public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdQueryRequest request)
         {
-            var response = await _mediator.Send(request);
-            return Ok(response);
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
         }
 
         #endregion Methods
