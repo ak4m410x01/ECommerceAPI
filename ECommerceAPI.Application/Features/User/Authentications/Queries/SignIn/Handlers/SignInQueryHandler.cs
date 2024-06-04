@@ -37,7 +37,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.
 
             var response = _mapper.Map<SignInQueryDTO>(authenticationResponse);
 
-            return response.IsAuthenticated ? Success(response) : BadRequest<SignInQueryDTO>(response.Message);
+            return response.IsAuthenticated ? Success(response) : Unauthorized<SignInQueryDTO>(response.Message);
         }
 
         #endregion Methods
