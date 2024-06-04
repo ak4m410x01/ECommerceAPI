@@ -28,27 +28,16 @@ namespace ECommerceAPI.Presentation.Controllers.Base
 
         public IActionResult ResponseResult<T>(Response<T> response)
         {
-            switch (response.StatusCode)
+            return response.StatusCode switch
             {
-                case HttpStatusCode.OK:
-                    return Ok(response);
-
-                case HttpStatusCode.Created:
-                    return Created("", response);
-
-                case HttpStatusCode.Unauthorized:
-                    return Unauthorized(response);
-
-                case HttpStatusCode.BadRequest:
-                    return BadRequest(response);
-
-                case HttpStatusCode.NotFound:
-                    return NotFound(response);
-
-                case HttpStatusCode.NoContent:
-                    return Ok(response);
-            }
-            return Ok(response);
+                HttpStatusCode.OK => Ok(response),
+                HttpStatusCode.Created => Created("", response),
+                HttpStatusCode.Unauthorized => Unauthorized(response),
+                HttpStatusCode.BadRequest => BadRequest(response),
+                HttpStatusCode.NotFound => NotFound(response),
+                HttpStatusCode.NoContent => Ok(response),
+                _ => Ok(response)
+            };
         }
 
         #endregion Methods
