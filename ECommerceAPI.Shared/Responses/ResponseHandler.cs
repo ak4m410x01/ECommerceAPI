@@ -24,13 +24,13 @@ namespace ECommerceAPI.Shared.Responses
             };
         }
 
-        public Response<T> Unauthorized<T>()
+        public Response<T> Unauthorized<T>(string? message = null)
         {
             return new Response<T>()
             {
                 StatusCode = HttpStatusCode.Unauthorized,
-                Succeeded = true,
-                Message = "Unauthorized"
+                Succeeded = false,
+                Message = message is null ? "Unauthorized" : message,
             };
         }
 
