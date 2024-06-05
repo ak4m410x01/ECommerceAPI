@@ -2,8 +2,11 @@ using ECommerceAPI.Application.Extensions;
 using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
+using ECommerceAPI.Presentation.Extensions.MiddleWares;
+using ECommerceAPI.Presentation.Extensions.MiddleWares.Exceptions;
 using ECommerceAPI.Presentation.Extensions.MiddleWares.Swagger;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections;
+using ECommerceAPI.Presentation.MiddleWares;
 using ECommerceAPI.Shared.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,15 +37,17 @@ namespace ECommerceAPI.Presentation
 
             #endregion Build Web Application
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                #region Configure Swagger/OpenAPI Pipeline
+            app.UsePresentationMiddleWares(app.Environment);
 
-                app.UseSwaggerMiddleWares();
+            //// Configure the HTTP request pipeline.
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    #region Configure Swagger/OpenAPI Pipeline
 
-                #endregion Configure Swagger/OpenAPI Pipeline
-            }
+            // app.UseSwaggerMiddleWares();
+
+            //    #endregion Configure Swagger/OpenAPI Pipeline
+            //}
 
             app.MapControllers();
 

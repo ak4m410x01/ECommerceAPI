@@ -2,10 +2,13 @@
 {
     public static class SwaggerApplicationBuilder
     {
-        public static IApplicationBuilder UseSwaggerMiddleWares(this IApplicationBuilder app)
+        public static IApplicationBuilder UseSwaggerMiddleWares(this IApplicationBuilder app, IHostEnvironment environment)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            if (environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
             return app;
         }
     }
