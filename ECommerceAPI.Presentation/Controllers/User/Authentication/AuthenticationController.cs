@@ -1,4 +1,6 @@
-﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
+﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
+using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
+using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,8 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         #region Methods
 
         [HttpPost("SignUp")]
+        [ProducesResponseType(typeof(SignUpCommandDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(SignUpCommandDTO), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SignUpAsync(SignUpCommandRequest request)
         {
             var response = await Mediator.Send(request);
@@ -25,6 +29,8 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         }
 
         [HttpPost("SignIn")]
+        [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> SignInAsync(SignInQueryRequest request)
         {
             var response = await Mediator.Send(request);

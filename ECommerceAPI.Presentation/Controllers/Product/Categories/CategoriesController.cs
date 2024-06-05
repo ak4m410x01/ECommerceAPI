@@ -1,4 +1,6 @@
-﻿using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.DTOs;
+using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
+using ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         #region Methods
 
         [HttpGet]
+        [ProducesResponseType(typeof(GetAllCategoriesQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync([FromQuery] GetAllCategoriesQueryRequest request)
         {
             var response = await Mediator.Send(request);
@@ -25,6 +28,8 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         }
 
         [HttpGet("GetById")]
+        [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);
