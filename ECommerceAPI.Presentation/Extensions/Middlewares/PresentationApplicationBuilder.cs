@@ -14,6 +14,8 @@ namespace ECommerceAPI.Presentation.Extensions.MiddleWares
 
             app.UseSwaggerMiddleWares(environment);
 
+            app.UseStatusCodePagesWithReExecute("/Api/Errors/{0}");
+
             app.UseAuthenticationMiddleWares();
 
             #endregion Config Authentication & Authorization Pipelines
