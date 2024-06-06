@@ -46,79 +46,39 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             // Generate Token
             var token = await _tokenService.CreateTokenAsync(user);
 
-            // Get User Roles
-            var roles = await _userManager.GetRolesAsync(user);
-
             // Build Response
-            var response = _mapper.Map<AuthenticationResponseDTO>(user);
-            response.Roles = roles;
-            response.IsAuthenticated = true;
-            response.AccessToken = token.value;
-            response.AccessTokenValidTo = token.validTo;
+            var response = new AuthenticationResponseDTO()
+            {
+                Message = "SignIn Successfully",
+                IsAuthenticated = true,
+                AccessToken = token.value,
+                AccessTokenValidTo = token.validTo
+            };
 
             return response;
         }
 
         public async Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto)
         {
-            // Check if Email Exists
-            if (_userManager.FindByEmailAsync(dto.Email) is null)
-            {
-                return await Task.FromResult(new AuthenticationResponseDTO()
-                {
-                    IsAuthenticated = false,
-                    Message = "Email already exists."
-                });
-            }
-
-            // Check if UserName Exits
-            if (_userManager.FindByNameAsync(dto.UserName) is null)
-            {
-                return await Task.FromResult(new AuthenticationResponseDTO()
-                {
-                    IsAuthenticated = false,
-                    Message = "UserName already exists."
-                });
-            }
-
             var user = _mapper.Map<ApplicationUser>(dto);
 
             // Create User
-            var result = await _userManager.CreateAsync(user, dto.Password);
-            if (!result.Succeeded)
-            {
-                var error = result.Errors.FirstOrDefault();
-                return await Task.FromResult(new AuthenticationResponseDTO()
-                {
-                    IsAuthenticated = false,
-                    Message = error is null ? "Something wrong." : error.Description
-                });
-            }
+            await _userManager.CreateAsync(user, dto.Password);
 
             // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
-            if (!result.Succeeded)
-            {
-                var error = result.Errors.FirstOrDefault();
-                return await Task.FromResult(new AuthenticationResponseDTO()
-                {
-                    IsAuthenticated = false,
-                    Message = error is null ? "Something wrong." : error.Description
-                });
-            }
 
             // Generate Token
             var token = await _tokenService.CreateTokenAsync(user);
 
-            // Get User Roles
-            var roles = await _userManager.GetRolesAsync(user);
-
             // Build Response
-            var response = _mapper.Map<AuthenticationResponseDTO>(user);
-            response.Roles = roles;
-            response.IsAuthenticated = true;
-            response.AccessToken = token.value;
-            response.AccessTokenValidTo = token.validTo;
+            var response = new AuthenticationResponseDTO()
+            {
+                Message = "SignUp Successfully",
+                IsAuthenticated = true,
+                AccessToken = token.value,
+                AccessTokenValidTo = token.validTo
+            };
 
             return response;
         }

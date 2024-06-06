@@ -58,8 +58,8 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             List<Claim> claims =
             [
-                new Claim(ClaimTypes.Email, user.Email!),
-                new Claim(ClaimTypes.Name, user.UserName!),
+                new Claim(ClaimTypes.NameIdentifier, user.Id!),
+                new Claim(ClaimTypes.Email, user.Email!)
             ];
 
             claims.AddRange(await _userManager.GetClaimsAsync(user));
