@@ -11,9 +11,6 @@ namespace ECommerceAPI.Application.Mapping.User.Authentication.Commands.SignUp
         public SignUpMappingProfile()
         {
             CreateMap<SignUpDTO, ApplicationUser>();
-            CreateMap<ApplicationUser, AuthenticationResponseDTO>()
-                 .ForMember(destination => destination.UserId, options =>
-                                   options.MapFrom(source => source.Id));
 
             CreateMap<SignUpCommandRequest, SignUpDTO>();
             CreateMap<AuthenticationResponseDTO, SignUpCommandDTO>();
