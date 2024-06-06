@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Requests
 {
-    public class GetByIdQueryRequest : IRequest<Response<GetByIdQueryDTO>>
+    public class GetCategoryByIdQueryRequest : IRequest<Response<GetCategoryByIdQueryDTO>>
     {
         public int Id { get; set; }
     }

@@ -6,12 +6,12 @@ using FluentValidation;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Commands.Add.Validators
 {
-    public class AddCommandValidator : AbstractValidator<AddCommandRequest>
+    public class AddCategoryCommandValidator : AbstractValidator<AddCategoryCommandRequest>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBaseSpecification<Category> _categorySpecification;
 
-        public AddCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification)
+        public AddCategoryCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification)
         {
             _unitOfWork = unitOfWork;
             _categorySpecification = categorySpecification;

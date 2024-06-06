@@ -21,7 +21,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpGet]
         [ProducesResponseType(typeof(GetAllInventoriesQueryDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllInventoriesQueryRequest request)
+        public async Task<IActionResult> GetAllInventoriesAsync([FromQuery] GetAllInventoriesQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
@@ -29,7 +29,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpPost]
         [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> AddAsync(AddInventoryCommandRequest request)
+        public async Task<IActionResult> AddInventoryAsync(AddInventoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

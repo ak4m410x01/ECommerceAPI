@@ -9,7 +9,7 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Handlers
 {
-    public class GetByIdQueryHandler : ResponseHandler, IRequestHandler<GetByIdQueryRequest, Response<GetByIdQueryDTO>>
+    public class GetCategoryByIdQueryHandler : ResponseHandler, IRequestHandler<GetCategoryByIdQueryRequest, Response<GetCategoryByIdQueryDTO>>
     {
         #region Properties
 
@@ -21,7 +21,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.H
 
         #region Constructors
 
-        public GetByIdQueryHandler(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification, IMapper mapper)
+        public GetCategoryByIdQueryHandler(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _categorySpecification = categorySpecification;
@@ -32,7 +32,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.H
 
         #region Methods
 
-        public async Task<Response<GetByIdQueryDTO>> Handle(GetByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Response<GetCategoryByIdQueryDTO>> Handle(GetCategoryByIdQueryRequest request, CancellationToken cancellationToken)
         {
             _categorySpecification.Criteria = category => category.Id == request.Id;
 
@@ -40,10 +40,10 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.H
 
             if (category is null)
             {
-                return NotFound<GetByIdQueryDTO>("Category doesn't exists.");
+                return NotFound<GetCategoryByIdQueryDTO>("Category doesn't exists.");
             }
 
-            var data = _mapper.Map<GetByIdQueryDTO>(category);
+            var data = _mapper.Map<GetCategoryByIdQueryDTO>(category);
             return Success(data);
         }
 

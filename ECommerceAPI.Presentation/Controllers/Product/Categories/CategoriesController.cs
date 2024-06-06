@@ -23,24 +23,24 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpGet]
         [ProducesResponseType(typeof(GetAllCategoriesQueryDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllCategoriesQueryRequest request)
+        public async Task<IActionResult> GetAllCategoriesAsync([FromQuery] GetAllCategoriesQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
         }
 
         [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByIdAsync([FromRoute] GetByIdQueryRequest request)
+        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(AddCommandDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> AddAsync(AddCommandRequest request)
+        [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> AddCategoryAsync(AddCategoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

@@ -8,7 +8,7 @@ namespace ECommerceAPI.Application.Mapping.Product.Categories.Queries.GetById
     {
         public GetByIdMappingProfile()
         {
-            CreateMap<Category, GetByIdQueryDTO>()
+            CreateMap<Category, GetCategoryByIdQueryDTO>()
                 .ForMember(destination => destination.ParentCategory, options =>
                                 options.MapFrom(source => source.ParentCategory!.Name));
         }

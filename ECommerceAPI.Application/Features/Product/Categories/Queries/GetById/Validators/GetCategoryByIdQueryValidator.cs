@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Validators
 {
-    public class GetByIdQueryValidator : AbstractValidator<GetByIdQueryRequest>
+    public class GetCategoryByIdQueryValidator : AbstractValidator<GetCategoryByIdQueryRequest>
     {
-        public GetByIdQueryValidator()
+        public GetCategoryByIdQueryValidator()
         {
             IdValidator();
         }

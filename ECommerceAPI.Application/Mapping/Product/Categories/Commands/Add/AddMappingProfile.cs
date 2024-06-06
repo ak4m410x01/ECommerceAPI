@@ -9,9 +9,9 @@ namespace ECommerceAPI.Application.Mapping.Product.Categories.Commands.Add
     {
         public AddMappingProfile()
         {
-            CreateMap<AddCommandRequest, Category>();
+            CreateMap<AddCategoryCommandRequest, Category>();
 
-            CreateMap<Category, AddCommandDTO>()
+            CreateMap<Category, AddCategoryCommandDTO>()
                 .ForMember(destination => destination.ParentCategory, options =>
                                 options.MapFrom(source => source.ParentCategory!.Name));
         }

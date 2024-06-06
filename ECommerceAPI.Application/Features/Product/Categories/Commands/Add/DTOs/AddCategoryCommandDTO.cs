@@ -1,6 +1,6 @@
 ﻿namespace ECommerceAPI.Application.Features.Product.Categories.Commands.Add.DTOs
 {
-    public class AddCommandDTO
+    public class AddCategoryCommandDTO
     {
         public int Id { get; set; }
         public string? Name { get; set; }

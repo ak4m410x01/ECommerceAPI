@@ -1,6 +1,6 @@
 ﻿namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.DTOs
 {
-    public class GetByIdQueryDTO
+    public class GetCategoryByIdQueryDTO
     {
         public int Id { get; set; }
         public string? Name { get; set; }
