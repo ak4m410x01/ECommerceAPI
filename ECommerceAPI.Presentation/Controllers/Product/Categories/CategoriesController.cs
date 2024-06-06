@@ -29,10 +29,10 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
             return ResponseResult(response);
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(GetByIdQueryDTO), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] GetByIdQueryRequest request)
+        public async Task<IActionResult> GetByIdAsync([FromRoute] GetByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
