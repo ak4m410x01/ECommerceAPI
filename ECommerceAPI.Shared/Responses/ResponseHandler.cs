@@ -14,13 +14,13 @@ namespace ECommerceAPI.Shared.Responses
 
         #region Methods
 
-        public Response<T> Deleted<T>()
+        public Response<T> Deleted<T>(string? message = null)
         {
             return new Response<T>()
             {
+                Message = message is null ? "Deleted Successfully" : message,
                 StatusCode = HttpStatusCode.NoContent,
-                Succeeded = true,
-                Message = "Deleted Successfully"
+                Succeeded = true
             };
         }
 
@@ -28,9 +28,9 @@ namespace ECommerceAPI.Shared.Responses
         {
             return new Response<T>()
             {
-                StatusCode = HttpStatusCode.Unauthorized,
-                Succeeded = false,
                 Message = message is null ? "Unauthorized" : message,
+                StatusCode = HttpStatusCode.Unauthorized,
+                Succeeded = false
             };
         }
 
@@ -38,9 +38,9 @@ namespace ECommerceAPI.Shared.Responses
         {
             return new Response<T>()
             {
+                Message = message is null ? "Bad Request" : message,
                 StatusCode = HttpStatusCode.BadRequest,
-                Succeeded = false,
-                Message = message is null ? "Bad Request" : message
+                Succeeded = false
             };
         }
 
@@ -48,32 +48,31 @@ namespace ECommerceAPI.Shared.Responses
         {
             return new Response<T>()
             {
+                Message = message is null ? "Not Found" : message,
                 StatusCode = HttpStatusCode.NotFound,
-                Succeeded = false,
-                Message = message is null ? "Not Found" : message
+                Succeeded = false
             };
         }
 
-        public Response<T> Success<T>(T data, string message = "", object? meta = null)
+        public Response<T> Success<T>(T data, string? message = null)
         {
             return new Response<T>()
             {
+                Message = message is null ? "Success" : message,
                 StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
-                Message = message,
-                Data = data,
+                Data = data
             };
         }
 
-        public Response<T> Created<T>(T data, object? meta = null)
+        public Response<T> Created<T>(T data, string? message = null)
         {
             return new Response<T>()
             {
+                Message = message is null ? "Created Successfully" : message,
                 StatusCode = HttpStatusCode.Created,
                 Succeeded = true,
-                Message = "Created Successfully",
-                Data = data,
-                Meta = meta
+                Data = data
             };
         }
 
