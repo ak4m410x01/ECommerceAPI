@@ -1,9 +1,9 @@
-﻿using ECommerceAPI.Application.Features.Product.Categories.Commands.Add.DTOs;
-using ECommerceAPI.Application.Features.Product.Categories.Commands.Add.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.DTOs;
+using ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.Requests;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
-using ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.DTOs;
-using ECommerceAPI.Application.Features.Product.Categories.Queries.GetById.Requests;
+using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.DTOs;
+using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,18 +29,18 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
             return ResponseResult(response);
         }
 
-        [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
+        [HttpPost]
+        [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> AddCategoryAsync(AddCategoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
         }
 
-        [HttpPost]
-        [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> AddCategoryAsync(AddCategoryCommandRequest request)
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
