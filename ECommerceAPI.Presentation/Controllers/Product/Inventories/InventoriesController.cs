@@ -1,4 +1,6 @@
-﻿using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
+﻿using ECommerceAPI.Application.Features.Product.Inventories.Commands.Add.DTOs;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.Add.Requests;
+using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,14 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
             return ResponseResult(response);
         }
 
-        #endregion Methods
+        [HttpPost]
+        [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> AddAsync(AddInventoryCommandRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
     }
+
+    #endregion Methods
 }

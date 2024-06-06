@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
-using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Requests;
 using ECommerceAPI.Domain.Entities.Products;
 
 namespace ECommerceAPI.Application.Mapping.Product.Inventories.Queries.GetAllInventories

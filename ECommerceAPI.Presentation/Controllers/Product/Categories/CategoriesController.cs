@@ -40,7 +40,6 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpPost]
         [ProducesResponseType(typeof(AddCommandDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(AddCommandDTO), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddAsync(AddCommandRequest request)
         {
             var response = await Mediator.Send(request);
