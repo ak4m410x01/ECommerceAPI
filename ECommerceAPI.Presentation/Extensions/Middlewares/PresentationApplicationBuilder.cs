@@ -8,8 +8,6 @@ namespace ECommerceAPI.Presentation.Extensions.MiddleWares
     {
         public static IApplicationBuilder UsePresentationMiddleWares(this IApplicationBuilder app, IHostEnvironment environment)
         {
-            #region Config Authentication & Authorization Pipelines
-
             app.UseServerErrorExceptionMiddleWares();
 
             app.UseSwaggerMiddleWares(environment);
@@ -18,7 +16,7 @@ namespace ECommerceAPI.Presentation.Extensions.MiddleWares
 
             app.UseAuthenticationMiddleWares();
 
-            #endregion Config Authentication & Authorization Pipelines
+            app.UseErrorHandlerMiddleWare();
 
             return app;
         }
