@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetDiscountById.DTOs;
 using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetDiscountById.Requests;
-using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.DTOs;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;

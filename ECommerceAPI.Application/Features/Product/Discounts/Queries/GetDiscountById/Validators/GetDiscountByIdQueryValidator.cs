@@ -3,7 +3,6 @@ using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
 using FluentValidation;
-using System.Threading;
 
 namespace ECommerceAPI.Application.Features.Product.Discounts.Queries.GetDiscountById.Validators
 {
