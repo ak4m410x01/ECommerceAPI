@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ECommerceAPI.Application.Extensions.Responses;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
@@ -9,7 +10,7 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Handlers
 {
-    public class GetAllInventoriesQueryHandler : ResponseHandler, IRequestHandler<GetAllInventoriesQueryRequest, Response<IQueryable<GetAllInventoriesQueryDTO>>>
+    public class GetAllInventoriesQueryHandler : ResponseHandler, IRequestHandler<GetAllInventoriesQueryRequest, PaginatedResponse<GetAllInventoriesQueryDTO>>
     {
         #region Properties
 
@@ -32,11 +33,13 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllIn
 
         #region Methods
 
-        public async Task<Response<IQueryable<GetAllInventoriesQueryDTO>>> Handle(GetAllInventoriesQueryRequest request, CancellationToken cancellationToken)
+        public async Task<PaginatedResponse<GetAllInventoriesQueryDTO>> Handle(GetAllInventoriesQueryRequest request, CancellationToken cancellationToken)
         {
             var inventories = await _unitOfWork.Repository<Inventory>().GetAllAsNoTrackingAsync(_inventorySpecification);
             var data = _mapper.ProjectTo<GetAllInventoriesQueryDTO>(inventories);
-            return Success(data);
+
+            var paginatedData = await data.ToPaginatedQueryableAsync(request.PageNumber, request.PageSize);
+            return paginatedData;
         }
 
         #endregion Methods
