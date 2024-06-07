@@ -1,5 +1,7 @@
 ﻿using ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct.DTOs;
 using ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct.Requests;
+using ECommerceAPI.Application.Features.Product.Products.Queries.GetAllProducts.DTOs;
+using ECommerceAPI.Application.Features.Product.Products.Queries.GetAllProducts.Requests;
 using ECommerceAPI.Application.Features.Product.Products.Queries.GetProductById.DTOs;
 using ECommerceAPI.Application.Features.Product.Products.Queries.GetProductById.Requests;
 using MediatR;
@@ -18,6 +20,14 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Products
         #endregion Constructors
 
         #region Methods
+
+        [HttpGet]
+        [ProducesResponseType(typeof(GetAllProductsQueryDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllProductsAsync([FromQuery] GetAllProductsQueryRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
 
         [HttpPost]
         [ProducesResponseType(typeof(AddProductCommandDTO), StatusCodes.Status201Created)]
