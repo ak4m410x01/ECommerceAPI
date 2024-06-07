@@ -51,7 +51,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
                 {
                     _categorySpecification.Criteria = category => category.Id == parentCategoryId;
                     return (await _unitOfWork.Repository<Category>().FindAsNoTrackingAsync(_categorySpecification)) is not null;
-                }).WithMessage("ParentCategoryId already exists.");
+                }).WithMessage("ParentCategoryId doesn't exists.");
         }
 
         #endregion Methods
