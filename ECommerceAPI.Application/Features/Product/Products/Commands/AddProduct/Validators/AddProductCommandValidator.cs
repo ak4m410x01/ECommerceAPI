@@ -26,6 +26,7 @@ namespace ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct
             _discountSpecification = discountSpecification;
             NameValidator();
             SKUValidator();
+            PriceValidator();
             CategoryIdValidator();
             InventoryIdValidator();
             DiscountIdValidator();
