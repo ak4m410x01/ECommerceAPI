@@ -46,6 +46,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
             RuleFor(request => request.ParentCategoryId)
                 .NotEmpty().WithMessage("ParentCategoryId can't be empty.")
                 .NotNull().WithMessage("ParentCategoryId can't be null.")
+                .GreaterThan(0).WithMessage("ParentCategoryId must be greater than 0.")
                 .MustAsync(async (parentCategoryId, cancellationToken) =>
                 {
                     _categorySpecification.Criteria = category => category.Id == parentCategoryId;

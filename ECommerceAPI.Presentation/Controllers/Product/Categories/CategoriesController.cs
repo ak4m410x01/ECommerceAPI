@@ -30,7 +30,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddCategoryAsync(AddCategoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
@@ -39,7 +39,6 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);

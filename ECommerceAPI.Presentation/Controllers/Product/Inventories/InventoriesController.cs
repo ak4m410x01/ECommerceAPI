@@ -30,7 +30,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddInventoryAsync(AddInventoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
@@ -39,7 +39,6 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(GetInventoryByIdQueryDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(GetInventoryByIdQueryDTO), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetInventoryByIdAsync([FromRoute] GetInventoryByIdQueryRequest request)
         {
             var response = await Mediator.Send(request);
