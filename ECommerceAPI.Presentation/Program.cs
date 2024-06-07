@@ -39,16 +39,6 @@ namespace ECommerceAPI.Presentation
 
             app.UsePresentationMiddleWares(app.Environment);
 
-            //// Configure the HTTP request pipeline.
-            //if (app.Environment.IsDevelopment())
-            //{
-            //    #region Configure Swagger/OpenAPI Pipeline
-
-            // app.UseSwaggerMiddleWares();
-
-            //    #endregion Configure Swagger/OpenAPI Pipeline
-            //}
-
             app.MapControllers();
 
             #region Data Seeding
