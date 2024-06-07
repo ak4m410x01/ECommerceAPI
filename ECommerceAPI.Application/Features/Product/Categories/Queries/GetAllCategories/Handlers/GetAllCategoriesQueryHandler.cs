@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ECommerceAPI.Application.Extensions.Responses;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
@@ -9,7 +10,7 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Handlers
 {
-    public class GetAllCategoriesQueryHandler : ResponseHandler, IRequestHandler<GetAllCategoriesQueryRequest, Response<IQueryable<GetAllCategoriesQueryDTO>>>
+    public class GetAllCategoriesQueryHandler : ResponseHandler, IRequestHandler<GetAllCategoriesQueryRequest, PaginatedResponse<GetAllCategoriesQueryDTO>>
     {
         #region Properties
 
@@ -32,11 +33,13 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCat
 
         #region Methods
 
-        public async Task<Response<IQueryable<GetAllCategoriesQueryDTO>>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
+        public async Task<PaginatedResponse<GetAllCategoriesQueryDTO>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
         {
             var categories = await _unitOfWork.Repository<Category>().GetAllAsNoTrackingAsync(_categorySpecification);
             var data = _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
-            return Success(data);
+
+            var paginatedData = await data.ToPaginatedQueryableAsync(request.PageNumber, request.PageSize);
+            return paginatedData;
         }
 
         #endregion Methods

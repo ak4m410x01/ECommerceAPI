@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests
 {
-    public class GetAllCategoriesQueryRequest : IRequest<Response<IQueryable<GetAllCategoriesQueryDTO>>>
+    public class GetAllCategoriesQueryRequest : PaginatedRequest, IRequest<PaginatedResponse<GetAllCategoriesQueryDTO>>
     {
     }
 }
