@@ -35,13 +35,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetCatego
         public async Task<Response<GetCategoryByIdQueryDTO>> Handle(GetCategoryByIdQueryRequest request, CancellationToken cancellationToken)
         {
             _categorySpecification.Criteria = category => category.Id == request.Id;
-
             var category = await _unitOfWork.Repository<Category>().FindAsNoTrackingAsync(_categorySpecification);
-
-            if (category is null)
-            {
-                return NotFound<GetCategoryByIdQueryDTO>("Category doesn't exists.");
-            }
 
             var data = _mapper.Map<GetCategoryByIdQueryDTO>(category);
             return Success(data);

@@ -6,6 +6,10 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInve
 {
     public class AddInventoryCommandRequest : IRequest<Response<AddInventoryCommandDTO>>
     {
+        #region Properties
+
         public int Quantity { get; set; } = 1;
+
+        #endregion Properties
     }
 }

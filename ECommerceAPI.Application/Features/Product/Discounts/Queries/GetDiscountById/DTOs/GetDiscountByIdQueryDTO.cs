@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDiscounts.DTOs
+﻿namespace ECommerceAPI.Application.Features.Product.Discounts.Queries.GetDiscountById.DTOs
 {
-    public class GetAllDiscountsQueryDTO
+    public class GetDiscountByIdQueryDTO
     {
         #region Properties
 

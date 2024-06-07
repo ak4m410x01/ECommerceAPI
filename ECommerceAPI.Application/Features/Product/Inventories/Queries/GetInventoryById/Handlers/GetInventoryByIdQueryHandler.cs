@@ -35,13 +35,7 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInven
         public async Task<Response<GetInventoryByIdQueryDTO>> Handle(GetInventoryByIdQueryRequest request, CancellationToken cancellationToken)
         {
             _inventorySpecification.Criteria = inventory => inventory.Id == request.Id;
-
             var inventory = await _unitOfWork.Repository<Inventory>().FindAsNoTrackingAsync(_inventorySpecification);
-
-            if (inventory is null)
-            {
-                return NotFound<GetInventoryByIdQueryDTO>("Inventory doesn't exists.");
-            }
 
             var data = _mapper.Map<GetInventoryByIdQueryDTO>(inventory);
             return Success(data);

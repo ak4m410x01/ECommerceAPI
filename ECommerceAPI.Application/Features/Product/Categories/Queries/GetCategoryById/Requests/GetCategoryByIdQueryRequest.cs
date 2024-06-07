@@ -6,6 +6,10 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetCatego
 {
     public class GetCategoryByIdQueryRequest : IRequest<Response<GetCategoryByIdQueryDTO>>
     {
+        #region Properties
+
         public int Id { get; set; }
+
+        #endregion Properties
     }
 }

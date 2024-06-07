@@ -6,6 +6,10 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInven
 {
     public class GetInventoryByIdQueryRequest : IRequest<Response<GetInventoryByIdQueryDTO>>
     {
+        #region Properties
+
         public int Id { get; set; }
+
+        #endregion Properties
     }
 }

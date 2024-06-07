@@ -8,8 +8,14 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
 {
     public class AddCategoryCommandValidator : AbstractValidator<AddCategoryCommandRequest>
     {
+        #region Properties
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBaseSpecification<Category> _categorySpecification;
+
+        #endregion Properties
+
+        #region Constructors
 
         public AddCategoryCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification)
         {
@@ -18,6 +24,10 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
             NameValidator();
             ParentCategoryIdValidator();
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public void NameValidator()
         {
@@ -42,5 +52,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
                     return (await _unitOfWork.Repository<Category>().FindAsNoTrackingAsync(_categorySpecification)) is not null;
                 }).WithMessage("ParentCategoryId already exists.");
         }
+
+        #endregion Methods
     }
 }
