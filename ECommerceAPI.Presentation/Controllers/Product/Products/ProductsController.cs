@@ -37,7 +37,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Products
             return ResponseResult(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(GetProductByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetProductByIdAsync([FromRoute] GetProductByIdQueryRequest request)
         {
