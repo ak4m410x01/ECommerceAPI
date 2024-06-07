@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDiscounts.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDiscounts.DTOs;
+using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDiscounts.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Discounts
         #region Methods
 
         [HttpGet]
+        [ProducesResponseType(typeof(GetAllDiscountsQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllDiscountsAsync([FromQuery] GetAllDiscountsQueryRequest request)
         {
             var response = await Mediator.Send(request);
