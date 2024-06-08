@@ -2,11 +2,11 @@ using ECommerceAPI.Application.Extensions;
 using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
-using ECommerceAPI.Presentation.Extensions.MiddleWares;
-using ECommerceAPI.Presentation.Extensions.MiddleWares.Exceptions;
-using ECommerceAPI.Presentation.Extensions.MiddleWares.Swagger;
+using ECommerceAPI.Presentation.Extensions.Middlewares;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections;
-using ECommerceAPI.Presentation.MiddleWares;
+using ECommerceAPI.Presentation.Middlewares;
 using ECommerceAPI.Shared.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +37,7 @@ namespace ECommerceAPI.Presentation
 
             #endregion Build Web Application
 
-            app.UsePresentationMiddleWares(app.Environment);
+            app.UsePresentationMiddlewares(app.Environment);
 
             app.MapControllers();
 

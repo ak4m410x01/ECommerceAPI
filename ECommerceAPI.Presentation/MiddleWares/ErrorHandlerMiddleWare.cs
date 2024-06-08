@@ -1,14 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Net;
-using System.Text.Json;
+﻿using ECommerceAPI.Shared.Responses;
 using FluentValidation;
-using ECommerceAPI.Shared.Responses;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
-namespace ECommerceAPI.Presentation.MiddleWares
+namespace ECommerceAPI.Presentation.Middlewares
 {
-    public class ErrorHandlerMiddleWare
+    public class ErrorHandlerMiddleware
     {
         #region Properties
 
@@ -18,7 +15,7 @@ namespace ECommerceAPI.Presentation.MiddleWares
 
         #region Constructors
 
-        public ErrorHandlerMiddleWare(RequestDelegate next)
+        public ErrorHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
         }

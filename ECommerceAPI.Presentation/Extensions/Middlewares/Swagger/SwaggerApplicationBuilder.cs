@@ -1,8 +1,8 @@
-﻿namespace ECommerceAPI.Presentation.Extensions.MiddleWares.Swagger
+﻿namespace ECommerceAPI.Presentation.Extensions.Middlewares.Swagger
 {
     public static class SwaggerApplicationBuilder
     {
-        public static IApplicationBuilder UseSwaggerMiddleWares(this IApplicationBuilder app, IHostEnvironment environment)
+        public static IApplicationBuilder UseSwaggerMiddlewares(this IApplicationBuilder app, IHostEnvironment environment)
         {
             if (environment.IsDevelopment())
             {

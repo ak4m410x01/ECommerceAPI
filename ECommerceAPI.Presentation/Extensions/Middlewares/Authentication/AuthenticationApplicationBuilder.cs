@@ -1,8 +1,8 @@
-﻿namespace ECommerceAPI.Presentation.Extensions.MiddleWares.Authentication
+﻿namespace ECommerceAPI.Presentation.Extensions.Middlewares.Authentication
 {
     public static class AuthenticationApplicationBuilder
     {
-        public static IApplicationBuilder UseAuthenticationMiddleWares(this IApplicationBuilder app)
+        public static IApplicationBuilder UseAuthenticationMiddlewares(this IApplicationBuilder app)
         {
             app.UseAuthorization();
             app.UseAuthorization();

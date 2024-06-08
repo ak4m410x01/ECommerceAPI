@@ -1,13 +1,12 @@
-﻿using ECommerceAPI.Presentation.MiddleWares;
-using ECommerceAPI.Shared.Exceptions;
+﻿using ECommerceAPI.Presentation.Middlewares;
 
-namespace ECommerceAPI.Presentation.Extensions.MiddleWares.Exceptions
+namespace ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions
 {
     public static class ServerErrorExceptionApplicationBuilder
     {
-        public static IApplicationBuilder UseServerErrorExceptionMiddleWares(this IApplicationBuilder app)
+        public static IApplicationBuilder UseServerErrorExceptionMiddlewares(this IApplicationBuilder app)
         {
-            app.UseMiddleware<GlobalExceptionHandlerMiddleWare>();
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             return app;
         }
     }

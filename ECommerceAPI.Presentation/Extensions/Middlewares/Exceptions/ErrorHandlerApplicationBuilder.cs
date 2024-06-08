@@ -1,12 +1,12 @@
-﻿using ECommerceAPI.Presentation.MiddleWares;
+﻿using ECommerceAPI.Presentation.Middlewares;
 
-namespace ECommerceAPI.Presentation.Extensions.MiddleWares.Exceptions
+namespace ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions
 {
     public static class ErrorHandlerApplicationBuilder
     {
-        public static IApplicationBuilder UseErrorHandlerMiddleWare(this IApplicationBuilder app)
+        public static IApplicationBuilder UseErrorHandlerMiddleware(this IApplicationBuilder app)
         {
-            app.UseMiddleware<ErrorHandlerMiddleWare>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             return app;
         }
     }

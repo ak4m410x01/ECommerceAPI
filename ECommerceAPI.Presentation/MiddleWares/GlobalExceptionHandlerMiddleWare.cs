@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
-namespace ECommerceAPI.Presentation.MiddleWares
+namespace ECommerceAPI.Presentation.Middlewares
 {
-    public class GlobalExceptionHandlerMiddleWare
+    public class GlobalExceptionHandlerMiddleware
     {
         #region Properties
 
@@ -16,7 +16,7 @@ namespace ECommerceAPI.Presentation.MiddleWares
 
         #region Constructors
 
-        public GlobalExceptionHandlerMiddleWare(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
         {
             _next = next;
             _logger = logger;

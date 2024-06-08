@@ -1,22 +1,22 @@
-﻿using ECommerceAPI.Presentation.Extensions.MiddleWares.Authentication;
-using ECommerceAPI.Presentation.Extensions.MiddleWares.Exceptions;
-using ECommerceAPI.Presentation.Extensions.MiddleWares.Swagger;
+﻿using ECommerceAPI.Presentation.Extensions.Middlewares.Authentication;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions;
+using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
 
-namespace ECommerceAPI.Presentation.Extensions.MiddleWares
+namespace ECommerceAPI.Presentation.Extensions.Middlewares
 {
     public static class PresentationApplicationBuilder
     {
-        public static IApplicationBuilder UsePresentationMiddleWares(this IApplicationBuilder app, IHostEnvironment environment)
+        public static IApplicationBuilder UsePresentationMiddlewares(this IApplicationBuilder app, IHostEnvironment environment)
         {
-            app.UseServerErrorExceptionMiddleWares();
+            app.UseServerErrorExceptionMiddlewares();
 
-            app.UseSwaggerMiddleWares(environment);
+            app.UseSwaggerMiddlewares(environment);
 
             app.UseStatusCodePagesWithReExecute("/Api/Errors/{0}");
 
-            app.UseAuthenticationMiddleWares();
+            app.UseAuthenticationMiddlewares();
 
-            app.UseErrorHandlerMiddleWare();
+            app.UseErrorHandlerMiddleware();
 
             return app;
         }
