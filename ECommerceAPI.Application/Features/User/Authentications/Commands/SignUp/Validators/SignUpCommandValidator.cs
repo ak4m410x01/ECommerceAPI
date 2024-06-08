@@ -49,7 +49,12 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
         {
             RuleFor(request => request.Password)
                    .NotEmpty().WithMessage("Password can't be empty.")
-                   .NotNull().WithMessage("Password can't be null.");
+                   .NotNull().WithMessage("Password can't be null.")
+                   .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
+                   .Must(password => password.Any(char.IsUpper)).WithMessage("Password must contain an uppercase letter.")
+                   .Must(password => password.Any(char.IsLower)).WithMessage("Password must contain a lowercase letter.")
+                   .Must(password => password.Any(char.IsDigit)).WithMessage("Password must contain a digit.")
+                   .Must(password => password.Any(c => !char.IsLetterOrDigit(c))).WithMessage("Password must contain a special character.");
         }
 
         public void ConfirmPasswordValidator()
