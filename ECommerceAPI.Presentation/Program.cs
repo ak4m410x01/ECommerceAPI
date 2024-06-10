@@ -3,12 +3,7 @@ using ECommerceAPI.Infrastructure.Extensions;
 using ECommerceAPI.Persistence.DataSeeding;
 using ECommerceAPI.Persistence.Extensions;
 using ECommerceAPI.Presentation.Extensions.Middlewares;
-using ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions;
-using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections;
-using ECommerceAPI.Presentation.Middlewares;
-using ECommerceAPI.Shared.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation
 {
