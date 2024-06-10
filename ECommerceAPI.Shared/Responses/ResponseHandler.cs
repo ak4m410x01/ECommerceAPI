@@ -54,6 +54,16 @@ namespace ECommerceAPI.Shared.Responses
             };
         }
 
+        public Response<T> ServerError<T>(string? message = null)
+        {
+            return new Response<T>()
+            {
+                Message = message is null ? "Internal Server Error" : message,
+                StatusCode = HttpStatusCode.InternalServerError,
+                Succeeded = false
+            };
+        }
+
         public Response<T> Success<T>(T data, string? message = null)
         {
             return new Response<T>()
@@ -62,6 +72,16 @@ namespace ECommerceAPI.Shared.Responses
                 StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
                 Data = data
+            };
+        }
+
+        public Response<T> Success<T>(string? message = null)
+        {
+            return new Response<T>()
+            {
+                Message = message is null ? "Success" : message,
+                StatusCode = HttpStatusCode.OK,
+                Succeeded = true,
             };
         }
 

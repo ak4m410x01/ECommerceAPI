@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authorization;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Cors;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
@@ -14,6 +15,12 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
             services.AddAuthenticationConfigurations(configuration);
 
             #endregion Configure Authentication
+
+            #region Configure Authorization
+
+            services.AddAuthorizationConfigurations();
+
+            #endregion Configure Authorization
 
             #region Configure Swagger/OpenAPI
 

@@ -1,4 +1,6 @@
-﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
+﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.DTOs;
+using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.Requests;
+using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
@@ -32,6 +34,15 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> SignInAsync(SignInQueryRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
+        [HttpPost("ChangePassword")]
+        [ProducesResponseType(typeof(ChangePasswordCommandDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ChangePasswordCommandDTO), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

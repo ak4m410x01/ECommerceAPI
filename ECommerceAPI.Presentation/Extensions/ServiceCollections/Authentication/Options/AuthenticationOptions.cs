@@ -11,7 +11,6 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
              {
                  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
              });
         }
     }

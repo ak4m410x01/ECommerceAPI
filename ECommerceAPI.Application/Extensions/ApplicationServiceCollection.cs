@@ -10,6 +10,9 @@ namespace ECommerceAPI.Application.Extensions
         {
             services.AddAutoMapperConfigurations();
             services.AddValidationConfiguration();
+
+            services.AddHttpContextAccessor();
+
             return services;
         }
     }

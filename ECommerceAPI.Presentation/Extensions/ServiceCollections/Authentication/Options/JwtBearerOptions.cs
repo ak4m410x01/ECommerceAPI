@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json;
 
 namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication.Options
 {
@@ -23,7 +25,20 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]!)),
                      ClockSkew = TimeSpan.Zero
                  };
+
+                 options.Events = new JwtBearerEvents
+                 {
+                     OnChallenge = context =>
+                     {
+                         context.HandleResponse();
+                         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                         context.Response.ContentType = "application/json";
+                         var result = JsonSerializer.Serialize(new { error = "Token is not provided or invalid." });
+                         return context.Response.WriteAsync(result);
+                     }
+                 };
              });
+
             return services;
         }
     }
