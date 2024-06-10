@@ -4,8 +4,7 @@
     {
         public static IApplicationBuilder UseAuthenticationMiddlewares(this IApplicationBuilder app)
         {
-            app.UseAuthorization();
-            app.UseAuthorization();
+            app.UseAuthentication();
             return app;
         }
     }
