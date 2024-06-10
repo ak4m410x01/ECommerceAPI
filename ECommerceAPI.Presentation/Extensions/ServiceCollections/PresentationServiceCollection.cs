@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Cors;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Swagger;
 
@@ -20,6 +21,8 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
             services.AddSwaggerConfiguration(configuration);
 
             #endregion Configure Swagger/OpenAPI
+
+            services.AddCorsConfiguration();
 
             #region Configure Controllers
 
