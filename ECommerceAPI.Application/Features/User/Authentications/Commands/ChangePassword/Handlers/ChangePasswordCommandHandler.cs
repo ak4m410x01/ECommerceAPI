@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePass
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
@@ -37,13 +38,13 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
 
             var authHeader = httpContext?.Request.Headers["Authorization"].FirstOrDefault();
 
-            var token = authHeader?.Substring("Bearer ".Length).Trim();
+            var token = authHeader?.Substring($"{JwtBearerDefaults.AuthenticationScheme} ".Length).Trim();
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
 
             var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
 
-            var user = await _userManager.FindByEmailAsync(emailClaim ?? "");
+            var user = await _userManager.FindByEmailAsync(emailClaim ?? string.Empty);
 
             return user!;
         }
@@ -51,13 +52,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
         public async Task<Response<ChangePasswordCommandDTO>> Handle(ChangePasswordCommandRequest request, CancellationToken cancellationToken)
         {
             var user = await GetSignInUserAsync();
-            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword!, request.NewPassword!);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest<ChangePasswordCommandDTO>("Password UnChanged.");
-            }
-
+            await _userManager.ChangePasswordAsync(user, request.CurrentPassword!, request.NewPassword!);
             return Success<ChangePasswordCommandDTO>("Password Changed Successfully.");
         }
 

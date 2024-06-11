@@ -40,7 +40,6 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
             var authHeader = httpContext.Request.Headers["Authorization"].FirstOrDefault(); if
             (authHeader is null || !authHeader.StartsWith("Bearer "))
             {
-                //this.AddFailure("Authorization", "Token not provided.");
                 return false;
             }
 
@@ -59,10 +58,10 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
 
         public void CurrentPasswordValidator()
         {
-            RuleFor(request => request.NewPassword)
+            RuleFor(request => request.CurrentPassword)
                    .NotEmpty().WithMessage("Password can't be empty.")
                    .NotNull().WithMessage("Password can't be null.")
-                   .MustAsync(async (request, CurrentPassword, cancellationToken) => await ValidateCurrentPasswordAsync(request.CurrentPassword ?? "")).WithMessage("Current password is not valid.");
+                   .MustAsync(async (request, CurrentPassword, cancellationToken) => await ValidateCurrentPasswordAsync(request.CurrentPassword)).WithMessage("Current password is not valid.");
         }
 
         public void NewPasswordValidator()

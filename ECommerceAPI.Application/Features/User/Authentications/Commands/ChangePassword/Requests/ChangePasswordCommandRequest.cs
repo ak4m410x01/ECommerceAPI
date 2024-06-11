@@ -8,9 +8,9 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
     {
         #region Properties
 
-        public string? CurrentPassword { get; set; }
-        public string? NewPassword { get; set; }
-        public string? ConfirmNewPassword { get; set; }
+        public string CurrentPassword { get; set; } = default!;
+        public string NewPassword { get; set; } = default!;
+        public string ConfirmNewPassword { get; set; } = default!;
 
         #endregion Properties
     }
