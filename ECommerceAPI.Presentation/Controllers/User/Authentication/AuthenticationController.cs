@@ -5,7 +5,6 @@ using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Req
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +40,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
             return ResponseResult(response);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize()]
         [HttpPost("ChangePassword")]
         [ProducesResponseType(typeof(ChangePasswordCommandDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordCommandRequest request)
