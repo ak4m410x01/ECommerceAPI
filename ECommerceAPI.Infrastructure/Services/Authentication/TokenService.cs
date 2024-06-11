@@ -1,7 +1,7 @@
 ﻿using ECommerceAPI.Application.Interfaces.Services.Authentication;
 using ECommerceAPI.Domain.IdentityEntities;
+using ECommerceAPI.Shared.Helpers.JwtSettings;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,17 +13,18 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
     {
         #region Properties
 
-        private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly JwtSettings _jwtSettings;
 
         #endregion Properties
 
         #region Constructors
 
-        public TokenService(IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        public TokenService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings)
         {
-            _configuration = configuration;
             _userManager = userManager;
+            _jwtSettings = jwtSettings;
         }
 
         #endregion Constructors
@@ -36,9 +37,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             JwtSecurityToken token = new
             (
-               issuer: _configuration["Jwt:Issuer"],
-               audience: _configuration["Jwt:Audience"],
-               expires: DateTime.UtcNow.AddDays(double.Parse(_configuration["Jwt:ExpireInDays"]!)),
+               issuer: _jwtSettings.Issuer,
+               audience: _jwtSettings.Audience,
+               expires: DateTime.UtcNow.AddDays(double.Parse(_jwtSettings.Key ?? "0")),
                claims: await GetTokenClaimsAsync(user),
                signingCredentials: GetSigningCredentials()
             );
@@ -48,7 +49,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         private SigningCredentials GetSigningCredentials()
         {
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtSettings.Key ?? ""));
             return new(key, SecurityAlgorithms.HmacSha256);
         }
 
