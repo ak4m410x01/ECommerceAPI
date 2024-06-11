@@ -2,7 +2,6 @@
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using FluentValidation;
-using System.Net;
 using ProductEntity = ECommerceAPI.Domain.Entities.Products.Product;
 
 namespace ECommerceAPI.Application.Features.Product.Products.Queries.GetProductById.Validators

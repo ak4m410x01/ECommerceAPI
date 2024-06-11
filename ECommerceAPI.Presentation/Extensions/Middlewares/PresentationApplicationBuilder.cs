@@ -11,15 +11,15 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares
         {
             app.UseServerErrorExceptionMiddlewares();
 
+            app.UseErrorHandlerMiddleware();
+
             app.UseStatusCodePagesWithReExecute("/Api/Errors/{0}");
 
             app.UseCorsMiddlewares();
 
-            app.UseAuthenticationMiddlewares();
-
             app.UseSwaggerMiddlewares(environment);
 
-            app.UseErrorHandlerMiddleware();
+            app.UseAuthenticationMiddlewares();
 
             return app;
         }

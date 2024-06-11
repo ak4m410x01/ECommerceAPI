@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
