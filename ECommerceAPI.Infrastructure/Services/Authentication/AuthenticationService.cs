@@ -43,16 +43,12 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
                 });
             }
 
-            // Generate Token
-            var token = await _tokenService.CreateTokenAsync(user);
-
             // Build Response
             var response = new AuthenticationResponseDTO()
             {
                 Message = "SignIn Successfully",
                 IsAuthenticated = true,
-                AccessToken = token.value,
-                AccessTokenValidTo = token.validTo
+                Token = await _tokenService.GenerateTokenAsync(user)
             };
 
             return response;
@@ -68,16 +64,12 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
 
-            // Generate Token
-            var token = await _tokenService.CreateTokenAsync(user);
-
             // Build Response
             var response = new AuthenticationResponseDTO()
             {
                 Message = "SignUp Successfully",
                 IsAuthenticated = true,
-                AccessToken = token.value,
-                AccessTokenValidTo = token.validTo
+                Token = await _tokenService.GenerateTokenAsync(user)
             };
 
             return response;
