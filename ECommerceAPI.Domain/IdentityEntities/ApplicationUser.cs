@@ -23,6 +23,7 @@ namespace ECommerceAPI.Domain.IdentityEntities
         public virtual ICollection<UserAddress> Addresses { get; set; } = new List<UserAddress>();
         public virtual ICollection<UserActivityLog> UserActivityLogs { get; set; } = new List<UserActivityLog>();
         public virtual UserProfile? UserProfile { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
         #endregion Relationships
     }

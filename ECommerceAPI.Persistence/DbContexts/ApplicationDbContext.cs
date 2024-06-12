@@ -25,6 +25,7 @@ namespace ECommerceAPI.Persistence.DbContexts
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserActivityLog> UserActivityLogs { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         #endregion User Related Db Sets
 
