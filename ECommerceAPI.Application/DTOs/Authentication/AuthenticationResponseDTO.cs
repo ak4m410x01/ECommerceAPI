@@ -7,6 +7,6 @@ namespace ECommerceAPI.Application.DTOs.Authentication
         public string? Message { get; set; }
         public bool IsAuthenticated { get; set; }
 
-        public TokenDTO Token { get; set; }
+        public TokenDTO? Token { get; set; }
     }
 }

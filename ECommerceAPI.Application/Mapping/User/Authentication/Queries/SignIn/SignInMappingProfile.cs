@@ -10,7 +10,11 @@ namespace ECommerceAPI.Application.Mapping.User.Authentication.Queries.SignIn
         public SignInMappingProfile()
         {
             CreateMap<SignInQueryRequest, SignInDTO>();
-            CreateMap<AuthenticationResponseDTO, SignInQueryDTO>();
+            CreateMap<AuthenticationResponseDTO, SignInQueryDTO>()
+                .ForMember(destination => destination.AccessToken, options => options.MapFrom(source => source.Token!.AccessToken!.Token))
+                .ForMember(destination => destination.AccessTokenExpiresAt, options => options.MapFrom(source => source.Token!.AccessToken!.ExpiresAt))
+                .ForMember(destination => destination.RefreshToken, options => options.MapFrom(source => source.Token!.RefreshToken!.Token))
+                .ForMember(destination => destination.RefreshTokenExpiresAt, options => options.MapFrom(source => source.Token!.RefreshToken!.ExpiresAt));
         }
     }
 }
