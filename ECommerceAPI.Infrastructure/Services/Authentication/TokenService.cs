@@ -69,9 +69,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         private SigningCredentials GetSigningCredentials()
         {
-            Console.WriteLine($"Jwt Key: {_jwtSettings.Key}");
-            //TODO: Remove in Production
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes("sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtSettings.Key ?? "sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
             return new(key, SecurityAlgorithms.HmacSha256);
         }
 
