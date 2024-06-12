@@ -13,7 +13,11 @@ namespace ECommerceAPI.Application.Mapping.User.Authentication.Commands.SignUp
             CreateMap<SignUpDTO, ApplicationUser>();
 
             CreateMap<SignUpCommandRequest, SignUpDTO>();
-            CreateMap<AuthenticationResponseDTO, SignUpCommandDTO>();
+            CreateMap<AuthenticationResponseDTO, SignUpCommandDTO>()
+                .ForMember(destination => destination.AccessToken, options => options.MapFrom(source => source.Token!.AccessToken!.Token))
+                .ForMember(destination => destination.AccessTokenExpiresAt, options => options.MapFrom(source => source.Token!.AccessToken!.ExpiresAt))
+                .ForMember(destination => destination.RefreshToken, options => options.MapFrom(source => source.Token!.RefreshToken!.Token))
+                .ForMember(destination => destination.RefreshTokenExpiresAt, options => options.MapFrom(source => source.Token!.RefreshToken!.ExpiresAt));
         }
     }
 }
