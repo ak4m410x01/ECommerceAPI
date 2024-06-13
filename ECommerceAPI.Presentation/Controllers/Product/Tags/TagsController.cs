@@ -1,5 +1,7 @@
 ﻿using ECommerceAPI.Application.Features.Product.Tags.Commands.AddTag.DTOs;
 using ECommerceAPI.Application.Features.Product.Tags.Commands.AddTag.Requests;
+using ECommerceAPI.Application.Features.Product.Tags.Queries.GetAllTags.DTOs;
+using ECommerceAPI.Application.Features.Product.Tags.Queries.GetAllTags.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +17,16 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Tags
 
         #endregion Constructors
 
+        #region Methods
+
+        [HttpGet]
+        [ProducesResponseType(typeof(GetAllTagsQueryDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> AddAsync([FromQuery] GetAllTagsQueryRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(AddTagCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddAsync(AddTagCommandRequest request)
@@ -22,5 +34,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Tags
             var response = await Mediator.Send(request);
             return ResponseResult(response);
         }
+
+        #endregion Methods
     }
 }
