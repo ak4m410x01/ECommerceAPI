@@ -52,7 +52,7 @@ namespace ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct
                 {
                     _productSpecification.Criteria = product => product.SKU == sku;
                     return (await _unitOfWork.Repository<ProductEntity>().FindAsNoTrackingAsync(_productSpecification)) is null;
-                }).WithMessage("SKU already exists."); ;
+                }).WithMessage("SKU already exists.");
         }
 
         public void PriceValidator()
