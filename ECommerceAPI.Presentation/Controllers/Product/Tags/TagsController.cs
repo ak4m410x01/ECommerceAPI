@@ -21,7 +21,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Tags
 
         [HttpGet]
         [ProducesResponseType(typeof(GetAllTagsQueryDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> AddAsync([FromQuery] GetAllTagsQueryRequest request)
+        public async Task<IActionResult> GetAllTagsAsync([FromQuery] GetAllTagsQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
