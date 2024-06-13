@@ -34,7 +34,7 @@ namespace ECommerceAPI.Application.Features.Product.Products.Queries.GetProductB
                 .GreaterThan(0).WithMessage("Id must be greater than 1.")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    _productSpecification.Criteria = discount => discount.Id == id;
+                    _productSpecification.Criteria = product => product.Id == id;
                     return (await _unitOfWork.Repository<ProductEntity>().FindAsNoTrackingAsync(_productSpecification)) is not null;
                 }).WithMessage("Product doesn't exists.");
         }
