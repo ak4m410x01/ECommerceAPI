@@ -9,6 +9,7 @@ using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 
 namespace ECommerceAPI.Infrastructure.Services.Authentication
@@ -18,8 +19,6 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         #region Properties
 
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
@@ -27,13 +26,11 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, ITokenService tokenService, IMapper mapper, IBaseSpecification<RefreshToken> refreshTokenSpecification)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper)
         {
             _userManager = userManager;
-            _unitOfWork = unitOfWork;
             _tokenService = tokenService;
             _mapper = mapper;
-            _refreshTokenSpecification = refreshTokenSpecification;
         }
 
         #endregion Constructors
@@ -80,10 +77,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         public async Task<AccessTokenDTO> GetAccessTokenAsync(string refreshToken)
         {
-            _refreshTokenSpecification.Criteria = _refreshToken => _refreshToken.Token == refreshToken;
-            var token = await _unitOfWork.Repository<RefreshToken>().FindAsNoTrackingAsync(_refreshTokenSpecification);
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.RefreshTokens.Any(r => r.Token == refreshToken));
 
-            return await _tokenService.GenerateAccessTokenAsync(token!.User!);
+            return await _tokenService.GenerateAccessTokenAsync(user!);
         }
 
         #endregion Methods
