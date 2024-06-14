@@ -1,15 +1,30 @@
 ﻿using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
+using ECommerceAPI.Domain.IdentityEntities;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Validators
 {
     public class SignInQueryValidator : AbstractValidator<SignInQueryRequest>
     {
-        public SignInQueryValidator()
+        #region Properties
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        #endregion Properties
+
+        #region Constructors
+
+        public SignInQueryValidator(UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             EmailValidator();
             PasswordValidator();
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public void EmailValidator()
         {
@@ -25,5 +40,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.
                    .NotEmpty().WithMessage("Password can't be empty.")
                    .NotNull().WithMessage("Password can't be null.");
         }
+
+        #endregion Methods
     }
 }

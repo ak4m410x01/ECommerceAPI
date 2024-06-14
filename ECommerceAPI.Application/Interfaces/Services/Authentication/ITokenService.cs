@@ -5,8 +5,6 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
 {
     public interface ITokenService
     {
-        Task<TokenDTO> GenerateTokenAsync(ApplicationUser user);
-
         Task<AccessTokenDTO> GenerateAccessTokenAsync(ApplicationUser user);
 
         Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user);

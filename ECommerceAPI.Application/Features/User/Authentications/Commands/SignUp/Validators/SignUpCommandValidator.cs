@@ -19,7 +19,6 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
         {
             _userManager = userManager;
             EmailValidator();
-            UserNameValidator();
             PasswordValidator();
             ConfirmPasswordValidator();
         }
@@ -28,7 +27,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
 
         #region Methods
 
-        public void EmailValidator()
+        private void EmailValidator()
         {
             RuleFor(request => request.Email)
                    .NotEmpty().WithMessage("Email can't be empty.")
@@ -37,15 +36,7 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
                    .MustAsync(async (email, cancellationToken) => (await _userManager.FindByEmailAsync(email)) is null).WithMessage("Email already exists.");
         }
 
-        public void UserNameValidator()
-        {
-            RuleFor(request => request.UserName)
-                   .NotEmpty().WithMessage("UserName can't be empty.")
-                   .NotNull().WithMessage("UserName can't be null.")
-                   .MustAsync(async (username, cancellationToken) => (await _userManager.FindByNameAsync(username)) is null).WithMessage("UserName already exists.");
-        }
-
-        public void PasswordValidator()
+        private void PasswordValidator()
         {
             RuleFor(request => request.Password)
                    .NotEmpty().WithMessage("Password can't be empty.")
@@ -57,11 +48,9 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
                    .Must(password => password.Any(c => !char.IsLetterOrDigit(c))).WithMessage("Password must contain a special character.");
         }
 
-        public void ConfirmPasswordValidator()
+        private void ConfirmPasswordValidator()
         {
             RuleFor(request => request.ConfirmPassword)
-                   .NotEmpty().WithMessage("ConfirmPassword can't be empty.")
-                   .NotNull().WithMessage("ConfirmPassword can't be null.")
                    .Equal(request => request.Password).WithMessage("Passwords must match.");
         }
 

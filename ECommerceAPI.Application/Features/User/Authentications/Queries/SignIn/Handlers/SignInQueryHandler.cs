@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ECommerceAPI.Application.DTOs.Authentication;
+using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.Requests;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
@@ -31,13 +31,13 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.SignIn.
 
         public async Task<Response<SignInQueryDTO>> Handle(SignInQueryRequest request, CancellationToken cancellationToken)
         {
-            var signInDto = _mapper.Map<SignInDTO>(request);
+            var signInDTORequest = _mapper.Map<SignInDTORequest>(request);
 
-            var authenticationResponse = await _authenticationService.SignInAsync(signInDto);
+            var signInDTOResponse = await _authenticationService.SignInAsync(signInDTORequest);
 
-            var response = _mapper.Map<SignInQueryDTO>(authenticationResponse);
+            var signInQueryDTO = _mapper.Map<SignInQueryDTO>(signInDTOResponse);
 
-            return response.IsAuthenticated ? Success(response) : Unauthorized<SignInQueryDTO>(response.Message);
+            return signInQueryDTO.IsAuthenticated ? Success(signInQueryDTO) : Unauthorized<SignInQueryDTO>(signInQueryDTO.Message);
         }
 
         #endregion Methods

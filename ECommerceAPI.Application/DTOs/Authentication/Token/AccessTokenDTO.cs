@@ -1,8 +1,6 @@
 ﻿namespace ECommerceAPI.Application.DTOs.Authentication.Token
 {
-    public class AccessTokenDTO
+    public class AccessTokenDTO : BaseTokenDTO
     {
-        public string? Token { get; set; }
-        public DateTime? ExpiresAt { get; set; }
     }
 }

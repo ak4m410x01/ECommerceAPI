@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ECommerceAPI.Application.DTOs.Authentication;
+using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
@@ -31,13 +31,14 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp
 
         public async Task<Response<SignUpCommandDTO>> Handle(SignUpCommandRequest request, CancellationToken cancellationToken)
         {
-            var signUpDto = _mapper.Map<SignUpDTO>(request);
+            var signUpDTORequest = _mapper.Map<SignUpDTORequest>(request);
+            var signUpDTOResponse = await _authenticationService.SignUpAsync(signUpDTORequest);
+            var signUpCommandDTO = _mapper.Map<SignUpCommandDTO>(signUpDTOResponse);
 
-            var authenticationResponse = await _authenticationService.SignUpAsync(signUpDto);
+            var response = Created(signUpCommandDTO);
+            response.Message = "SignUp Successfully.";
 
-            var response = _mapper.Map<SignUpCommandDTO>(authenticationResponse);
-
-            return response.IsAuthenticated ? Created(response) : BadRequest<SignUpCommandDTO>(response.Message);
+            return response;
         }
 
         #endregion Methods

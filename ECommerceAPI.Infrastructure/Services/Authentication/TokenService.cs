@@ -34,19 +34,6 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Methods
 
-        #region Generate Token
-
-        public async Task<TokenDTO> GenerateTokenAsync(ApplicationUser user)
-        {
-            return new TokenDTO()
-            {
-                AccessToken = await GenerateAccessTokenAsync(user),
-                RefreshToken = await GenerateRefreshTokenAsync(user)
-            };
-        }
-
-        #endregion Generate Token
-
         #region Generate Access Token
 
         public async Task<AccessTokenDTO> GenerateAccessTokenAsync(ApplicationUser user)
@@ -108,12 +95,8 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         public async Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user)
         {
-            var refreshToken = user.RefreshTokens.FirstOrDefault(token => token.IsActive);
-
-            if (refreshToken is null)
-            {
-                refreshToken = await GenerateRefreshTokenAsync();
-            }
+            var refreshToken = user.RefreshTokens.FirstOrDefault(token => token.IsActive) ??
+                                    await GenerateRefreshTokenAsync();
 
             user.RefreshTokens.Add(refreshToken);
             await _userManager.UpdateAsync(user);

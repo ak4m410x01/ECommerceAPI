@@ -1,9 +1,15 @@
 ﻿using AutoMapper;
-using ECommerceAPI.Application.DTOs.Authentication;
+using ECommerceAPI.Application.DTOs.Authentication.SignIn;
+using ECommerceAPI.Application.DTOs.Authentication.SignUp;
+using ECommerceAPI.Application.DTOs.Authentication.Token;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
+using ECommerceAPI.Application.Interfaces.Specifications.Base;
+using ECommerceAPI.Application.Interfaces.UnitOfWork;
+using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Mail;
 
 namespace ECommerceAPI.Infrastructure.Services.Authentication
 {
@@ -12,6 +18,8 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         #region Properties
 
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
@@ -19,24 +27,41 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, ITokenService tokenService, IMapper mapper, IBaseSpecification<RefreshToken> refreshTokenSpecification)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _tokenService = tokenService;
             _mapper = mapper;
+            _refreshTokenSpecification = refreshTokenSpecification;
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public async Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto)
+        public async Task<SignUpDTOResponse> SignUpAsync(SignUpDTORequest request)
         {
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            var user = _mapper.Map<ApplicationUser>(request);
 
-            if (user is null || !await _userManager.CheckPasswordAsync(user, dto.Password))
+            user.UserName = $"{(new MailAddress(user.Email!)).User}-{user.Id}";
+
+            // Create User
+            await _userManager.CreateAsync(user, request.Password);
+
+            // Assign Roles
+            await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
+
+            return new SignUpDTOResponse();
+        }
+
+        public async Task<SignInDTOResponse> SignInAsync(SignInDTORequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
             {
-                return await Task.FromResult(new AuthenticationResponseDTO()
+                return await Task.FromResult(new SignInDTOResponse()
                 {
                     IsAuthenticated = false,
                     Message = "Invalid SignIn."
@@ -44,35 +69,21 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             }
 
             // Build Response
-            var response = new AuthenticationResponseDTO()
+            return new SignInDTOResponse()
             {
                 Message = "SignIn Successfully",
                 IsAuthenticated = true,
-                Token = await _tokenService.GenerateTokenAsync(user)
+                AccessToken = await _tokenService.GenerateAccessTokenAsync(user),
+                RefreshToken = await _tokenService.GenerateRefreshTokenAsync(user),
             };
-
-            return response;
         }
 
-        public async Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto)
+        public async Task<AccessTokenDTO> GetAccessTokenAsync(string refreshToken)
         {
-            var user = _mapper.Map<ApplicationUser>(dto);
+            _refreshTokenSpecification.Criteria = _refreshToken => _refreshToken.Token == refreshToken;
+            var token = await _unitOfWork.Repository<RefreshToken>().FindAsNoTrackingAsync(_refreshTokenSpecification);
 
-            // Create User
-            await _userManager.CreateAsync(user, dto.Password);
-
-            // Assign Roles
-            await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
-
-            // Build Response
-            var response = new AuthenticationResponseDTO()
-            {
-                Message = "SignUp Successfully",
-                IsAuthenticated = true,
-                Token = await _tokenService.GenerateTokenAsync(user)
-            };
-
-            return response;
+            return await _tokenService.GenerateAccessTokenAsync(token!.User!);
         }
 
         #endregion Methods

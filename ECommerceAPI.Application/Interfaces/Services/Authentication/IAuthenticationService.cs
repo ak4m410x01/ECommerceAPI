@@ -1,11 +1,15 @@
-﻿using ECommerceAPI.Application.DTOs.Authentication;
+﻿using ECommerceAPI.Application.DTOs.Authentication.SignIn;
+using ECommerceAPI.Application.DTOs.Authentication.SignUp;
+using ECommerceAPI.Application.DTOs.Authentication.Token;
 
 namespace ECommerceAPI.Application.Interfaces.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<AuthenticationResponseDTO> SignUpAsync(SignUpDTO dto);
+        Task<SignUpDTOResponse> SignUpAsync(SignUpDTORequest request);
 
-        Task<AuthenticationResponseDTO> SignInAsync(SignInDTO dto);
+        Task<SignInDTOResponse> SignInAsync(SignInDTORequest request);
+
+        Task<AccessTokenDTO> GetAccessTokenAsync(string refreshToken);
     }
 }
