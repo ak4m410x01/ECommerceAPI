@@ -6,6 +6,10 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.GetAcce
 {
     public class GetAccessTokenQueryRequest : IRequest<Response<GetAccessTokenQueryDTO>>
     {
+        #region Properties
+
         public string RefreshToken { get; set; } = default!;
+
+        #endregion Properties
     }
 }

@@ -11,5 +11,7 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
         Task<SignInDTOResponse> SignInAsync(SignInDTORequest request);
 
         Task<AccessTokenDTO> GetAccessTokenAsync(string refreshToken);
+
+        Task<RefreshTokenDTO> GetRefreshTokenAsync(string refreshToken);
     }
 }

@@ -7,6 +7,6 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
     {
         Task<AccessTokenDTO> GenerateAccessTokenAsync(ApplicationUser user);
 
-        Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user);
+        Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user, bool revokeOld = false);
     }
 }

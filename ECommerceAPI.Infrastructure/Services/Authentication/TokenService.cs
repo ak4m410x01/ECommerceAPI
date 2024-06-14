@@ -1,10 +1,14 @@
 ﻿using ECommerceAPI.Application.DTOs.Authentication.Token;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
+using ECommerceAPI.Application.Interfaces.Specifications.Base;
+using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Helpers.JwtSettings;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -17,17 +21,20 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         #region Properties
 
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
         private readonly JwtSettings _jwtSettings;
 
         #endregion Properties
 
         #region Constructors
 
-        public TokenService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings)
+        public TokenService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings;
+            _unitOfWork = unitOfWork;
+            _refreshTokenSpecification = refreshTokenSpecification;
         }
 
         #endregion Constructors
@@ -93,13 +100,27 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Generate Refresh Token
 
-        public async Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user)
+        public async Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user, bool revokeOld = false)
         {
-            var refreshToken = user.RefreshTokens.FirstOrDefault(token => token.IsActive) ??
-                                    await GenerateRefreshTokenAsync();
+            _refreshTokenSpecification.Criteria = r => r.UserId == user.Id && (r.RevokedAt == null && (DateTime.UtcNow < r.ExpiresAt));
+            var refreshToken = await _unitOfWork.Repository<RefreshToken>().FindAsync(_refreshTokenSpecification);
 
-            user.RefreshTokens.Add(refreshToken);
-            await _userManager.UpdateAsync(user);
+            if (refreshToken is null)
+            {
+                refreshToken = await GenerateRefreshTokenAsync();
+                refreshToken.UserId = user.Id;
+                await _unitOfWork.Repository<RefreshToken>().AddAsync(refreshToken);
+            }
+            else if (revokeOld)
+            {
+                refreshToken.RevokedAt = DateTime.UtcNow;
+                refreshToken.ModifiedAt = DateTime.UtcNow;
+                await _unitOfWork.SaveAsync();
+
+                refreshToken = await GenerateRefreshTokenAsync();
+                refreshToken.UserId = user.Id;
+                await _unitOfWork.Repository<RefreshToken>().AddAsync(refreshToken);
+            }
 
             return new RefreshTokenDTO()
             {

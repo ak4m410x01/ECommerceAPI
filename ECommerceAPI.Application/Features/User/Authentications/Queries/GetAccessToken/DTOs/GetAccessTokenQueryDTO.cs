@@ -5,7 +5,7 @@
         #region Properties
 
         public string? AccessToken { get; set; }
-        public string? AccessTokenExpiresAt { get; set; }
+        public DateTime? AccessTokenExpiresAt { get; set; }
 
         #endregion Properties
     }

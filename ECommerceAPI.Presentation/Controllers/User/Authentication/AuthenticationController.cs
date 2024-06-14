@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.Requests;
+using ECommerceAPI.Application.Features.User.Authentications.Commands.GetRefreshToken.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Queries.GetAccessToken.Requests;
@@ -43,6 +44,14 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         [HttpPost("GetAccessToken")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAccessTokenAsync(GetAccessTokenQueryRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
+        [HttpPost("GetRefreshToken")]
+        [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetRefreshTokenAsync(GetRefreshTokenCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

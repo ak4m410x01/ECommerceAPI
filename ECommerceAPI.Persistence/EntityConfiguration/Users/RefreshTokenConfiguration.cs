@@ -16,8 +16,6 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
 
             #region Config Properties
 
-            builder.HasKey(token => new { token.Id, token.UserId });
-
             builder.Property(token => token.Token)
                    .IsRequired();
 

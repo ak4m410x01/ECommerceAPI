@@ -18,6 +18,8 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
     {
         #region Properties
 
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
@@ -26,11 +28,13 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
+            _refreshTokenSpecification = refreshTokenSpecification;
         }
 
         #endregion Constructors
@@ -80,6 +84,13 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             var user = await _userManager.Users.SingleOrDefaultAsync(user => user.RefreshTokens.Any(r => r.Token == refreshToken));
 
             return await _tokenService.GenerateAccessTokenAsync(user!);
+        }
+
+        public async Task<RefreshTokenDTO> GetRefreshTokenAsync(string refreshToken)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.RefreshTokens.Any(r => r.Token == refreshToken));
+
+            return await _tokenService.GenerateRefreshTokenAsync(user!, true);
         }
 
         #endregion Methods
