@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Product
 {
-    [Route("Api/v{version:apiVersion}/Product/[controller]")]
+    [Route("Api/V{version:apiVersion}/Product/[controller]")]
     public class ProductAPIBaseController : APIBaseController
     {
         #region Constructors

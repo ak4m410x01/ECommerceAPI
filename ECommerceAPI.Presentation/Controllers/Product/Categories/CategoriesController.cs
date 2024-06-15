@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.DTOs;
+﻿using Asp.Versioning;
+using ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.Requests;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 {
+    [ApiVersion("1.0")]
     public class CategoriesController : ProductAPIBaseController
     {
         #region Constructors
@@ -22,6 +24,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         #region Methods
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetAllCategoriesQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllCategoriesAsync([FromQuery] GetAllCategoriesQueryRequest request)
         {
@@ -30,6 +33,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddCategoryAsync(AddCategoryCommandRequest request)
         {
@@ -38,6 +42,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
         }
 
         [HttpGet("{id:int}")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
         {

@@ -5,7 +5,7 @@ using System.Net;
 
 namespace ECommerceAPI.Presentation.Controllers.Base
 {
-    [Route("Api/v{version:apiVersion}/[controller]")]
+    [Route("Api/V{version:apiVersion}/[controller]")]
     [ApiController]
     public class APIBaseController : ControllerBase
     {

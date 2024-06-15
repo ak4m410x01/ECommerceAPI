@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.User
 {
-    [Route("Api/v{version:apiVersion}/User/[controller]")]
+    [Route("Api/V{version:apiVersion}/User/[controller]")]
     public class UserAPIBaseController : APIBaseController
     {
         #region Constructors

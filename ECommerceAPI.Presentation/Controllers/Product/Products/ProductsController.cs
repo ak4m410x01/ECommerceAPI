@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct.DTOs;
+﻿using Asp.Versioning;
+using ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct.DTOs;
 using ECommerceAPI.Application.Features.Product.Products.Commands.AddProduct.Requests;
 using ECommerceAPI.Application.Features.Product.Products.Queries.GetAllProducts.DTOs;
 using ECommerceAPI.Application.Features.Product.Products.Queries.GetAllProducts.Requests;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Product.Products
 {
+    [ApiVersion("1.0")]
     public class ProductsController : ProductAPIBaseController
     {
         #region Constructors
@@ -22,6 +24,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Products
         #region Methods
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetAllProductsQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllProductsAsync([FromQuery] GetAllProductsQueryRequest request)
         {
@@ -30,6 +33,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Products
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddProductCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddProductAsync(AddProductCommandRequest request)
         {
@@ -38,6 +42,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Products
         }
 
         [HttpGet("{id:int}")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetProductByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetProductByIdAsync([FromRoute] GetProductByIdQueryRequest request)
         {

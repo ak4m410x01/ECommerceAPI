@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.DTOs;
+﻿using Asp.Versioning;
+using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.DTOs;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.ChangePassword.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.GetRefreshToken.Requests;
 using ECommerceAPI.Application.Features.User.Authentications.Commands.SignUp.DTOs;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.User.Authentication
 {
+    [ApiVersion("1.0")]
     public class AuthenticationController : UserAPIBaseController
     {
         #region Constructors
@@ -25,6 +27,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         #region Methods
 
         [HttpPost("SignUp")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(SignUpCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> SignUpAsync(SignUpCommandRequest request)
         {
@@ -33,6 +36,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         }
 
         [HttpPost("SignIn")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> SignInAsync(SignInQueryRequest request)
@@ -42,6 +46,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         }
 
         [HttpPost("AccessToken")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAccessTokenAsync(GetAccessTokenQueryRequest request)
         {
@@ -50,6 +55,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         }
 
         [HttpPost("RefreshToken")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRefreshTokenAsync(GetRefreshTokenCommandRequest request)
         {
@@ -59,6 +65,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
 
         [Authorize()]
         [HttpPost("ChangePassword")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(ChangePasswordCommandDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordCommandRequest request)
         {

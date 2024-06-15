@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Errors
 {
-    [Route("Api/v{version:apiVersion}/[controller]/{code}")]
+    [Route("Api/V{version:apiVersion}/[controller]/{code}")]
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorsController : ControllerBase

@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.DTOs;
+﻿using Asp.Versioning;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.Requests;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Requests;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 {
+    [ApiVersion("1.0")]
     public class InventoriesController : ProductAPIBaseController
     {
         #region Constructors
@@ -22,6 +24,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         #region Methods
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetAllInventoriesQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllInventoriesAsync([FromQuery] GetAllInventoriesQueryRequest request)
         {
@@ -30,6 +33,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddInventoryAsync(AddInventoryCommandRequest request)
         {
@@ -38,6 +42,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         }
 
         [HttpGet("{id:int}")]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetInventoryByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetInventoryByIdAsync([FromRoute] GetInventoryByIdQueryRequest request)
         {
