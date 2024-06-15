@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
+﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.ApiVersioning;
+using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authorization;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Cors;
 using ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions;
@@ -42,6 +43,12 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
             services.AddValidationErrorExceptionConfiguration();
 
             #endregion Configure Exceptions
+
+            #region Configure Api Versioning
+
+            services.AddApiVersioningConfiguration();
+
+            #endregion Configure Api Versioning
 
             return services;
         }

@@ -7,7 +7,10 @@
             if (environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("v1/swagger.json", "v1");
+                });
             }
             return app;
         }
