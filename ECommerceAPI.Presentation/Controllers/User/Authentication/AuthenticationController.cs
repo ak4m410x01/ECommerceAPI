@@ -41,7 +41,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
             return ResponseResult(response);
         }
 
-        [HttpPost("GetAccessToken")]
+        [HttpPost("AccessToken")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAccessTokenAsync(GetAccessTokenQueryRequest request)
         {
@@ -49,7 +49,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
             return ResponseResult(response);
         }
 
-        [HttpPost("GetRefreshToken")]
+        [HttpPost("RefreshToken")]
         [ProducesResponseType(typeof(SignInQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRefreshTokenAsync(GetRefreshTokenCommandRequest request)
         {
