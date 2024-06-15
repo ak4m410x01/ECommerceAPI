@@ -14,7 +14,7 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares
 
             app.UseErrorHandlerMiddleware();
 
-            app.UseStatusCodePagesWithReExecute("/Api/Errors/{0}");
+            app.UseStatusCodePagesWithReExecute("/Api/V1/Errors/{0}");
 
             app.UseCorsMiddlewares();
 
