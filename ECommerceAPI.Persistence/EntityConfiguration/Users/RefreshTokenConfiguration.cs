@@ -22,8 +22,14 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
             builder.Property(token => token.ExpiresAt)
                    .IsRequired();
 
+            builder.Property(token => token.IsExpired)
+                .HasComputedColumnSql("CASE WHEN [ExpiresAt] <= GETUTCDATE() THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END");
+
             builder.Property(token => token.RevokedAt)
                    .IsRequired(false);
+
+            builder.Property(token => token.IsActive)
+                   .HasComputedColumnSql("CASE WHEN [RevokedAt] IS NULL AND [ExpiresAt] > GETUTCDATE() THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END");
 
             builder.Property(token => token.CreatedAt)
                    .HasDefaultValue(DateTime.UtcNow)

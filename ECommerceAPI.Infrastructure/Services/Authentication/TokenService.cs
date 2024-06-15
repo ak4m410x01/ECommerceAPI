@@ -100,7 +100,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         public async Task<RefreshTokenDTO> GenerateRefreshTokenAsync(ApplicationUser user, bool revokeOld = false)
         {
-            _refreshTokenSpecification.Criteria = r => r.UserId == user.Id && (r.RevokedAt == null && (DateTime.UtcNow < r.ExpiresAt));
+            _refreshTokenSpecification.Criteria = r => r.UserId == user.Id && r.IsActive;
             var refreshToken = await _unitOfWork.Repository<RefreshToken>().FindAsync(_refreshTokenSpecification);
 
             if (refreshToken is null)

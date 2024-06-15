@@ -35,9 +35,9 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Queries.GetAcce
                 .NotNull().WithMessage("Email can't be null.")
                 .MustAsync(async (token, cancellationToken) =>
                 {
-                    _refreshTokenSpecification.Criteria = r => r.Token == token;
+                    _refreshTokenSpecification.Criteria = r => r.Token == token && r.IsActive;
                     var refreshToken = await _unitOfWork.Repository<RefreshToken>().FindAsNoTrackingAsync(_refreshTokenSpecification);
-                    return refreshToken is not null && refreshToken.IsActive;
+                    return refreshToken is not null;
                 }).WithMessage("Refresh Token is Expired or InValid.");
         }
 

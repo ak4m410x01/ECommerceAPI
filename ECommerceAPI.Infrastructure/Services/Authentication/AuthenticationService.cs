@@ -3,9 +3,6 @@ using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
-using ECommerceAPI.Application.Interfaces.Specifications.Base;
-using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
@@ -18,8 +15,6 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
     {
         #region Properties
 
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
@@ -28,13 +23,11 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
-            _refreshTokenSpecification = refreshTokenSpecification;
         }
 
         #endregion Constructors

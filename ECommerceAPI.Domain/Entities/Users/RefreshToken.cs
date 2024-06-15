@@ -9,10 +9,10 @@ namespace ECommerceAPI.Domain.Entities.Users
 
         public string? Token { get; set; }
         public DateTime ExpiresAt { get; set; }
-        public bool IsExpired => DateTime.UtcNow > ExpiresAt;
+        public bool IsExpired { get; private set; }
         public DateTime? RevokedAt { get; set; }
 
-        public bool IsActive => RevokedAt is null && !IsExpired;
+        public bool IsActive { get; private set; }
 
         #endregion Properties
 
