@@ -34,6 +34,16 @@ namespace ECommerceAPI.Shared.Responses
             };
         }
 
+        public Response<T> Forbidden<T>(string? message = null)
+        {
+            return new Response<T>()
+            {
+                Message = message is null ? "Forbidden" : message,
+                StatusCode = HttpStatusCode.Forbidden,
+                Succeeded = false
+            };
+        }
+
         public Response<T> BadRequest<T>(string? message = null)
         {
             return new Response<T>()
