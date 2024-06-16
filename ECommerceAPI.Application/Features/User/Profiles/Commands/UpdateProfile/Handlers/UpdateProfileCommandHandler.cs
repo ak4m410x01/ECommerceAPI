@@ -55,22 +55,8 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile
             if (user == null)
                 return Forbidden<UpdateProfileCommandDTO>();
 
-            // Map User
-            if (request.Username != null)
-                user.UserName = request.Username;
-
-            if (request.FirstName != null)
-                user.FirstName = request.FirstName;
-
-            if (request.LastName != null)
-                user.LastName = request.LastName;
-
-            if (request.PhoneNumber != null)
-                user.PhoneNumber = request.PhoneNumber;
-
-            if (request.Bio != null)
-                user.UserProfile!.Bio = request.Bio;
-
+            // Update User
+            _mapper.Map(request, user);
             await _userManager.UpdateAsync(user);
 
             var response = _mapper.Map<UpdateProfileCommandDTO>(user);
