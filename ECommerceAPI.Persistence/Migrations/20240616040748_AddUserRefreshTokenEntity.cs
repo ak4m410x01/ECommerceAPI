@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ECommerceAPI.Persistence.Migrations
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public partial class AddUserRefreshTokenEntity : Migration
     {
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTime>(
@@ -16,7 +17,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Users",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(2784),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(9923),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 604, DateTimeKind.Utc).AddTicks(2448));
@@ -27,7 +28,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Users",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(546),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(9467),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 604, DateTimeKind.Utc).AddTicks(2103));
@@ -38,7 +39,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "UserAddresses",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 57, DateTimeKind.Utc).AddTicks(8357),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(3186),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 605, DateTimeKind.Utc).AddTicks(881));
@@ -49,7 +50,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "UserAddresses",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 57, DateTimeKind.Utc).AddTicks(5860),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(2595),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 605, DateTimeKind.Utc).AddTicks(419));
@@ -60,7 +61,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Tags",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 55, DateTimeKind.Utc).AddTicks(5142),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(4221),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(6937));
@@ -71,10 +72,30 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Tags",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 55, DateTimeKind.Utc).AddTicks(4628),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(3717),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(6406));
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "ModifiedAt",
+                schema: "User",
+                table: "Profiles",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(8487),
+                oldClrType: typeof(DateTime),
+                oldType: "datetime2");
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "CreatedAt",
+                schema: "User",
+                table: "Profiles",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(7860),
+                oldClrType: typeof(DateTime),
+                oldType: "datetime2");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -82,7 +103,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "ProductVariants",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 54, DateTimeKind.Utc).AddTicks(9298),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 307, DateTimeKind.Utc).AddTicks(8793),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(2041));
@@ -93,7 +114,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "ProductVariants",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 54, DateTimeKind.Utc).AddTicks(7015),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 307, DateTimeKind.Utc).AddTicks(8176),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(1545));
@@ -104,7 +125,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Products",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(9433),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 302, DateTimeKind.Utc).AddTicks(2947),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 597, DateTimeKind.Utc).AddTicks(1073));
@@ -115,7 +136,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Products",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(8763),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 302, DateTimeKind.Utc).AddTicks(2141),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 597, DateTimeKind.Utc).AddTicks(571));
@@ -126,7 +147,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "ProductImages",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 49, DateTimeKind.Utc).AddTicks(3130),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 303, DateTimeKind.Utc).AddTicks(3204),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 598, DateTimeKind.Utc).AddTicks(789));
@@ -137,7 +158,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "ProductImages",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 49, DateTimeKind.Utc).AddTicks(2547),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 303, DateTimeKind.Utc).AddTicks(2597),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 598, DateTimeKind.Utc).AddTicks(171));
@@ -148,7 +169,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Inventories",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(4596),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(8818),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(7661));
@@ -159,7 +180,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Inventories",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(3980),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(8271),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(7222));
@@ -170,7 +191,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Discounts",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(219),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(4941),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(4472));
@@ -181,7 +202,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Discounts",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(9653),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(4457),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(4022));
@@ -192,7 +213,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Categories",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(3472),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 300, DateTimeKind.Utc).AddTicks(7396),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 595, DateTimeKind.Utc).AddTicks(7124));
@@ -203,7 +224,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 table: "Categories",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(2863),
+                defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 300, DateTimeKind.Utc).AddTicks(6674),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 595, DateTimeKind.Utc).AddTicks(6516));
@@ -221,8 +242,8 @@ namespace ECommerceAPI.Persistence.Migrations
                     RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, computedColumnSql: "CASE WHEN [RevokedAt] IS NULL AND [ExpiresAt] > GETUTCDATE() THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(6288)),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(6767)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 309, DateTimeKind.Utc).AddTicks(3215)),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 309, DateTimeKind.Utc).AddTicks(3688)),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -244,7 +265,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 column: "UserId");
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -260,7 +281,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 604, DateTimeKind.Utc).AddTicks(2448),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(2784));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(9923));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -271,7 +292,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 604, DateTimeKind.Utc).AddTicks(2103),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 56, DateTimeKind.Utc).AddTicks(546));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(9467));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -282,7 +303,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 605, DateTimeKind.Utc).AddTicks(881),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 57, DateTimeKind.Utc).AddTicks(8357));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(3186));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -293,7 +314,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 605, DateTimeKind.Utc).AddTicks(419),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 57, DateTimeKind.Utc).AddTicks(5860));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(2595));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -304,7 +325,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(6937),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 55, DateTimeKind.Utc).AddTicks(5142));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(4221));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -315,7 +336,27 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(6406),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 55, DateTimeKind.Utc).AddTicks(4628));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 308, DateTimeKind.Utc).AddTicks(3717));
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "ModifiedAt",
+                schema: "User",
+                table: "Profiles",
+                type: "datetime2",
+                nullable: false,
+                oldClrType: typeof(DateTime),
+                oldType: "datetime2",
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(8487));
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "CreatedAt",
+                schema: "User",
+                table: "Profiles",
+                type: "datetime2",
+                nullable: false,
+                oldClrType: typeof(DateTime),
+                oldType: "datetime2",
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 310, DateTimeKind.Utc).AddTicks(7860));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -326,7 +367,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(2041),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 54, DateTimeKind.Utc).AddTicks(9298));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 307, DateTimeKind.Utc).AddTicks(8793));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -337,7 +378,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 603, DateTimeKind.Utc).AddTicks(1545),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 54, DateTimeKind.Utc).AddTicks(7015));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 307, DateTimeKind.Utc).AddTicks(8176));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -348,7 +389,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 597, DateTimeKind.Utc).AddTicks(1073),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(9433));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 302, DateTimeKind.Utc).AddTicks(2947));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -359,7 +400,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 597, DateTimeKind.Utc).AddTicks(571),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(8763));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 302, DateTimeKind.Utc).AddTicks(2141));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -370,7 +411,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 598, DateTimeKind.Utc).AddTicks(789),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 49, DateTimeKind.Utc).AddTicks(3130));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 303, DateTimeKind.Utc).AddTicks(3204));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -381,7 +422,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 598, DateTimeKind.Utc).AddTicks(171),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 49, DateTimeKind.Utc).AddTicks(2547));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 303, DateTimeKind.Utc).AddTicks(2597));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -392,7 +433,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(7661),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(4596));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(8818));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -403,7 +444,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(7222),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(3980));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(8271));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -414,7 +455,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(4472),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 47, DateTimeKind.Utc).AddTicks(219));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(4941));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -425,7 +466,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 596, DateTimeKind.Utc).AddTicks(4022),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(9653));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 301, DateTimeKind.Utc).AddTicks(4457));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ModifiedAt",
@@ -436,7 +477,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 595, DateTimeKind.Utc).AddTicks(7124),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(3472));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 300, DateTimeKind.Utc).AddTicks(7396));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
@@ -447,7 +488,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 defaultValue: new DateTime(2024, 6, 2, 23, 26, 50, 595, DateTimeKind.Utc).AddTicks(6516),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2024, 6, 15, 2, 53, 17, 46, DateTimeKind.Utc).AddTicks(2863));
+                oldDefaultValue: new DateTime(2024, 6, 16, 4, 7, 48, 300, DateTimeKind.Utc).AddTicks(6674));
         }
     }
 }
