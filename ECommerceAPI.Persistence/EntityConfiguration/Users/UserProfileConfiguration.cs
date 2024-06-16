@@ -22,6 +22,17 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
             builder.Property(profile => profile.ImageUrl)
                    .IsRequired(false);
 
+            builder.Property(user => user.CreatedAt)
+                   .HasDefaultValue(DateTime.UtcNow)
+                   .IsRequired();
+
+            builder.Property(user => user.ModifiedAt)
+                   .HasDefaultValue(DateTime.UtcNow)
+                   .IsRequired();
+
+            builder.Property(user => user.DeletedAt)
+                   .IsRequired(false);
+
             #endregion Config Properties
 
             #region Config Relationships
