@@ -3,6 +3,8 @@ using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
+using ECommerceAPI.Application.Interfaces.UnitOfWork;
+using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
@@ -18,16 +20,18 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
         #endregion Properties
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         #endregion Constructors
@@ -42,6 +46,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
             // Create User
             await _userManager.CreateAsync(user, request.Password);
+            await _unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = user.Id, Bio = string.Empty });
 
             // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());

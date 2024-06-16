@@ -1,3 +1,4 @@
+using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Persistence.DataSeeding.Security.Roles;
 using ECommerceAPI.Persistence.DataSeeding.Users;
@@ -41,11 +42,12 @@ namespace ECommerceAPI.Persistence.DataSeeding
         private static async Task InitializeUserDataAsync(IServiceProvider services)
         {
             UserManager<ApplicationUser>? userManager = services.GetService<UserManager<ApplicationUser>>();
+            var unitOfWork = services.GetService<IUnitOfWork>();
 
-            if (userManager is null)
+            if (userManager is null || unitOfWork is null)
                 return;
 
-            await userManager.InitializeUsersDataSeedingAsync();
+            await userManager.InitializeUsersDataSeedingAsync(unitOfWork);
         }
 
         private static async Task InitializeRolesDataAsync(IServiceProvider services)
