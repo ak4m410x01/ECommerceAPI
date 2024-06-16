@@ -34,18 +34,13 @@ namespace ECommerceAPI.Application.Features.User.Authentications.Commands.Change
 
         protected async Task<ApplicationUser> GetSignInUserAsync()
         {
-            var httpContext = _httpContextAccessor.HttpContext;
-
-            var authHeader = httpContext?.Request.Headers["Authorization"].FirstOrDefault();
-
-            var token = authHeader?.Substring($"{JwtBearerDefaults.AuthenticationScheme} ".Length).Trim();
-            var handler = new JwtSecurityTokenHandler();
-            var jwtToken = handler.ReadJwtToken(token);
+            // Get Token From Request Authorization Header
+            var authorizationHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"].FirstOrDefault();
+            var token = authorizationHeader!.Substring($"{JwtBearerDefaults.AuthenticationScheme} ".Length).Trim();
+            var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
             var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
-
             var user = await _userManager.FindByEmailAsync(emailClaim ?? string.Empty);
-
             return user!;
         }
 

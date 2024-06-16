@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.User.Profiles.Queries.GetProfileByUserAccessToken.DTOs;
 using ECommerceAPI.Application.Features.User.Profiles.Queries.GetProfileByUserAccessToken.Requests;
-using ECommerceAPI.Application.Interfaces.Specifications.Base;
-using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
@@ -21,21 +18,17 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Queries.GetProfileByUs
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IBaseSpecification<UserProfile> _profileSpecification;
 
         #endregion Properties
 
         #region Constructors
 
-        public GetProfileByUserAccessTokenQueryHandler(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, IMapper mapper, IBaseSpecification<UserProfile> profileSpecification)
+        public GetProfileByUserAccessTokenQueryHandler(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _profileSpecification = profileSpecification;
         }
 
         #endregion Constructors
@@ -59,12 +52,8 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Queries.GetProfileByUs
             if (user == null)
                 return Forbidden<GetProfileByUserAccessTokenQueryDTO>();
 
-            // Get User Profile
-            _profileSpecification.Criteria = p => p.UserId == user.Id;
-            var profile = await _unitOfWork.Repository<UserProfile>().FindAsNoTrackingAsync(_profileSpecification);
-
             // Map Response
-            var response = _mapper.Map<GetProfileByUserAccessTokenQueryDTO>(profile);
+            var response = _mapper.Map<GetProfileByUserAccessTokenQueryDTO>(user.UserProfile);
             return Success(response);
         }
 

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.DTOs;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.Requests;
-using ECommerceAPI.Application.Interfaces.Specifications.Base;
-using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
@@ -57,6 +54,7 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile
 
             // Update User
             _mapper.Map(request, user);
+            user.ModifiedAt = DateTime.UtcNow;
             await _userManager.UpdateAsync(user);
 
             var response = _mapper.Map<UpdateProfileCommandDTO>(user);
