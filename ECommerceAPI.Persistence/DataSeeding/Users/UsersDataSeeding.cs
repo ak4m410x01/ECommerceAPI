@@ -8,23 +8,38 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
 {
     public static class UsersDataSeeding
     {
+        private static async Task InitializeSuperAdminsAsync(this UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork)
+        {
+            var superAdmin = new ApplicationUser()
+            {
+                Email = "superadmin@ecommerceapi.com",
+                UserName = "superadmin"
+            };
+            string password = "P@ssw0rd";
+
+            await userManager.CreateAsync(superAdmin, password);
+            await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = superAdmin.Id, Bio = string.Empty });
+            await userManager.AddToRoleAsync(superAdmin, UserRole.SuperAdmin.ToString());
+        }
+
         private static async Task InitializeAdminsAsync(this UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork)
         {
-            ApplicationUser user = new()
+            var admin = new ApplicationUser()
             {
-                UserName = "Admin",
+                UserName = "admin",
                 Email = "admin@ecommerceapi.com"
             };
             string password = "P@ssw0rd";
 
-            await userManager.CreateAsync(user, password);
-            await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = user.Id, Bio = string.Empty });
-            await userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
+            await userManager.CreateAsync(admin, password);
+            await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = admin.Id, Bio = string.Empty });
+            await userManager.AddToRoleAsync(admin, UserRole.Admin.ToString());
         }
 
         public static async Task InitializeUsersDataSeedingAsync(this UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork)
         {
             await userManager.InitializeAdminsAsync(unitOfWork);
+            await userManager.InitializeSuperAdminsAsync(unitOfWork);
         }
     }
 }

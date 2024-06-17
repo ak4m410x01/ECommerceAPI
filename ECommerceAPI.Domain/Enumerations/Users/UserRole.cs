@@ -2,6 +2,7 @@
 {
     public enum UserRole
     {
+        SuperAdmin,
         Admin,
         Customer
     }
