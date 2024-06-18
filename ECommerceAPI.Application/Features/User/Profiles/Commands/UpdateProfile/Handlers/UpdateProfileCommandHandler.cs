@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.DTOs;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.Requests;
+using ECommerceAPI.Application.Interfaces.Services.Media;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
@@ -18,17 +19,19 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
+        private readonly IMediaService _mediaService;
         private readonly UserManager<ApplicationUser> _userManager;
 
         #endregion Properties
 
         #region Constructors
 
-        public UpdateProfileCommandHandler(IHttpContextAccessor httpContextAccessor, IMapper mapper, UserManager<ApplicationUser> userManager)
+        public UpdateProfileCommandHandler(IHttpContextAccessor httpContextAccessor, IMapper mapper, UserManager<ApplicationUser> userManager, IMediaService mediaService)
         {
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _userManager = userManager;
+            _mediaService = mediaService;
         }
 
         #endregion Constructors
@@ -54,6 +57,10 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile
 
             // Update User
             _mapper.Map(request, user);
+
+            if (request.Image != null)
+                user.UserProfile!.ImageUrl = await _mediaService.UpdateAsync(user.UserProfile.ImageUrl, request.Image, "Images", "User", "Profiles");
+
             user.ModifiedAt = DateTime.UtcNow;
             await _userManager.UpdateAsync(user);
 

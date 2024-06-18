@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.DTOs;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.Requests;
+using ECommerceAPI.Application.Interfaces.Services.Media;
 using ECommerceAPI.Domain.IdentityEntities;
+using MediatR;
 
 namespace ECommerceAPI.Application.Mapping.User.Profiles.Commands.UpdateProfile
 {
@@ -20,7 +22,8 @@ namespace ECommerceAPI.Application.Mapping.User.Profiles.Commands.UpdateProfile
                 .ForPath(destination => destination.UserProfile!.Bio, options => options.MapFrom(source => source.Bio));
 
             CreateMap<ApplicationUser, UpdateProfileCommandDTO>()
-                .ForMember(destination => destination.Bio, options => options.MapFrom(source => source.UserProfile!.Bio));
+                .ForMember(destination => destination.Bio, options => options.MapFrom(source => source.UserProfile!.Bio))
+                .ForMember(destination => destination.ImageUrl, options => options.MapFrom(source => source.UserProfile!.ImageUrl));
         }
 
         #endregion Constructors

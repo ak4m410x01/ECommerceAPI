@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.DTOs;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.Requests
 {
@@ -20,6 +21,7 @@ namespace ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile
         #region User Profile Properties
 
         public string? Bio { get; set; }
+        public IFormFile? Image { get; set; }
 
         #endregion User Profile Properties
 

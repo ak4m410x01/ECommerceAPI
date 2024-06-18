@@ -35,7 +35,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Profile
         [HttpPut]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(UpdateProfileCommandDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateProfileAsync(UpdateProfileCommandRequest request)
+        public async Task<IActionResult> UpdateProfileAsync([FromForm] UpdateProfileCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
