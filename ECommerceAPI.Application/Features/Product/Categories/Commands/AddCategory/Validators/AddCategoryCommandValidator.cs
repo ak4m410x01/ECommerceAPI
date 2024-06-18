@@ -44,11 +44,11 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
         public void ParentCategoryIdValidator()
         {
             RuleFor(request => request.ParentCategoryId)
-                .NotEmpty().WithMessage("ParentCategoryId can't be empty.")
-                .NotNull().WithMessage("ParentCategoryId can't be null.")
                 .GreaterThan(0).WithMessage("ParentCategoryId must be greater than 0.")
                 .MustAsync(async (parentCategoryId, cancellationToken) =>
                 {
+                    if (parentCategoryId == null) return true;
+
                     _categorySpecification.Criteria = category => category.Id == parentCategoryId;
                     return (await _unitOfWork.Repository<Category>().FindAsNoTrackingAsync(_categorySpecification)) is not null;
                 }).WithMessage("ParentCategoryId doesn't exists.");
