@@ -2,6 +2,7 @@
 using ECommerceAPI.Presentation.Extensions.Middlewares.Authorization;
 using ECommerceAPI.Presentation.Extensions.Middlewares.Cors;
 using ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions;
+using ECommerceAPI.Presentation.Extensions.Middlewares.StaticFiles;
 using ECommerceAPI.Presentation.Extensions.Middlewares.Swagger;
 
 namespace ECommerceAPI.Presentation.Extensions.Middlewares
@@ -19,6 +20,8 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares
             app.UseCorsMiddlewares();
 
             app.UseSwaggerMiddlewares(environment);
+
+            app.UseStaticFilesMiddleware();
 
             app.UseAuthenticationMiddlewares();
 
