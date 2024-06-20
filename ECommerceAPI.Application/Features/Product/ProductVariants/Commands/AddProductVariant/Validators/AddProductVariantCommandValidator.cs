@@ -56,9 +56,9 @@ namespace ECommerceAPI.Application.Features.Product.ProductVariants.Commands.Add
             RuleFor(request => request.Name)
                 .NotEmpty().WithMessage("Name is required.")
                 .NotNull().WithMessage("Name must be not null.")
-                .MustAsync(async (name, cancellationToken) =>
+                .MustAsync(async (request, name, cancellationToken) =>
                 {
-                    _productVariantSpecification.Criteria = variant => variant.Name == name;
+                    _productVariantSpecification.Criteria = variant => variant.Name == request.Name && variant.ProductId == request.ProductId;
                     return await _unitOfWork.Repository<ProductVariant>().FindAsNoTrackingAsync(_productVariantSpecification) is null;
                 }).WithMessage("Name already exits.");
         }
