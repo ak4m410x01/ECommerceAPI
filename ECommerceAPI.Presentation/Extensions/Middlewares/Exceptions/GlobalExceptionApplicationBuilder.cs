@@ -2,9 +2,9 @@
 
 namespace ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions
 {
-    public static class ServerErrorExceptionApplicationBuilder
+    public static class GlobalExceptionApplicationBuilder
     {
-        public static IApplicationBuilder UseServerErrorExceptionMiddlewares(this IApplicationBuilder app)
+        public static IApplicationBuilder UseGlobalExceptionMiddlewares(this IApplicationBuilder app)
         {
             app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             return app;

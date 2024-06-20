@@ -1,4 +1,4 @@
-﻿using ECommerceAPI.Shared.Exceptions;
+﻿using ECommerceAPI.Shared.Exceptions.ValidationError;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions
@@ -16,7 +16,7 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Exceptions
                                                 .Select(error => error.ErrorMessage)
                                                 .ToList();
 
-                            var validationError = new ValidationErrorException()
+                            var validationError = new ValidationErrorExceptionResponse()
                             {
                                 Errors = errors
                             };

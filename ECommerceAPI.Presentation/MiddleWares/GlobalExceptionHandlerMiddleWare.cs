@@ -1,5 +1,4 @@
-﻿using ECommerceAPI.Shared.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using ECommerceAPI.Shared.Exceptions.ServerError;
 using System.Net;
 
 namespace ECommerceAPI.Presentation.Middlewares
@@ -16,7 +15,7 @@ namespace ECommerceAPI.Presentation.Middlewares
 
         #region Constructors
 
-        public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
         {
             _next = next;
             _logger = logger;
@@ -39,7 +38,7 @@ namespace ECommerceAPI.Presentation.Middlewares
 
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                var response = new ServerErrorException();
+                var response = new ServerErrorExceptionResponse();
 
                 if (_environment.IsDevelopment())
                 {

@@ -1,9 +1,9 @@
 ﻿using ECommerceAPI.Shared.Responses;
 using System.Net;
 
-namespace ECommerceAPI.Shared.Exceptions
+namespace ECommerceAPI.Shared.Exceptions.ServerError
 {
-    public class ServerErrorException : Response<ServerErrorException>
+    public class ServerErrorExceptionResponse : Response<ServerErrorExceptionResponse>
     {
         #region Properties
 
@@ -13,7 +13,7 @@ namespace ECommerceAPI.Shared.Exceptions
 
         #region Constructors
 
-        public ServerErrorException()
+        public ServerErrorExceptionResponse()
         {
             Message = "Internal Server Error";
             StatusCode = HttpStatusCode.InternalServerError;

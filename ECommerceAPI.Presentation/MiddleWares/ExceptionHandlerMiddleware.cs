@@ -5,7 +5,7 @@ using System.Net;
 
 namespace ECommerceAPI.Presentation.Middlewares
 {
-    public class ErrorHandlerMiddleware
+    public class ExceptionHandlerMiddleware
     {
         #region Properties
 
@@ -15,7 +15,7 @@ namespace ECommerceAPI.Presentation.Middlewares
 
         #region Constructors
 
-        public ErrorHandlerMiddleware(RequestDelegate next)
+        public ExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -28,7 +28,27 @@ namespace ECommerceAPI.Presentation.Middlewares
         {
             try
             {
-                await _next(context);
+                // Validate Content-Type header for POST and PUT requests
+                if (context.Request.Method == HttpMethods.Post || context.Request.Method == HttpMethods.Put)
+                {
+                    if (!context.Request.Headers.ContainsKey("Content-Type") ||
+                        context.Request.Headers["Content-Type"] != "application/json")
+                    {
+                        var responseModel = new Response<string>
+                        {
+                            Succeeded = false,
+                            Message = "Unsupported Media Type",
+                            StatusCode = HttpStatusCode.UnsupportedMediaType
+                        };
+
+                        context.Response.ContentType = "application/json";
+                        context.Response.StatusCode = (int)HttpStatusCode.UnsupportedMediaType;
+                        await context.Response.WriteAsJsonAsync(responseModel);
+                        return;
+                    }
+                }
+
+                await _next.Invoke(context);
             }
             catch (Exception error)
             {

@@ -1,15 +1,15 @@
 ﻿using ECommerceAPI.Shared.Responses;
 using System.Net;
 
-namespace ECommerceAPI.Shared.Exceptions
+namespace ECommerceAPI.Shared.Exceptions.ValidationError
 {
-    public class ValidationErrorException : Response<ValidationErrorException>
+    public class ValidationErrorExceptionResponse : Response<ValidationErrorExceptionResponse>
     {
         public List<string> Errors { get; set; }
 
         #region Constructors
 
-        public ValidationErrorException()
+        public ValidationErrorExceptionResponse()
         {
             Message = "Bad Request";
             StatusCode = HttpStatusCode.BadRequest;

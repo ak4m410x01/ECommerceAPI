@@ -11,9 +11,9 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares
     {
         public static IApplicationBuilder UsePresentationMiddlewares(this IApplicationBuilder app, IHostEnvironment environment)
         {
-            app.UseServerErrorExceptionMiddlewares();
+            app.UseGlobalExceptionMiddlewares();
 
-            app.UseErrorHandlerMiddleware();
+            app.UseExeptionHandlerMiddleware();
 
             app.UseStatusCodePagesWithReExecute("/Api/V1/Errors/{0}");
 
