@@ -4,10 +4,9 @@ public class UnsupportedMediaTypeException : Exception
 {
     #region Constructors
 
-    public UnsupportedMediaTypeException(string? message): base(message)
+    public UnsupportedMediaTypeException(string? message) : base(message)
     {
-            
     }
-        
-    #endregion
+
+    #endregion Constructors
 }

@@ -2,9 +2,9 @@
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Constants.Media;
-using ProductEntity = ECommerceAPI.Domain.Entities.Products.Product;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using ProductEntity = ECommerceAPI.Domain.Entities.Products.Product;
 
 namespace ECommerceAPI.Application.Features.Product.ProductImages.Commands.AddProductImage.Validators
 {

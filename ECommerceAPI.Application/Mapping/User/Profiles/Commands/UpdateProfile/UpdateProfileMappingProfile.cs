@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.DTOs;
 using ECommerceAPI.Application.Features.User.Profiles.Commands.UpdateProfile.Requests;
-using ECommerceAPI.Application.Interfaces.Services.Media;
 using ECommerceAPI.Domain.IdentityEntities;
-using MediatR;
 
 namespace ECommerceAPI.Application.Mapping.User.Profiles.Commands.UpdateProfile
 {

@@ -4,9 +4,9 @@ public class ValidationErrorException : Exception
 {
     #region Constructors
 
-    public ValidationErrorException(string? message): base(message)
+    public ValidationErrorException(string? message) : base(message)
     {
     }
 
-    #endregion
+    #endregion Constructors
 }

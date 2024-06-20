@@ -1,9 +1,9 @@
 ﻿using ECommerceAPI.Application.Features.Product.ProductVariants.Commands.AddProductVariant.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ProductEntity = ECommerceAPI.Domain.Entities.Products.Product;
-using FluentValidation;
 using ECommerceAPI.Domain.Entities.Products;
+using FluentValidation;
+using ProductEntity = ECommerceAPI.Domain.Entities.Products.Product;
 
 namespace ECommerceAPI.Application.Features.Product.ProductVariants.Commands.AddProductVariant.Validators
 {
