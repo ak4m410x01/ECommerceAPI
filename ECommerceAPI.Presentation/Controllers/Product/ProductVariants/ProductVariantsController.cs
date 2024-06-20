@@ -22,7 +22,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.ProductVariants
         [HttpPost]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddProductVariantCommandDTO), StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddAsync(AddProductVariantCommandRequest request)
+        public async Task<IActionResult> AddProductVariantAsync(AddProductVariantCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

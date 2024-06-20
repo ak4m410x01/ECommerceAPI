@@ -22,7 +22,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.ProductImages
         [HttpPost]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddProductImageCommandDTO), StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddProductAsync(AddProductImageCommandRequest request)
+        public async Task<IActionResult> AddProductImageAsync(AddProductImageCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

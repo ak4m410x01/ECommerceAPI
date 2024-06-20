@@ -34,7 +34,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Tags
         [HttpPost]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(AddTagCommandDTO), StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddAsync(AddTagCommandRequest request)
+        public async Task<IActionResult> AddTagAsync(AddTagCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
