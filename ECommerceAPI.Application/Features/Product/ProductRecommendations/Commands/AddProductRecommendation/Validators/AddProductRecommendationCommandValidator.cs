@@ -62,15 +62,15 @@ namespace ECommerceAPI.Application.Features.Product.ProductRecommendations.Comma
                     _productSpecification.Criteria = product => product.Id == productId;
                     return await _unitOfWork.Repository<ProductEntity>().FindAsNoTrackingAsync(_productSpecification) is not null;
                 }).WithMessage("RecommendedProductId doesn't exits.")
-            .MustAsync(async (request, productId, cancellationToken) =>
-            {
-                _productRecommendationSpecification.Criteria = product =>
-                                        product.ProductId == request.ProductId &&
-                                        product.RecommendedProductId == request.RecommendedProductId;
+                .MustAsync(async (request, productId, cancellationToken) =>
+                {
+                    _productRecommendationSpecification.Criteria = product =>
+                                            product.ProductId == request.ProductId &&
+                                            product.RecommendedProductId == request.RecommendedProductId;
 
-                return await _unitOfWork.Repository<ProductRecommendation>()
-                                        .FindAsNoTrackingAsync(_productRecommendationSpecification) is null;
-            }).WithMessage("This Product Recommendation (RecommendedProductId, ProductId) already exits.");
+                    return await _unitOfWork.Repository<ProductRecommendation>()
+                                            .FindAsNoTrackingAsync(_productRecommendationSpecification) is null;
+                }).WithMessage("This Product Recommendation (RecommendedProductId, ProductId) already exits.");
 
             #endregion Methods
         }
