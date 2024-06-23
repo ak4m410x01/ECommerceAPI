@@ -10,6 +10,7 @@
 		<ProjectReference Include="..\ECommerceAPI.Application\ECommerceAPI.Application.csproj" />
 		<ProjectReference Include="..\ECommerceAPI.Domain\ECommerceAPI.Domain.csproj" />
 		<ProjectReference Include="..\ECommerceAPI.Persistence\ECommerceAPI.Persistence.csproj" />
+		<ProjectReference Include="..\ECommerceAPI.Shared\ECommerceAPI.Shared.csproj" />
 	</ItemGroup>
 
 </Project>
