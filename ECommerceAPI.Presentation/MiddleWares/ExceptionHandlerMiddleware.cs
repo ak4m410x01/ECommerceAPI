@@ -32,7 +32,7 @@ namespace ECommerceAPI.Presentation.Middlewares
                 if (context.Request.Method == HttpMethods.Post || context.Request.Method == HttpMethods.Put)
                 {
                     if (!context.Request.Headers.ContainsKey("Content-Type") ||
-                        context.Request.Headers["Content-Type"] != "application/json")
+                        !IsValidContentType(context.Request.Headers["Content-Type"]!))
                     {
                         var responseModel = new Response<string>
                         {
@@ -55,32 +55,28 @@ namespace ECommerceAPI.Presentation.Middlewares
                 var response = context.Response;
                 response.ContentType = "application/json";
                 var responseModel = new Response<string>() { Succeeded = false, Message = error?.Message };
-                //TODO:: cover all validation errors
+
                 switch (error)
                 {
                     case UnauthorizedAccessException e:
-                        // custom application error
                         responseModel.Message = error.Message;
                         responseModel.StatusCode = HttpStatusCode.Unauthorized;
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         break;
 
                     case ValidationException e:
-                        // custom validation error
                         responseModel.Message = error.Message;
                         responseModel.StatusCode = HttpStatusCode.UnprocessableEntity;
                         response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
                         break;
 
                     case KeyNotFoundException e:
-                        // not found error
-                        responseModel.Message = error.Message; ;
+                        responseModel.Message = error.Message;
                         responseModel.StatusCode = HttpStatusCode.NotFound;
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
 
                     case DbUpdateException e:
-                        // can't update error
                         responseModel.Message = e.Message;
                         responseModel.StatusCode = HttpStatusCode.BadRequest;
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -102,7 +98,6 @@ namespace ECommerceAPI.Presentation.Middlewares
                         break;
 
                     default:
-                        // unhandled error
                         responseModel.Message = error?.Message;
                         responseModel.StatusCode = HttpStatusCode.InternalServerError;
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -111,6 +106,13 @@ namespace ECommerceAPI.Presentation.Middlewares
 
                 await response.WriteAsJsonAsync(responseModel);
             }
+        }
+
+        private bool IsValidContentType(string contentType)
+        {
+            return contentType.StartsWith("application/json") ||
+                   contentType.StartsWith("application/x-www-form-urlencoded") ||
+                   contentType.StartsWith("multipart/form-data");
         }
 
         #endregion Methods
