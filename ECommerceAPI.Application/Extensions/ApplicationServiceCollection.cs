@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Extensions.AutoMapper;
+using ECommerceAPI.Application.Extensions.MediatR;
 using ECommerceAPI.Application.Extensions.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ namespace ECommerceAPI.Application.Extensions
             services.AddValidationConfiguration();
 
             services.AddHttpContextAccessor();
+
+            services.AddMediatR();
 
             return services;
         }
