@@ -4,7 +4,7 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares.Exceptions
 {
     public static class ExeptionHandlerApplicationBuilder
     {
-        public static IApplicationBuilder UseExeptionHandlerMiddleware(this IApplicationBuilder app)
+        public static IApplicationBuilder UseExeptionHandlerMiddlewares(this IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionHandlerMiddleware>();
             return app;

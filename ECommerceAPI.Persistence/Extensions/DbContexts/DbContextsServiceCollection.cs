@@ -5,9 +5,9 @@ namespace ECommerceAPI.Persistence.Extensions.DbContexts
 {
     internal static class DbContextsServiceCollection
     {
-        public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDbContextsConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddApplicationDbContext(configuration);
+            services.AddApplicationDbContextConfiguration(configuration);
             return services;
         }
     }

@@ -5,7 +5,7 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authorization
 {
     public static class AuthorizationServiceCollection
     {
-        public static IServiceCollection AddAuthorizationConfigurations(this IServiceCollection services)
+        public static IServiceCollection AddAuthorizationConfiguration(this IServiceCollection services)
         {
             services.AddAuthorization(options =>
             {

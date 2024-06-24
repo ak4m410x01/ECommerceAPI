@@ -6,7 +6,7 @@ namespace ECommerceAPI.Persistence.Extensions.Specifications
 {
     public static class SpecificationServiceCollection
     {
-        public static IServiceCollection AddSpecification(this IServiceCollection services)
+        public static IServiceCollection AddSpecificationConfiguration(this IServiceCollection services)
         {
             services.AddScoped(typeof(IBaseSpecification<>), typeof(BaseSpecification<>));
             return services;

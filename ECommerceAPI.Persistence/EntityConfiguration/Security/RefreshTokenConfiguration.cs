@@ -1,8 +1,8 @@
-﻿using ECommerceAPI.Domain.Entities.Users;
+﻿using ECommerceAPI.Domain.Entities.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ECommerceAPI.Persistence.EntityConfiguration.Users
+namespace ECommerceAPI.Persistence.EntityConfiguration.Security
 {
     public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
     {
@@ -10,7 +10,7 @@ namespace ECommerceAPI.Persistence.EntityConfiguration.Users
         {
             #region Config Table Name
 
-            builder.ToTable("RefreshTokens", "User");
+            builder.ToTable("RefreshTokens", "Security");
 
             #endregion Config Table Name
 

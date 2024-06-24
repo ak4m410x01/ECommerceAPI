@@ -1,7 +1,7 @@
 ﻿using ECommerceAPI.Application.Features.User.Authentications.Commands.GetRefreshToken.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ECommerceAPI.Domain.Entities.Users;
+using ECommerceAPI.Domain.Entities.Security;
 using FluentValidation;
 
 namespace ECommerceAPI.Application.Features.User.Authentications.Commands.GetRefreshToken.Validators

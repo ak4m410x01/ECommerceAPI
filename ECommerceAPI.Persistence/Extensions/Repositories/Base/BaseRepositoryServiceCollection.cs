@@ -6,7 +6,7 @@ namespace ECommerceAPI.Persistence.Extensions.Repositories.Base
 {
     public static class BaseRepositoryServiceCollection
     {
-        public static IServiceCollection AddBaseRepository(this IServiceCollection services)
+        public static IServiceCollection AddBaseRepositoryConfiguration(this IServiceCollection services)
         {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 

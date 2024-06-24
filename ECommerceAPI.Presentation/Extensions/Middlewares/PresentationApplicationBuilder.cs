@@ -9,19 +9,19 @@ namespace ECommerceAPI.Presentation.Extensions.Middlewares
 {
     public static class PresentationApplicationBuilder
     {
-        public static IApplicationBuilder UsePresentationMiddlewares(this IApplicationBuilder app, IHostEnvironment environment)
+        public static IApplicationBuilder UsePresentationMiddlewares(this IApplicationBuilder app)
         {
             app.UseGlobalExceptionMiddlewares();
 
-            app.UseExeptionHandlerMiddleware();
+            app.UseExeptionHandlerMiddlewares();
 
             app.UseStatusCodePagesWithReExecute("/Api/V1/Errors/{0}");
 
             app.UseCorsMiddlewares();
 
-            app.UseSwaggerMiddlewares(environment);
+            app.UseSwaggerMiddlewares();
 
-            app.UseStaticFilesMiddleware();
+            app.UseStaticFilesMiddlewares();
 
             app.UseAuthenticationMiddlewares();
 

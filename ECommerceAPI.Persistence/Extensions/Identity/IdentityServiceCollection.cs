@@ -7,7 +7,7 @@ namespace ECommerceAPI.Persistence.Extensions.Identity
 {
     internal static class IdentityServiceCollection
     {
-        public static IServiceCollection AddIdentity(this IServiceCollection services)
+        public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
         {
             // Identity Configuration
             services.AddIdentity<ApplicationUser, IdentityRole>()

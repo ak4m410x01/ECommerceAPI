@@ -2,7 +2,7 @@
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
-using ECommerceAPI.Domain.Entities.Users;
+using ECommerceAPI.Domain.Entities.Security;
 using ECommerceAPI.Domain.IdentityEntities;
 using ECommerceAPI.Shared.Helpers.JwtSettings;
 using Microsoft.AspNetCore.Identity;

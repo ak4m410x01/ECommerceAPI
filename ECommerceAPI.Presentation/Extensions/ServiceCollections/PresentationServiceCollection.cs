@@ -13,13 +13,13 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
         {
             #region Configure Authentication
 
-            services.AddAuthenticationConfigurations(configuration);
+            services.AddAuthenticationConfiguration(configuration);
 
             #endregion Configure Authentication
 
             #region Configure Authorization
 
-            services.AddAuthorizationConfigurations();
+            services.AddAuthorizationConfiguration();
 
             #endregion Configure Authorization
 
@@ -30,7 +30,11 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections
 
             #endregion Configure Swagger/OpenAPI
 
+            #region Configure Cors
+
             services.AddCorsConfiguration();
+
+            #endregion Configure Cors
 
             #region Configure Controllers
 

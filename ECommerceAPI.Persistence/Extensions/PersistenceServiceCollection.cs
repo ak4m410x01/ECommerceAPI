@@ -1,5 +1,4 @@
-﻿using ECommerceAPI.Application.Extensions.MediatR;
-using ECommerceAPI.Persistence.Extensions.DbContexts;
+﻿using ECommerceAPI.Persistence.Extensions.DbContexts;
 using ECommerceAPI.Persistence.Extensions.Identity;
 using ECommerceAPI.Persistence.Extensions.Repositories.Base;
 using ECommerceAPI.Persistence.Extensions.Specifications;
@@ -13,14 +12,12 @@ namespace ECommerceAPI.Persistence.Extensions
     {
         public static IServiceCollection AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContexts(configuration)
-                    .AddIdentity();
+            services.AddDbContextsConfiguration(configuration)
+                    .AddIdentityConfiguration();
 
-            services.AddBaseRepository()
-                    .AddUnitOfWork();
-
-            services.AddSpecification();
-
+            services.AddSpecificationConfiguration()
+                    .AddBaseRepositoryConfiguration()
+                    .AddUnitOfWorkConfiguration();
             return services;
         }
     }

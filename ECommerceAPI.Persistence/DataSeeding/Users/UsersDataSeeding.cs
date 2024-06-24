@@ -15,9 +15,7 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
                 Email = "superadmin@ecommerceapi.com",
                 UserName = "superadmin"
             };
-            string password = "P@ssw0rd";
-
-            await userManager.CreateAsync(superAdmin, password);
+            await userManager.CreateAsync(superAdmin, "P@ssw0rd");
             await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = superAdmin.Id, Bio = string.Empty });
             await userManager.AddToRoleAsync(superAdmin, UserRole.SuperAdmin.ToString());
         }
@@ -29,9 +27,8 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
                 UserName = "admin",
                 Email = "admin@ecommerceapi.com"
             };
-            string password = "P@ssw0rd";
 
-            await userManager.CreateAsync(admin, password);
+            await userManager.CreateAsync(admin, "P@ssw0rd");
             await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = admin.Id, Bio = string.Empty });
             await userManager.AddToRoleAsync(admin, UserRole.Admin.ToString());
         }

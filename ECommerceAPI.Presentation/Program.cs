@@ -13,7 +13,7 @@ namespace ECommerceAPI.Presentation
         {
             #region Create Web Application
 
-            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);
 
             #endregion Create Web Application
 
@@ -21,18 +21,22 @@ namespace ECommerceAPI.Presentation
 
             builder.Services.AddApplicationLayer()
                             .AddInfrastructureLayer()
-                            .AddPresentationLayer(builder.Configuration)
-                            .AddPersistenceLayer(builder.Configuration);
+                            .AddPersistenceLayer(builder.Configuration)
+                            .AddPresentationLayer(builder.Configuration);
 
             #endregion Clean Architecture Layers Configuration
 
             #region Build Web Application
 
-            WebApplication? app = builder.Build();
+            var app = builder.Build();
 
             #endregion Build Web Application
 
-            app.UsePresentationMiddlewares(app.Environment);
+            #region Use App Middlewares
+
+            app.UsePresentationMiddlewares();
+
+            #endregion Use App Middlewares
 
             app.MapControllers();
 

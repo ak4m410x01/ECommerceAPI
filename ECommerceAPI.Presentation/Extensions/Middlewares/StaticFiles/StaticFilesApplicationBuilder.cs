@@ -2,7 +2,7 @@
 {
     public static class StaticFilesApplicationBuilder
     {
-        public static IApplicationBuilder UseStaticFilesMiddleware(this IApplicationBuilder app)
+        public static IApplicationBuilder UseStaticFilesMiddlewares(this IApplicationBuilder app)
         {
             app.UseStaticFiles();
             return app;

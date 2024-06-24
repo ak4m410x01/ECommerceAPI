@@ -1,7 +1,7 @@
 ﻿using ECommerceAPI.Domain.Common.Abstracts;
 using ECommerceAPI.Domain.IdentityEntities;
 
-namespace ECommerceAPI.Domain.Entities.Users
+namespace ECommerceAPI.Domain.Entities.Security
 {
     public class RefreshToken : BaseEntity
     {

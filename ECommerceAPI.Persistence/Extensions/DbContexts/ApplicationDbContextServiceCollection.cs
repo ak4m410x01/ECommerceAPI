@@ -7,7 +7,7 @@ namespace ECommerceAPI.Persistence.Extensions.DbContexts
 {
     internal static class ApplicationDbContextServiceCollection
     {
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddApplicationDbContextConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             // Get Connection String From appsettings.json
             string? connectionString = configuration.GetConnectionString("LocalDevelopmentDbConnection");

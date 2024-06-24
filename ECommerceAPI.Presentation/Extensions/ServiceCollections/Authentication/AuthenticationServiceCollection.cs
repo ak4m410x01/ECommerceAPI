@@ -6,7 +6,7 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
 {
     public static class AuthenticationServiceCollection
     {
-        public static IServiceCollection AddAuthenticationConfigurations(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthenticationOptions()
                     .AddJwtBearerOptions(configuration);

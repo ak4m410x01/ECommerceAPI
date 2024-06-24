@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Domain.Entities.Users;
+﻿using ECommerceAPI.Domain.Entities.Security;
+using ECommerceAPI.Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Domain.IdentityEntities
