@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ECommerceAPI.Application.Features.Product.Categories.Commands.RemoveCategory.DTOs;
+﻿using ECommerceAPI.Application.Features.Product.Categories.Commands.RemoveCategory.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Commands.RemoveCategory.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;

@@ -9,7 +9,6 @@ using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategor
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCategories.Requests;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.DTOs;
 using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Requests;
-using ECommerceAPI.Domain.Enumerations.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
