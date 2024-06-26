@@ -31,6 +31,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpGet]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetAllCategoriesQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllCategoriesAsync([FromQuery] GetAllCategoriesQueryRequest request)
         {
@@ -40,6 +41,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpPost]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(AddCategoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddCategoryAsync([FromBody] AddCategoryCommandRequest request)
         {
@@ -49,6 +51,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetCategoryByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategoryByIdAsync([FromRoute] GetCategoryByIdQueryRequest request)
         {
@@ -58,6 +61,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpPut("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(UpdateCategoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> UpdateCategoryAsync(int id, [FromBody] UpdateCategoryCommandRequest request)
         {
@@ -68,6 +72,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Categories
 
         [HttpDelete("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(RemoveCategoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> RemoveCategoryAsync([FromRoute] RemoveCategoryCommandRequest request)
         {

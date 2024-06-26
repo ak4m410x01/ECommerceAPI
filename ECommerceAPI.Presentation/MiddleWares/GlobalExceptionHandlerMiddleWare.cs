@@ -15,7 +15,7 @@ namespace ECommerceAPI.Presentation.Middlewares
 
         #region Constructors
 
-        public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger, IHostEnvironment environment)
         {
             _next = next;
             _logger = logger;

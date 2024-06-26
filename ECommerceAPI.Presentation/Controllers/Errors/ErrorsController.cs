@@ -14,9 +14,10 @@ namespace ECommerceAPI.Presentation.Controllers.Errors
 
             return code switch
             {
-                401 => Unauthorized(responseHandler.Unauthorized<object>("Unauthorized or invalid token")),
-                404 => NotFound(responseHandler.NotFound<object>("Resource Not Found")),
-                _ => StatusCode(code, responseHandler.ServerError<object>("An unexpected error occurred"))
+                StatusCodes.Status401Unauthorized => Unauthorized(responseHandler.Unauthorized<object>("Unauthorized or Invalid token.")),
+                StatusCodes.Status403Forbidden => StatusCode(StatusCodes.Status403Forbidden, responseHandler.Forbidden<object>("Access Forbidden.")),
+                StatusCodes.Status404NotFound => NotFound(responseHandler.NotFound<object>("Resource Not Found.")),
+                _ => StatusCode(code, responseHandler.ServerError<object>("An unexpected error occurred."))
             };
         }
     }
