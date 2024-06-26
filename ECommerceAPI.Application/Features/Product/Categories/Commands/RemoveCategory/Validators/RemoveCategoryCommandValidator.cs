@@ -1,12 +1,12 @@
-﻿using ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Categories.Commands.RemoveCategory.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
 using FluentValidation;
 
-namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetCategoryById.Validators
+namespace ECommerceAPI.Application.Features.Product.Categories.Commands.RemoveCategory.Validators
 {
-    public class GetCategoryByIdQueryValidator : AbstractValidator<GetCategoryByIdQueryRequest>
+    public class RemoveCategoryCommandValidator : AbstractValidator<RemoveCategoryCommandRequest>
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetCatego
 
         #region Constructors
 
-        public GetCategoryByIdQueryValidator(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification)
+        public RemoveCategoryCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Category> categorySpecification)
         {
             _unitOfWork = unitOfWork;
             _categorySpecification = categorySpecification;
@@ -33,7 +33,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetCatego
             IdValidator();
         }
 
-        public void IdValidator()
+        private void IdValidator()
         {
             RuleFor(request => request.Id)
                 .GreaterThan(0).WithMessage("Id must be greater than 0.")

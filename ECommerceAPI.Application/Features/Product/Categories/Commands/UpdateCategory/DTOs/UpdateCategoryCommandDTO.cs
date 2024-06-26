@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCategory.DTOs
+﻿namespace ECommerceAPI.Application.Features.Product.Categories.Commands.UpdateCategory.DTOs
 {
-    public class AddCategoryCommandDTO
+    public class UpdateCategoryCommandDTO
     {
         #region Properties
 

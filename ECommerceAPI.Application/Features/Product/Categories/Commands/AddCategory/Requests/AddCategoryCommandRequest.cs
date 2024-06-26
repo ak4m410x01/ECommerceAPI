@@ -8,7 +8,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
     {
         #region Properties
 
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
         public string? Description { get; set; }
         public int? ParentCategoryId { get; set; }
 

@@ -14,11 +14,11 @@ namespace ECommerceAPI.Shared.Responses
 
         #region Methods
 
-        public Response<T> Deleted<T>(string? message = null)
+        public Response<T> Removed<T>(string? message = null)
         {
             return new Response<T>()
             {
-                Message = message is null ? "Deleted Successfully" : message,
+                Message = message is null ? "Removed Successfully" : message,
                 StatusCode = HttpStatusCode.NoContent,
                 Succeeded = true
             };
