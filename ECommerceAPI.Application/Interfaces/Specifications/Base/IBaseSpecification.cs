@@ -6,5 +6,8 @@ namespace ECommerceAPI.Application.Interfaces.Specifications.Base
     {
         Expression<Func<T, bool>> Criteria { get; set; }
         List<Expression<Func<T, object>>> Includes { get; }
+
+        Expression<Func<T, object>>? OrderBy { get; set; }
+        Expression<Func<T, object>>? OrderByDescending { get; set; }
     }
 }

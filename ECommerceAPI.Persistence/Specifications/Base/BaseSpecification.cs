@@ -5,29 +5,55 @@ namespace ECommerceAPI.Persistence.Specifications.Base
 {
     public class BaseSpecification<T> : IBaseSpecification<T> where T : class
     {
+        #region Fields
+
+        public Expression<Func<T, object>>? _orderBy;
+        public Expression<Func<T, object>>? _orderByDescending;
+
+        #endregion Fields
+
         #region Constructors
 
         public BaseSpecification()
         {
         }
 
-        public BaseSpecification(Expression<Func<T, bool>> criteria)
-        {
-            Criteria = criteria;
-        }
-
         #endregion Constructors
 
         #region Properties
 
-        public Expression<Func<T, bool>> Criteria { get; set; } = default!;
+        public Expression<Func<T, bool>>? Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; } = new();
+
+        public Expression<Func<T, object>>? OrderBy
+        {
+            get
+            {
+                return _orderBy;
+            }
+            set
+            {
+                _orderBy = value;
+            }
+        }
+
+        public Expression<Func<T, object>>? OrderByDescending
+        {
+            get
+            {
+                return _orderByDescending;
+            }
+            set
+            {
+                _orderByDescending = value;
+            }
+        }
 
         #endregion Properties
 
         #region Methods
 
-        protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
+        public virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);
         }

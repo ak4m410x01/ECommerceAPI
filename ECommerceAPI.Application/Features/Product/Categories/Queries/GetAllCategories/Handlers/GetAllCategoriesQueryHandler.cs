@@ -36,6 +36,7 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Queries.GetAllCat
         public async Task<PaginatedResponse<GetAllCategoriesQueryDTO>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
         {
             _categorySpecification.Criteria = category => category.DeletedAt == null;
+            _categorySpecification.OrderBy = category => category.Name!;
             var categories = await _unitOfWork.Repository<Category>().GetAllAsNoTrackingAsync(_categorySpecification);
             var data = _mapper.ProjectTo<GetAllCategoriesQueryDTO>(categories);
 
