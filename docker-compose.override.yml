@@ -14,7 +14,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: API.Dockerfile
+      dockerfile: ECommerceAPI.Presentation/Dockerfile
     container_name: api
     hostname: api
     restart: unless-stopped
