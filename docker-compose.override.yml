@@ -1,12 +1,10 @@
 services:
   sqlserver:
-    build:
-      context: .
-      dockerfile: DB.Dockerfile
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     hostname: sqlserver
     environment:
-      - SA_PASSWORD=P@ssw0rd
+      - SA_PASSWORD=${SA_PASSWORD}
       - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
@@ -21,8 +19,8 @@ services:
     hostname: api
     restart: unless-stopped
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ECommerceDb;User ID=sa;Password=P@ssw0rd;Encrypt=False;Trust Server Certificate=True;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
     ports:
       - "8080:8080"
     depends_on:
