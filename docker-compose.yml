@@ -19,6 +19,7 @@ services:
       dockerfile: API.Dockerfile
     container_name: api
     hostname: api
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ECommerceDb;User ID=sa;Password=P@ssw0rd;Encrypt=False;Trust Server Certificate=True;
