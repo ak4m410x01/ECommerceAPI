@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
-using ECommerceAPI.Application.Features.User.Authentications.Queries.GetAccessToken.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Queries.GetAccessToken.DTOs;
 
 namespace ECommerceAPI.Application.Mapping.User.Authentication.Queries.GetAccessToken
 {

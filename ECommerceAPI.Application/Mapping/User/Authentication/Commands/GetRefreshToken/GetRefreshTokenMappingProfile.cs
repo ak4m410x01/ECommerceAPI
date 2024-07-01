@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
-using ECommerceAPI.Application.Features.User.Authentications.Commands.GetRefreshToken.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.GetRefreshToken.DTOs;
 
 namespace ECommerceAPI.Application.Mapping.User.Authentication.Commands.GetRefreshToken
 {
