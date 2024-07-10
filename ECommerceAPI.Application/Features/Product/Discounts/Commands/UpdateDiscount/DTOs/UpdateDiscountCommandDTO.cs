@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscount.DTOs
+﻿namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.UpdateDiscount.DTOs
 {
-    public class AddDiscountCommandDTO
+    public class UpdateDiscountCommandDTO
     {
         #region Properties
 

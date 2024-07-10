@@ -34,7 +34,7 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Queries.GetDiscoun
 
         public async Task<Response<GetDiscountByIdQueryDTO>> Handle(GetDiscountByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            _discountSpecification.Criteria = discount => discount.Id == request.Id;
+            _discountSpecification.Criteria = discount => discount.Id == request.Id && discount.DeletedAt == null;
             var discount = await _unitOfWork.Repository<Discount>().FindAsNoTrackingAsync(_discountSpecification);
 
             var data = _mapper.Map<GetDiscountByIdQueryDTO>(discount);

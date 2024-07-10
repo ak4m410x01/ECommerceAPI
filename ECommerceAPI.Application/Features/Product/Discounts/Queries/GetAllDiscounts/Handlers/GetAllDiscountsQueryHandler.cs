@@ -35,6 +35,7 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDisc
 
         public async Task<PaginatedResponse<GetAllDiscountsQueryDTO>> Handle(GetAllDiscountsQueryRequest request, CancellationToken cancellationToken)
         {
+            _discountSpecification.Criteria = discount => discount.DeletedAt == null;
             var discounts = await _unitOfWork.Repository<Discount>().GetAllAsNoTrackingAsync(_discountSpecification);
             var data = _mapper.ProjectTo<GetAllDiscountsQueryDTO>(discounts);
 

@@ -1,12 +1,12 @@
-﻿using ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscount.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Discounts.Commands.UpdateDiscount.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
 using FluentValidation;
 
-namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscount.Validators
+namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.UpdateDiscount.Validators
 {
-    public class AddDiscountCommandValidator : AbstractValidator<AddDiscountCommandRequest>
+    public class UpdateDiscountCommandValidator : AbstractValidator<UpdateDiscountCommandRequest>
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscou
 
         #region Constructors
 
-        public AddDiscountCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Discount> discountSpecification)
+        public UpdateDiscountCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Discount> discountSpecification)
         {
             _unitOfWork = unitOfWork;
             _discountSpecification = discountSpecification;
@@ -30,6 +30,7 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscou
 
         private void InitializeRules()
         {
+            IdValidator();
             CodeValidator();
             PercentValidator();
             MaxUsesValidator();
@@ -37,14 +38,23 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscou
             EndAtValidator();
         }
 
+        private void IdValidator()
+        {
+            RuleFor(request => request.Id)
+                .GreaterThan(0).WithMessage("Id must be greater than 0.")
+                .MustAsync(async (id, cancellationToken) =>
+                {
+                    _discountSpecification.Criteria = discount => discount.Id == id && discount.DeletedAt == null;
+                    return (await _unitOfWork.Repository<Discount>().FindAsNoTrackingAsync(_discountSpecification)) is not null;
+                }).WithMessage("Discount doesn't exists.");
+        }
+
         private void CodeValidator()
         {
             RuleFor(request => request.Code)
-                .NotEmpty().WithMessage("Code is required field.")
-                .NotNull().WithMessage("Code must be not null.")
-                .MustAsync(async (code, cancellationToken) =>
+                .MustAsync(async (request, code, cancellationToken) =>
                 {
-                    _discountSpecification.Criteria = discount => discount.Code == code && discount.DeletedAt == null;
+                    _discountSpecification.Criteria = discount => discount.Id != request.Id && discount.Code == request.Code && discount.DeletedAt == null;
                     return (await _unitOfWork.Repository<Discount>().FindAsNoTrackingAsync(_discountSpecification)) is null;
                 }).WithMessage("Code already exists.");
         }
@@ -52,32 +62,24 @@ namespace ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscou
         private void PercentValidator()
         {
             RuleFor(request => request.Percent)
-                .NotEmpty().WithMessage("Percent is required field.")
-                .NotNull().WithMessage("Percent must be not null.")
                 .GreaterThan(0).WithMessage("Percent must be greater than 0.");
         }
 
         private void MaxUsesValidator()
         {
             RuleFor(request => request.MaxUses)
-                .NotEmpty().WithMessage("MaxUses is required field.")
-                .NotNull().WithMessage("MaxUses must be not null.")
                 .GreaterThan(0).WithMessage("MaxUses must be greater than 0.");
         }
 
         private void StartAtValidator()
         {
             RuleFor(request => request.StartAt)
-                .NotEmpty().WithMessage("StartAt is required field.")
-                .NotNull().WithMessage("StartAt must be not null.")
                 .GreaterThan(DateTime.UtcNow).WithMessage("StartAt must be in Future.");
         }
 
         private void EndAtValidator()
         {
             RuleFor(request => request.EndAt)
-                .NotEmpty().WithMessage("EndAt is required field.")
-                .NotNull().WithMessage("EndAt must be not null.")
                 .GreaterThan(request => request.StartAt).WithMessage("EndAt must be greater than StartAt.");
         }
 
