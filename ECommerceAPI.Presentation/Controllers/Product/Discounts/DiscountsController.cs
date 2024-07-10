@@ -42,7 +42,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Discounts
         [MapToApiVersion("1.0")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(AddDiscountCommandDTO), StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddDiscountAsync(AddDiscountCommandRequest request)
+        public async Task<IActionResult> AddDiscountAsync([FromBody] AddDiscountCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

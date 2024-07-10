@@ -42,7 +42,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         [MapToApiVersion("1.0")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddInventoryAsync(AddInventoryCommandRequest request)
+        public async Task<IActionResult> AddInventoryAsync([FromBody] AddInventoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
@@ -62,8 +62,9 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         [MapToApiVersion("1.0")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(UpdateInventoryCommandDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateInventoryAsync([FromRoute] UpdateInventoryCommandRequest request)
+        public async Task<IActionResult> UpdateInventoryAsync(int id, [FromBody] UpdateInventoryCommandRequest request)
         {
+            request.Id = id;
             var response = await Mediator.Send(request);
             return ResponseResult(response);
         }
