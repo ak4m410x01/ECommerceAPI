@@ -9,18 +9,23 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInve
 
         public AddInventoryCommandValidator()
         {
-            QuantityValidator();
+            InitializeRules();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public void QuantityValidator()
+        private void InitializeRules()
+        {
+            QuantityValidator();
+        }
+
+        private void QuantityValidator()
         {
             RuleFor(request => request.Quantity)
-                .NotEmpty().WithMessage("Quantity can't be empty")
-                .NotNull().WithMessage("Quantity can't be null")
+                .NotEmpty().WithMessage("Quantity  is required field.")
+                .NotNull().WithMessage("Quantity must be not null.")
                 .GreaterThan(0).WithMessage("Quantity must be greater than 0.");
         }
 

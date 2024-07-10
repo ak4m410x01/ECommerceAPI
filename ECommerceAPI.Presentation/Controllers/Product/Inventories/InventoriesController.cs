@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.Requests;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.UpdateInventory.DTOs;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.UpdateInventory.Requests;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.Requests;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.DTOs;
@@ -45,6 +47,15 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(GetInventoryByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetInventoryByIdAsync([FromRoute] GetInventoryByIdQueryRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
+        [HttpPut("{id:int}")]
+        [MapToApiVersion("1.0")]
+        [ProducesResponseType(typeof(UpdateInventoryCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateInventoryAsync([FromRoute] UpdateInventoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
