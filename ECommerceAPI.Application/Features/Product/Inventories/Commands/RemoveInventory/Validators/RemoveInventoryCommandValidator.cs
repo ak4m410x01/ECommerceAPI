@@ -1,12 +1,12 @@
-﻿using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.Requests;
+﻿using ECommerceAPI.Application.Features.Product.Inventories.Commands.RemoveInventory.Requests;
 using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Products;
 using FluentValidation;
 
-namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.Validators
+namespace ECommerceAPI.Application.Features.Product.Inventories.Commands.RemoveInventory.Validators
 {
-    public class GetInventoryByIdQueryValidator : AbstractValidator<GetInventoryByIdQueryRequest>
+    public class RemoveInventoryCommandValidator : AbstractValidator<RemoveInventoryCommandRequest>
     {
         #region Properties
 
@@ -17,21 +17,26 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInven
 
         #region Constructors
 
-        public GetInventoryByIdQueryValidator(IUnitOfWork unitOfWork, IBaseSpecification<Inventory> inventorySpecification)
+        public RemoveInventoryCommandValidator(IUnitOfWork unitOfWork, IBaseSpecification<Inventory> inventorySpecification)
         {
             _unitOfWork = unitOfWork;
             _inventorySpecification = inventorySpecification;
-            IdValidator();
+            InitializeRules();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public void IdValidator()
+        private void InitializeRules()
+        {
+            IdValidator();
+        }
+
+        private void IdValidator()
         {
             RuleFor(request => request.Id)
-                .GreaterThan(0).WithMessage("Id must greater than 1.")
+                .GreaterThan(0).WithMessage("Id must be greater than 0.")
                 .MustAsync(async (id, cancellationToken) =>
                 {
                     _inventorySpecification.Criteria = inventory => inventory.Id == id && inventory.DeletedAt == null;

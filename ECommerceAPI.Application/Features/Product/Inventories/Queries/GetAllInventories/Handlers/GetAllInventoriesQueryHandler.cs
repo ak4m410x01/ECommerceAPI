@@ -35,6 +35,7 @@ namespace ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllIn
 
         public async Task<PaginatedResponse<GetAllInventoriesQueryDTO>> Handle(GetAllInventoriesQueryRequest request, CancellationToken cancellationToken)
         {
+            _inventorySpecification.Criteria = inventory => inventory.DeletedAt == null;
             var inventories = await _unitOfWork.Repository<Inventory>().GetAllAsNoTrackingAsync(_inventorySpecification);
             var data = _mapper.ProjectTo<GetAllInventoriesQueryDTO>(inventories);
 

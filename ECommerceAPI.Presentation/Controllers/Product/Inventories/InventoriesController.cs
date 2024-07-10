@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.AddInventory.Requests;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.RemoveInventory.DTOs;
+using ECommerceAPI.Application.Features.Product.Inventories.Commands.RemoveInventory.Requests;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.UpdateInventory.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Commands.UpdateInventory.Requests;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInventories.DTOs;
@@ -8,6 +10,7 @@ using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetAllInvent
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.DTOs;
 using ECommerceAPI.Application.Features.Product.Inventories.Queries.GetInventoryById.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
@@ -56,6 +59,16 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(UpdateInventoryCommandDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateInventoryAsync([FromRoute] UpdateInventoryCommandRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(typeof(RemoveInventoryCommandDTO), StatusCodes.Status201Created)]
+        public async Task<IActionResult> RemoveInventoryAsync([FromRoute] RemoveInventoryCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
