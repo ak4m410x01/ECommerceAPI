@@ -38,8 +38,8 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.AddCateg
         public void NameValidator()
         {
             RuleFor(request => request.Name)
-                .NotEmpty().WithMessage("Name is a Required Field.")
-                .NotNull().WithMessage("Name can't be null.")
+                .NotEmpty().WithMessage("Name is required field.")
+                .NotNull().WithMessage("Name must be not null.")
                 .MustAsync(async (name, cancellationToken) =>
                 {
                     _categorySpecification.Criteria = category => category.Name == name && category.DeletedAt == null;

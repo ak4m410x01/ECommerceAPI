@@ -50,9 +50,9 @@ namespace ECommerceAPI.Application.Features.Product.Categories.Commands.UpdateCa
         private void NameValidator()
         {
             RuleFor(request => request.Name)
-                .MustAsync(async (name, cancellationToken) =>
+                .MustAsync(async (request, name, cancellationToken) =>
                 {
-                    _categorySpecification.Criteria = category => category.Name == name && category.DeletedAt == null;
+                    _categorySpecification.Criteria = category => category.Id != request.Id && category.Name == request.Name && category.DeletedAt == null;
                     return (await _unitOfWork.Repository<Category>().FindAsNoTrackingAsync(_categorySpecification)) is null;
                 }).WithMessage("Name already exists.");
         }
