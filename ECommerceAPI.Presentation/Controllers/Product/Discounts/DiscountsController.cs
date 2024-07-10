@@ -30,6 +30,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Discounts
 
         [HttpGet]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetAllDiscountsQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllDiscountsAsync([FromQuery] GetAllDiscountsQueryRequest request)
         {
@@ -49,6 +50,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Discounts
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetDiscountByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDiscountByIdAsync([FromRoute] GetDiscountByIdQueryRequest request)
         {

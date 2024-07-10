@@ -30,6 +30,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpGet]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetAllInventoriesQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllInventoriesAsync([FromQuery] GetAllInventoriesQueryRequest request)
         {
@@ -39,6 +40,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpPost]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(AddInventoryCommandDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> AddInventoryAsync(AddInventoryCommandRequest request)
         {
@@ -48,6 +50,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin,Customer")]
         [ProducesResponseType(typeof(GetInventoryByIdQueryDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetInventoryByIdAsync([FromRoute] GetInventoryByIdQueryRequest request)
         {
@@ -57,6 +60,7 @@ namespace ECommerceAPI.Presentation.Controllers.Product.Inventories
 
         [HttpPut("{id:int}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(UpdateInventoryCommandDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateInventoryAsync([FromRoute] UpdateInventoryCommandRequest request)
         {
