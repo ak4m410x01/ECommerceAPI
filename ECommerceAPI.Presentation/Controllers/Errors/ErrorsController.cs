@@ -17,6 +17,7 @@ namespace ECommerceAPI.Presentation.Controllers.Errors
                 StatusCodes.Status401Unauthorized => Unauthorized(responseHandler.Unauthorized<object>("Unauthorized or Invalid token.")),
                 StatusCodes.Status403Forbidden => StatusCode(StatusCodes.Status403Forbidden, responseHandler.Forbidden<object>("Access Forbidden.")),
                 StatusCodes.Status404NotFound => NotFound(responseHandler.NotFound<object>("Resource Not Found.")),
+                StatusCodes.Status405MethodNotAllowed => StatusCode(code, responseHandler.MethodNotAllowed<object>()),
                 _ => StatusCode(code, responseHandler.ServerError<object>("An unexpected error occurred."))
             };
         }

@@ -106,6 +106,16 @@ namespace ECommerceAPI.Shared.Responses
             };
         }
 
+        public Response<T> MethodNotAllowed<T>(string? message = null)
+        {
+            return new Response<T>
+            {
+                Message = message is null ? "Method Not Allowed" : message,
+                StatusCode = HttpStatusCode.MethodNotAllowed,
+                Succeeded = false
+            };
+        }
+
         #endregion Methods
     }
 }
