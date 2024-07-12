@@ -105,7 +105,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
 
-            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
+            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password) || !await _userManager.IsEmailConfirmedAsync(user))
             {
                 return await Task.FromResult(new SignInDTOResponse()
                 {
