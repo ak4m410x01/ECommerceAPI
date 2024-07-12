@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.DTOs.Authentication.SignIn;
+﻿using ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail;
+using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
 
@@ -13,5 +14,7 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
         Task<AccessTokenDTO> GetAccessTokenAsync(string refreshToken);
 
         Task<RefreshTokenDTO> GetRefreshTokenAsync(string refreshToken);
+
+        Task<ConfirmEmailDTOResponse> ConfirmEmailAsync(ConfirmEmailDTORequest request);
     }
 }

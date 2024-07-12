@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ChangePassword.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ChangePassword.Requests;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.GetRefreshToken.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.SignUp.Requests;
@@ -68,6 +70,15 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(ChangePasswordCommandDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordCommandRequest request)
+        {
+            var response = await Mediator.Send(request);
+            return ResponseResult(response);
+        }
+
+        [HttpGet("ConfirmEmail")]
+        [MapToApiVersion("1.0")]
+        [ProducesResponseType(typeof(ConfirmEmailCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ConfirmEmailAsync([FromQuery] ConfirmEmailCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

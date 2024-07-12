@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail;
 using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
@@ -8,11 +9,12 @@ using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
 using ECommerceAPI.Domain.IdentityEntities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Mail;
 using ECommerceAPI.Shared.Helpers.MailConfiguration;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 
 namespace ECommerceAPI.Infrastructure.Services.Authentication
@@ -72,7 +74,8 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
             // Build Confirmation Mail
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/User/Authentication/ConfirmEmail?userId={user.Id}&token={token}";
+            var encodedToken = WebUtility.UrlEncode(token);
+            var confirmationUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/Api/V1/User/Authentication/ConfirmEmail?userId={user.Id}&token={encodedToken}";
 
             // Send Confirmation Mail
             var mailData = new MailData(
@@ -133,6 +136,37 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             var user = await _userManager.Users.SingleOrDefaultAsync(user => user.RefreshTokens.Any(r => r.Token == refreshToken));
 
             return await _tokenService.GenerateRefreshTokenAsync(user!, true);
+        }
+
+        public async Task<ConfirmEmailDTOResponse> ConfirmEmailAsync(ConfirmEmailDTORequest request)
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user == null)
+            {
+                return new ConfirmEmailDTOResponse()
+                {
+                    IsAuthenticated = false,
+                    Message = "Email Confirmation Failed!"
+                };
+            }
+
+            var token = WebUtility.UrlDecode(request.Token).Replace(" ", "+");
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+
+            if (!result.Succeeded)
+            {
+                return new ConfirmEmailDTOResponse()
+                {
+                    IsAuthenticated = false,
+                    Message = string.Join(", ", result.Errors.Select(e => e.Description))
+                };
+            }
+
+            return new ConfirmEmailDTOResponse()
+            {
+                IsAuthenticated = true,
+                Message = "Email Confirmation Success."
+            };
         }
 
         #endregion Methods
