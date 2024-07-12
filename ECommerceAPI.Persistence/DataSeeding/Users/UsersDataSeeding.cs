@@ -13,7 +13,8 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
             var superAdmin = new ApplicationUser()
             {
                 Email = "superadmin@ecommerceapi.com",
-                UserName = "superadmin"
+                UserName = "superadmin",
+                EmailConfirmed = true
             };
             await userManager.CreateAsync(superAdmin, "P@ssw0rd");
             await unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = superAdmin.Id, Bio = string.Empty });
@@ -25,7 +26,8 @@ namespace ECommerceAPI.Persistence.DataSeeding.Users
             var admin = new ApplicationUser()
             {
                 UserName = "admin",
-                Email = "admin@ecommerceapi.com"
+                Email = "admin@ecommerceapi.com",
+                EmailConfirmed = true
             };
 
             await userManager.CreateAsync(admin, "P@ssw0rd");

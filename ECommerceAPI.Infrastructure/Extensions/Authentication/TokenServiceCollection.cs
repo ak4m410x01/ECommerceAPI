@@ -11,7 +11,7 @@ namespace ECommerceAPI.Infrastructure.Extensions.Authentication
     {
         public static IServiceCollection AddTokenService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<JwtConfiguration>(configuration.GetSection("Jwt"));
+            services.Configure<JwtConfiguration>(configuration.GetSection("JwtConfiguration"));
             services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<JwtConfiguration>>().Value);
 
             services.AddScoped(typeof(ITokenService), typeof(TokenService));

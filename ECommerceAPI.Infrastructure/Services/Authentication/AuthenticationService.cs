@@ -105,7 +105,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
 
-            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password) || !await _userManager.IsEmailConfirmedAsync(user))
+            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
             {
                 return await Task.FromResult(new SignInDTOResponse()
                 {
@@ -158,7 +158,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
                 return new ConfirmEmailDTOResponse()
                 {
                     IsAuthenticated = false,
-                    Message = string.Join(", ", result.Errors.Select(e => e.Description))
+                    Message = "Email Confirmation Failed!"
                 };
             }
 

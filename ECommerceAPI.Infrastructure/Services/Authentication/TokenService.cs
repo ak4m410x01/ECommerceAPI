@@ -21,16 +21,16 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
-        private readonly JwtConfiguration JwtConfiguration;
+        private readonly JwtConfiguration _jwtConfiguration;
 
         #endregion Properties
 
         #region Constructors
 
-        public TokenService(UserManager<ApplicationUser> userManager, JwtConfiguration JwtConfiguration, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
+        public TokenService(UserManager<ApplicationUser> userManager, JwtConfiguration jwtConfiguration, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
         {
             _userManager = userManager;
-            JwtConfiguration = JwtConfiguration;
+            _jwtConfiguration = jwtConfiguration;
             _unitOfWork = unitOfWork;
             _refreshTokenSpecification = refreshTokenSpecification;
         }
@@ -45,9 +45,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             JwtSecurityToken token = new
             (
-               issuer: JwtConfiguration.Issuer,
-               audience: JwtConfiguration.Audience,
-               expires: DateTime.UtcNow.AddDays(JwtConfiguration.AccessTokenExpiryDays),
+               issuer: _jwtConfiguration.Issuer,
+               audience: _jwtConfiguration.Audience,
+               expires: DateTime.UtcNow.AddDays(_jwtConfiguration.AccessTokenExpiryDays),
                claims: await GetTokenClaimsAsync(user),
                signingCredentials: GetSigningCredentials()
             );
@@ -61,7 +61,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         private SigningCredentials GetSigningCredentials()
         {
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(JwtConfiguration.Key ?? "sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtConfiguration.Key ?? "sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
             return new(key, SecurityAlgorithms.HmacSha256);
         }
 
@@ -137,7 +137,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             return new RefreshToken()
             {
                 Token = Convert.ToBase64String(randomNumber),
-                ExpiresAt = DateTime.UtcNow.AddDays(JwtConfiguration.RefreshTokenExpiryDays),
+                ExpiresAt = DateTime.UtcNow.AddDays(_jwtConfiguration.RefreshTokenExpiryDays),
                 CreatedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
             };
