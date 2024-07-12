@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using ECommerceAPI.Shared.Helpers.MailConfiguration;
+using Microsoft.AspNetCore.Http;
+using System.Text.Encodings.Web;
 
 namespace ECommerceAPI.Infrastructure.Services.Authentication
 {
@@ -24,18 +26,20 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMailService _mailService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         #endregion Properties
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork, IMailService mailService)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork, IMailService mailService, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _mailService = mailService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         #endregion Constructors
@@ -46,19 +50,52 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             var user = _mapper.Map<ApplicationUser>(request);
 
-            user.UserName = $"{(new MailAddress(user.Email!)).User}-{user.Id}";
+            var mailUserName = new MailAddress(user.Email!).User;
+            user.UserName = $"{mailUserName}-{user.Id}";
 
             // Create User
-            await _userManager.CreateAsync(user, request.Password);
+            var result = await _userManager.CreateAsync(user, request.Password);
+            if (!result.Succeeded)
+            {
+                return new SignUpDTOResponse
+                {
+                    IsAuthenticated = false,
+                    Message = "User creation failed."
+                };
+            }
+
+            // Create UserProfile
             await _unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = user.Id, Bio = string.Empty });
 
             // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
 
-            // Send Confirmation Mail
-            await _mailService.SendAsync(new MailData("abdullah.kamal0x01", "abdullah.kamal0x01@gmail.com", "Test MailKit Service", "Test Body..."));
+            // Build Confirmation Mail
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/User/Authentication/ConfirmEmail?userId={user.Id}&token={token}";
 
-            return new SignUpDTOResponse();
+            // Send Confirmation Mail
+            var mailData = new MailData(
+                mailUserName,
+                user.Email!,
+                "Confirm Your Email",
+                $@"
+                    <html>
+                        <body>
+                            <h2>Confirm Your Email</h2>
+                            <p>Dear {mailUserName},</p>
+                            <p>Please confirm your account by following this link: <a href='{HtmlEncoder.Default.Encode(confirmationUrl)}'>Confirm Email</a></p>
+                            <p>Best regards,<br/>{mailUserName}</p>
+                        </body>
+                    </html>"
+            );
+            await _mailService.SendAsync(mailData);
+
+            return new SignUpDTOResponse
+            {
+                IsAuthenticated = true,
+                Message = "User created successfully. Please check your email to confirm your account."
+            };
         }
 
         public async Task<SignInDTOResponse> SignInAsync(SignInDTORequest request)

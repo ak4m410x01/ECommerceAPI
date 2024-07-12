@@ -1,13 +1,9 @@
 ﻿using ECommerceAPI.Application.Interfaces.Services.Mail;
 using ECommerceAPI.Shared.Helpers.MailConfiguration;
-using Microsoft.Extensions.Logging;
-using MimeKit;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using System;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MimeKit;
 
 namespace ECommerceAPI.Infrastructure.Services.Mail
 {
@@ -48,8 +44,10 @@ namespace ECommerceAPI.Infrastructure.Services.Mail
                 mailMessage.Subject = mailData.MailSubject;
 
                 // Mail Body
-                var mailBody = new BodyBuilder();
-                mailBody.TextBody = mailData.MailBody;
+                var mailBody = new BodyBuilder
+                {
+                    HtmlBody = mailData.MailBody
+                };
                 mailMessage.Body = mailBody.ToMessageBody();
 
                 // Mail Client
