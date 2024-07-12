@@ -1,5 +1,5 @@
 ﻿using ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication.Options;
-using ECommerceAPI.Shared.Helpers.JwtSettings;
+using ECommerceAPI.Shared.Helpers.JwtConfiguration;
 using Microsoft.Extensions.Options;
 
 namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
@@ -10,9 +10,6 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
         {
             services.AddAuthenticationOptions()
                     .AddJwtBearerOptions(configuration);
-
-            services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
-            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<JwtSettings>>().Value);
 
             return services;
         }

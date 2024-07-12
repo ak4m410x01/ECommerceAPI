@@ -4,7 +4,7 @@ using ECommerceAPI.Application.Interfaces.Specifications.Base;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Security;
 using ECommerceAPI.Domain.IdentityEntities;
-using ECommerceAPI.Shared.Helpers.JwtSettings;
+using ECommerceAPI.Shared.Helpers.JwtConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,16 +21,16 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBaseSpecification<RefreshToken> _refreshTokenSpecification;
-        private readonly JwtSettings _jwtSettings;
+        private readonly JwtConfiguration JwtConfiguration;
 
         #endregion Properties
 
         #region Constructors
 
-        public TokenService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
+        public TokenService(UserManager<ApplicationUser> userManager, JwtConfiguration JwtConfiguration, IUnitOfWork unitOfWork, IBaseSpecification<RefreshToken> refreshTokenSpecification)
         {
             _userManager = userManager;
-            _jwtSettings = jwtSettings;
+            JwtConfiguration = JwtConfiguration;
             _unitOfWork = unitOfWork;
             _refreshTokenSpecification = refreshTokenSpecification;
         }
@@ -45,9 +45,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             JwtSecurityToken token = new
             (
-               issuer: _jwtSettings.Issuer,
-               audience: _jwtSettings.Audience,
-               expires: DateTime.UtcNow.AddDays(_jwtSettings.AccessTokenExpiryDays),
+               issuer: JwtConfiguration.Issuer,
+               audience: JwtConfiguration.Audience,
+               expires: DateTime.UtcNow.AddDays(JwtConfiguration.AccessTokenExpiryDays),
                claims: await GetTokenClaimsAsync(user),
                signingCredentials: GetSigningCredentials()
             );
@@ -61,7 +61,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         private SigningCredentials GetSigningCredentials()
         {
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtSettings.Key ?? "sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(JwtConfiguration.Key ?? "sz8eI7OdHBrjrIo8j9nTW/rQyO1OvY0pAQ2wDKQZw/0="));
             return new(key, SecurityAlgorithms.HmacSha256);
         }
 
@@ -137,7 +137,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             return new RefreshToken()
             {
                 Token = Convert.ToBase64String(randomNumber),
-                ExpiresAt = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpiryDays),
+                ExpiresAt = DateTime.UtcNow.AddDays(JwtConfiguration.RefreshTokenExpiryDays),
                 CreatedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
             };

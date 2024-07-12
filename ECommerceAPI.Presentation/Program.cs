@@ -20,7 +20,7 @@ namespace ECommerceAPI.Presentation
             #region Clean Architecture Layers Configuration
 
             builder.Services.AddApplicationLayer()
-                            .AddInfrastructureLayer()
+                            .AddInfrastructureLayer(builder.Configuration)
                             .AddPersistenceLayer(builder.Configuration)
                             .AddPresentationLayer(builder.Configuration);
 

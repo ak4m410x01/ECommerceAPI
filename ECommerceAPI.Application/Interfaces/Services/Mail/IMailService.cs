@@ -1,7 +1,9 @@
-﻿namespace ECommerceAPI.Application.Interfaces.Services.Mail
+﻿using ECommerceAPI.Shared.Helpers.MailConfiguration;
+
+namespace ECommerceAPI.Application.Interfaces.Services.Mail
 {
     public interface IMailService
     {
-        Task SendAsync(string toEmail, string subject, string body, bool isBodyHTML);
+        Task<bool> SendAsync(MailData mailData);
     }
 }

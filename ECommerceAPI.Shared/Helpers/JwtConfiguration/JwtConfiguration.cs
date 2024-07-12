@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Shared.Helpers.JwtSettings
+﻿namespace ECommerceAPI.Shared.Helpers.JwtConfiguration
 {
-    public class JwtSettings
+    public class JwtConfiguration
     {
         public string? Issuer { get; set; }
         public string? Audience { get; set; }
