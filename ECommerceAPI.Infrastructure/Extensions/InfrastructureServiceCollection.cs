@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Infrastructure.Extensions.Authentication;
+using ECommerceAPI.Infrastructure.Extensions.Mail;
 using ECommerceAPI.Infrastructure.Extensions.Media;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ namespace ECommerceAPI.Infrastructure.Extensions
             services.AddTokenService(configuration);
             services.AddAuthenticationService();
             services.AddMediaService();
+            services.AddMailService(configuration);
             return services;
         }
     }

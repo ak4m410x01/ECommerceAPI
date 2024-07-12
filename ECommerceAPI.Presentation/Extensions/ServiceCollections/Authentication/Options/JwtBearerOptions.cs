@@ -20,9 +20,9 @@ namespace ECommerceAPI.Presentation.Extensions.ServiceCollections.Authentication
                      ValidateIssuer = true,
                      ValidateAudience = true,
                      ValidateLifetime = true,
-                     ValidIssuer = configuration["JWT:Issuer"],
-                     ValidAudience = configuration["JWT:Audience"],
-                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]!)),
+                     ValidIssuer = configuration["JwtConfiguration:Issuer"],
+                     ValidAudience = configuration["JwtConfiguration:Audience"],
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtConfiguration:Key"]!)),
                      ClockSkew = TimeSpan.Zero
                  };
 

@@ -3,6 +3,7 @@ using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
+using ECommerceAPI.Application.Interfaces.Services.Mail;
 using ECommerceAPI.Application.Interfaces.UnitOfWork;
 using ECommerceAPI.Domain.Entities.Users;
 using ECommerceAPI.Domain.Enumerations.Users;
@@ -10,6 +11,7 @@ using ECommerceAPI.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
+using ECommerceAPI.Shared.Helpers.MailConfiguration;
 
 namespace ECommerceAPI.Infrastructure.Services.Authentication
 {
@@ -21,17 +23,19 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMailService _mailService;
 
         #endregion Properties
 
         #region Constructors
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork, IMailService mailService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _mailService = mailService;
         }
 
         #endregion Constructors
@@ -50,6 +54,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
             // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
+
+            // Send Confirmation Mail
+            await _mailService.SendAsync(new MailData("abdullah.kamal0x01", "abdullah.kamal0x01@gmail.com", "Test MailKit Service", "Test Body..."));
 
             return new SignUpDTOResponse();
         }

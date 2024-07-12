@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using ECommerceAPI.Infrastructure.Services.Mail;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.Presentation.Controllers

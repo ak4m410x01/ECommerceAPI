@@ -1,9 +1,13 @@
 ﻿using ECommerceAPI.Application.Interfaces.Services.Mail;
 using ECommerceAPI.Shared.Helpers.MailConfiguration;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 using MimeKit;
 using MailKit.Net.Smtp;
-using Microsoft.Extensions.Logging;
+using MailKit.Security;
+using System;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.Infrastructure.Services.Mail
 {
@@ -51,9 +55,19 @@ namespace ECommerceAPI.Infrastructure.Services.Mail
                 // Mail Client
                 using var mailClient = new SmtpClient();
 
-                await mailClient.ConnectAsync(_mailConfiguration.Host, _mailConfiguration.Port, _mailConfiguration.UseSSL);
-                await mailClient.AuthenticateAsync(_mailConfiguration.EmailId, _mailConfiguration.Password);
+                // Bypass SSL certificate validation (for development/testing purposes only)
+                mailClient.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+
+                // Connect to the SMTP server
+                await mailClient.ConnectAsync(_mailConfiguration.Host, _mailConfiguration.Port, SecureSocketOptions.StartTls);
+
+                // Authenticate using the provided credentials
+                await mailClient.AuthenticateAsync(_mailConfiguration.UserName, _mailConfiguration.Password);
+
+                // Send the email
                 await mailClient.SendAsync(mailMessage);
+
+                // Disconnect from the server
                 await mailClient.DisconnectAsync(true);
 
                 return true;
@@ -61,7 +75,6 @@ namespace ECommerceAPI.Infrastructure.Services.Mail
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while sending email.");
-
                 return false;
             }
         }
