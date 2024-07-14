@@ -169,11 +169,11 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
             // Build Confirmation Mail
             var token = await _userManager.GeneratePasswordResetTokenAsync(user!);
-            var encodedToken = WebUtility.UrlEncode(token);
-            var resetPasswordUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/Api/V1/User/Authentication/ResetPassword?userId={user!.Id}&token={encodedToken}";
+            var encodedToken = WebUtility.HtmlEncode(token);
 
             // Send Confirmation Mail
-            var mailUserName = new MailAddress(user.Email!).User;
+            var mailUserName = new MailAddress(user!.Email!).User;
+
             var mailData = new MailData(
                 mailUserName,
                 user.Email!,
@@ -183,7 +183,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
                         <body>
                             <h2>Reset Your Password</h2>
                             <p>Dear {mailUserName},</p>
-                            <p>Please rest your password by following this link: <a href='{HtmlEncoder.Default.Encode(resetPasswordUrl)}'>Reset Password</a></p>
+                            <p><b>UserId:</b> {user.Id}</p>
+                            <p><b>Token:</b> {token}</p>
+                            <br />
                             <p>Best regards,<br/>{mailUserName}</p>
                         </body>
                     </html>"
@@ -200,7 +202,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
 
-            var token = WebUtility.UrlDecode(request.Token);
+            var token = WebUtility.HtmlDecode(request.Token);
             var result = await _userManager.ResetPasswordAsync(user!, token, request.NewPassword);
             if (!result.Succeeded)
             {

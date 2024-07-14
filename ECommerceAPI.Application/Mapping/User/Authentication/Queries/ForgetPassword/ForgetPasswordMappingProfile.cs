@@ -12,7 +12,7 @@ namespace ECommerceAPI.Application.Mapping.User.Authentication.Queries.ForgetPas
         public ForgetPasswordMappingProfile()
         {
             CreateMap<ForgetPasswordQueryRequest, ForgetPasswordDTORequest>();
-            CreateMap<ForgetPasswordDTORequest, ForgetPasswordQueryDTO>();
+            CreateMap<ForgetPasswordDTOResponse, ForgetPasswordQueryDTO>();
         }
 
         #endregion Constructors
