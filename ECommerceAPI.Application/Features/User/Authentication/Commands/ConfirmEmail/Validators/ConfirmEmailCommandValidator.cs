@@ -1,15 +1,24 @@
 ﻿using ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.Requests;
+using ECommerceAPI.Domain.IdentityEntities;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.Validators
 {
     public class ConfirmEmailCommandValidator : AbstractValidator<ConfirmEmailCommandRequest>
     {
+        #region Properties
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        #endregion Properties
+
         #region Constructors
 
-        public ConfirmEmailCommandValidator()
+        public ConfirmEmailCommandValidator(UserManager<ApplicationUser> userManager)
         {
             InitializeRules();
+            _userManager = userManager;
         }
 
         #endregion Constructors
@@ -26,7 +35,8 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Commands.Confirm
         {
             RuleFor(request => request.UserId)
                 .NotEmpty().WithMessage("UserId is required field.")
-                .NotNull().WithMessage("UserId must be not null.");
+                .NotNull().WithMessage("UserId must be not null.")
+                .MustAsync(async (userId, cancellationToken) => (await _userManager.FindByIdAsync(userId)) != null).WithMessage("UserId doesn't exists.");
         }
 
         private void TokenValidator()

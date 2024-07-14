@@ -1,4 +1,6 @@
 ﻿using ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail;
+using ECommerceAPI.Application.DTOs.Authentication.ForgetPassword;
+using ECommerceAPI.Application.DTOs.Authentication.ResetPassword;
 using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
@@ -16,5 +18,9 @@ namespace ECommerceAPI.Application.Interfaces.Services.Authentication
         Task<RefreshTokenDTO> GetRefreshTokenAsync(string refreshToken);
 
         Task<ConfirmEmailDTOResponse> ConfirmEmailAsync(ConfirmEmailDTORequest request);
+
+        Task<ForgetPasswordDTOResponse> ForgetPasswordAsync(ForgetPasswordDTORequest request);
+
+        Task<ResetPasswordDTOResponse> ResetPasswordAsync(ResetPasswordDTORequest request);
     }
 }

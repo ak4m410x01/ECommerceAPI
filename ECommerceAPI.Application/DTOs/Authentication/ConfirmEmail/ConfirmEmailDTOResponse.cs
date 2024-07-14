@@ -1,6 +1,4 @@
-﻿using ECommerceAPI.Application.DTOs.Authentication.Token;
-
-namespace ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail
+﻿namespace ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail
 {
     public class ConfirmEmailDTOResponse
     {

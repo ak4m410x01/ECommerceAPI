@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
-using ECommerceAPI.Application.Features.Product.Discounts.Commands.RemoveDiscount.DTOs;
-using ECommerceAPI.Application.Features.Product.Discounts.Commands.RemoveDiscount.Requests;
 using ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscount.DTOs;
 using ECommerceAPI.Application.Features.Product.Discounts.Commands.AddDiscount.Requests;
+using ECommerceAPI.Application.Features.Product.Discounts.Commands.RemoveDiscount.DTOs;
+using ECommerceAPI.Application.Features.Product.Discounts.Commands.RemoveDiscount.Requests;
 using ECommerceAPI.Application.Features.Product.Discounts.Commands.UpdateDiscount.DTOs;
 using ECommerceAPI.Application.Features.Product.Discounts.Commands.UpdateDiscount.Requests;
 using ECommerceAPI.Application.Features.Product.Discounts.Queries.GetAllDiscounts.DTOs;

@@ -1,11 +1,11 @@
-﻿using ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.Requests;
+﻿using ECommerceAPI.Application.Features.User.Authentication.Queries.ForgetPassword.Requests;
 using ECommerceAPI.Domain.IdentityEntities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 
-namespace ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.Validators
+namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ForgetPassword.Validators
 {
-    public class SignInQueryValidator : AbstractValidator<SignInQueryRequest>
+    public class ForgetPasswordQueryValidator : AbstractValidator<ForgetPasswordQueryRequest>
     {
         #region Properties
 
@@ -15,7 +15,7 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.V
 
         #region Constructors
 
-        public SignInQueryValidator(UserManager<ApplicationUser> userManager)
+        public ForgetPasswordQueryValidator(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             InitializeRules();
@@ -28,7 +28,6 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.V
         private void InitializeRules()
         {
             EmailValidator();
-            PasswordValidator();
         }
 
         private void EmailValidator()
@@ -36,14 +35,8 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.V
             RuleFor(request => request.Email)
                    .NotEmpty().WithMessage("Email is required field.")
                    .NotNull().WithMessage("Email must be not null.")
-                   .Matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").WithMessage("Email must be valid.");
-        }
-
-        private void PasswordValidator()
-        {
-            RuleFor(request => request.Password)
-                   .NotEmpty().WithMessage("Password is required field.")
-                   .NotNull().WithMessage("Password must be not null.");
+                   .Matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").WithMessage("Email must be valid.")
+                   .MustAsync(async (email, cancellationToken) => (await _userManager.FindByEmailAsync(email)) != null).WithMessage("Email doesn't exists.");
         }
 
         #endregion Methods

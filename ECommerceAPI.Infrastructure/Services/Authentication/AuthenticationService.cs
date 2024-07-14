@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.DTOs.Authentication.ConfirmEmail;
+using ECommerceAPI.Application.DTOs.Authentication.ForgetPassword;
+using ECommerceAPI.Application.DTOs.Authentication.ResetPassword;
 using ECommerceAPI.Application.DTOs.Authentication.SignIn;
 using ECommerceAPI.Application.DTOs.Authentication.SignUp;
 using ECommerceAPI.Application.DTOs.Authentication.Token;
@@ -141,17 +143,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
         public async Task<ConfirmEmailDTOResponse> ConfirmEmailAsync(ConfirmEmailDTORequest request)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
-            if (user == null)
-            {
-                return new ConfirmEmailDTOResponse()
-                {
-                    IsAuthenticated = false,
-                    Message = "Email Confirmation Failed!"
-                };
-            }
 
             var token = WebUtility.UrlDecode(request.Token).Replace(" ", "+");
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _userManager.ConfirmEmailAsync(user!, token);
 
             if (!result.Succeeded)
             {
@@ -166,6 +160,62 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             {
                 IsAuthenticated = true,
                 Message = "Email Confirmation Success."
+            };
+        }
+
+        public async Task<ForgetPasswordDTOResponse> ForgetPasswordAsync(ForgetPasswordDTORequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            // Build Confirmation Mail
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user!);
+            var encodedToken = WebUtility.UrlEncode(token);
+            var resetPasswordUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/Api/V1/User/Authentication/ResetPassword?userId={user!.Id}&token={encodedToken}";
+
+            // Send Confirmation Mail
+            var mailUserName = new MailAddress(user.Email!).User;
+            var mailData = new MailData(
+                mailUserName,
+                user.Email!,
+                "Reset Your Password",
+                $@"
+                    <html>
+                        <body>
+                            <h2>Reset Your Password</h2>
+                            <p>Dear {mailUserName},</p>
+                            <p>Please rest your password by following this link: <a href='{HtmlEncoder.Default.Encode(resetPasswordUrl)}'>Reset Password</a></p>
+                            <p>Best regards,<br/>{mailUserName}</p>
+                        </body>
+                    </html>"
+            );
+            await _mailService.SendAsync(mailData);
+
+            return new ForgetPasswordDTOResponse
+            {
+                Message = "Please check your email to reset your password."
+            };
+        }
+
+        public async Task<ResetPasswordDTOResponse> ResetPasswordAsync(ResetPasswordDTORequest request)
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+
+            var token = WebUtility.UrlDecode(request.Token);
+            var result = await _userManager.ResetPasswordAsync(user!, token, request.NewPassword);
+            if (!result.Succeeded)
+            {
+                return new ResetPasswordDTOResponse()
+                {
+                    Message = "Reset Password Failed.",
+                    IsAuthenticated = false,
+                };
+            }
+
+            // Build Response
+            return new ResetPasswordDTOResponse()
+            {
+                Message = "Reset Password Success.",
+                IsAuthenticated = true,
             };
         }
 
