@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using ECommerceAPI.Application.DTOs.Authentication.ResetPassword;
-using ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.DTOs;
-using ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.Requests;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Requests;
 using ECommerceAPI.Application.Interfaces.Services.Authentication;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
 
-namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.Handlers
+namespace ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Handlers
 {
-    public class ResetPasswordQueryHandler : ResponseHandler, IRequestHandler<ResetPasswordQueryRequest, Response<ResetPasswordQueryDTO>>
+    public class ResetPasswordCommandHandler : ResponseHandler, IRequestHandler<ResetPasswordCommandRequest, Response<ResetPasswordCommandDTO>>
     {
         #region Properties
 
@@ -19,7 +19,7 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPas
 
         #region Constructors
 
-        public ResetPasswordQueryHandler(IAuthenticationService authenticationService, IMapper mapper)
+        public ResetPasswordCommandHandler(IAuthenticationService authenticationService, IMapper mapper)
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
@@ -29,12 +29,12 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPas
 
         #region Methods
 
-        public async Task<Response<ResetPasswordQueryDTO>> Handle(ResetPasswordQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Response<ResetPasswordCommandDTO>> Handle(ResetPasswordCommandRequest request, CancellationToken cancellationToken)
         {
             var resetPasswordDTORequest = _mapper.Map<ResetPasswordDTORequest>(request);
             var resetPasswordDTOResponse = await _authenticationService.ResetPasswordAsync(resetPasswordDTORequest);
 
-            var response = _mapper.Map<ResetPasswordQueryDTO>(resetPasswordDTOResponse);
+            var response = _mapper.Map<ResetPasswordCommandDTO>(resetPasswordDTOResponse);
             return Success(response);
         }
 

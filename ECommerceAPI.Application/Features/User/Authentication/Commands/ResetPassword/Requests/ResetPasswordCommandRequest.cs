@@ -1,10 +1,10 @@
-﻿using ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.DTOs;
+﻿using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.DTOs;
 using ECommerceAPI.Shared.Responses;
 using MediatR;
 
-namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.Requests
+namespace ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Requests
 {
-    public class ResetPasswordQueryRequest : IRequest<Response<ResetPasswordQueryDTO>>
+    public class ResetPasswordCommandRequest : IRequest<Response<ResetPasswordCommandDTO>>
     {
         #region Properties
 

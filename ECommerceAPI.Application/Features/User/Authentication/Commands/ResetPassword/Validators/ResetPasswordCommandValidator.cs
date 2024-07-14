@@ -1,11 +1,11 @@
-﻿using ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.Requests;
+﻿using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Requests;
 using ECommerceAPI.Domain.IdentityEntities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 
-namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.Validators
+namespace ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Validators
 {
-    public class ResetPasswordQueryValidator : AbstractValidator<ResetPasswordQueryRequest>
+    public class ResetPasswordCommandValidator : AbstractValidator<ResetPasswordCommandRequest>
     {
         #region Properties
 
@@ -15,7 +15,7 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPas
 
         #region Constructors
 
-        public ResetPasswordQueryValidator(UserManager<ApplicationUser> userManager)
+        public ResetPasswordCommandValidator(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             InitializeRules();
@@ -38,7 +38,7 @@ namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPas
             RuleFor(request => request.UserId)
                 .NotEmpty().WithMessage("UserId is required field.")
                 .NotNull().WithMessage("UserId must be not null.")
-                .MustAsync(async (userId, cancellationToken) => (await _userManager.FindByIdAsync(userId)) != null).WithMessage("UserId doesn't exists.");
+                .MustAsync(async (userId, cancellationToken) => await _userManager.FindByIdAsync(userId) != null).WithMessage("UserId doesn't exists.");
         }
 
         private void TokenValidator()

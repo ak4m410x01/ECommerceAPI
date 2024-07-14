@@ -1,16 +1,16 @@
 ﻿using Asp.Versioning;
-using ECommerceAPI.Application.DTOs.Authentication.ForgetPassword;
-using ECommerceAPI.Application.DTOs.Authentication.ResetPassword;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ChangePassword.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ChangePassword.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.ConfirmEmail.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.GetRefreshToken.Requests;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.SignUp.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Commands.SignUp.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Queries.ForgetPassword.DTOs;
+using ECommerceAPI.Application.Features.User.Authentication.Queries.ForgetPassword.Requests;
 using ECommerceAPI.Application.Features.User.Authentication.Queries.GetAccessToken.Requests;
-using ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.DTOs;
 using ECommerceAPI.Application.Features.User.Authentication.Queries.SignIn.Requests;
 using MediatR;
@@ -91,7 +91,7 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
         [HttpPost("ForgetPassword")]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(ForgetPasswordQueryDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> ForgetPasswordAsync([FromBody] ForgetPasswordDTORequest request)
+        public async Task<IActionResult> ForgetPasswordAsync([FromBody] ForgetPasswordQueryRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);
@@ -99,8 +99,8 @@ namespace ECommerceAPI.Presentation.Controllers.User.Authentication
 
         [HttpPost("ResetPassword")]
         [MapToApiVersion("1.0")]
-        [ProducesResponseType(typeof(ResetPasswordQueryDTO), StatusCodes.Status200OK)]
-        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordDTORequest request)
+        [ProducesResponseType(typeof(ResetPasswordCommandDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordCommandRequest request)
         {
             var response = await Mediator.Send(request);
             return ResponseResult(response);

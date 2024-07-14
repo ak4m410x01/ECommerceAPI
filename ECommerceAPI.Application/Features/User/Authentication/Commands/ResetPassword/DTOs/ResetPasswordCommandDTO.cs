@@ -1,6 +1,6 @@
-﻿namespace ECommerceAPI.Application.Features.User.Authentication.Queries.ResetPassword.DTOs
+﻿namespace ECommerceAPI.Application.Features.User.Authentication.Commands.ResetPassword.DTOs
 {
-    public class ResetPasswordQueryDTO
+    public class ResetPasswordCommandDTO
     {
         #region Properties
 
