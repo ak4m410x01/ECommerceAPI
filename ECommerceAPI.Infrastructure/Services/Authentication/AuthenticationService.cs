@@ -50,6 +50,33 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
 
         #region Methods
 
+        private async Task SendConfirmationEmailAsync(ApplicationUser user)
+        {
+            // Build Confirmation Mail
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var encodedToken = WebUtility.UrlEncode(token);
+            var confirmationUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/Api/V1/User/Authentication/ConfirmEmail?userId={user.Id}&token={encodedToken}";
+
+            // Send Confirmation Mail
+            var mailUserName = new MailAddress(user.Email!).User;
+            var mailData = new MailData(
+               mailUserName,
+               user.Email!,
+               "Confirm Your Email",
+               $@"
+                    <html>
+                        <body>
+                            <h2>Confirm Your Email</h2>
+                            <p>Dear {mailUserName},</p>
+                            <p>Please confirm your account by following this link: <a href='{HtmlEncoder.Default.Encode(confirmationUrl)}'>Confirm Email</a></p>
+                            <p>Best regards,<br/>Abdullah Kamal</p>
+                        </body>
+                    </html>"
+                );
+
+            await _mailService.SendAsync(mailData);
+        }
+
         public async Task<SignUpDTOResponse> SignUpAsync(SignUpDTORequest request)
         {
             var user = _mapper.Map<ApplicationUser>(request);
@@ -71,30 +98,9 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
             // Create UserProfile
             await _unitOfWork.Repository<UserProfile>().AddAsync(new UserProfile() { UserId = user.Id, Bio = string.Empty });
 
-            // Assign Roles
             await _userManager.AddToRoleAsync(user, UserRole.Customer.ToString());
 
-            // Build Confirmation Mail
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var encodedToken = WebUtility.UrlEncode(token);
-            var confirmationUrl = $"{_httpContextAccessor.HttpContext!.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}/Api/V1/User/Authentication/ConfirmEmail?userId={user.Id}&token={encodedToken}";
-
-            // Send Confirmation Mail
-            var mailData = new MailData(
-                mailUserName,
-                user.Email!,
-                "Confirm Your Email",
-                $@"
-                    <html>
-                        <body>
-                            <h2>Confirm Your Email</h2>
-                            <p>Dear {mailUserName},</p>
-                            <p>Please confirm your account by following this link: <a href='{HtmlEncoder.Default.Encode(confirmationUrl)}'>Confirm Email</a></p>
-                            <p>Best regards,<br/>{mailUserName}</p>
-                        </body>
-                    </html>"
-            );
-            await _mailService.SendAsync(mailData);
+            await SendConfirmationEmailAsync(user);
 
             return new SignUpDTOResponse
             {
@@ -186,7 +192,7 @@ namespace ECommerceAPI.Infrastructure.Services.Authentication
                             <p><b>UserId:</b> {user.Id}</p>
                             <p><b>Token:</b> {token}</p>
                             <br />
-                            <p>Best regards,<br/>{mailUserName}</p>
+                            <p>Best regards,<br/>Abdullah Kamal</p>
                         </body>
                     </html>"
             );
